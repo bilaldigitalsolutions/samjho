@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Content Inbox — Samjho Admin</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="ci-topnav">
+    <div class="ci-topnav__brand">
+      <div class="ci-topnav__logo">S</div>
+      <div class="ci-topnav__text">
+        <div class="ci-topnav__name">Samjho Admin</div>
+        <div class="ci-topnav__sub">CONTENT OS</div>
+      </div>
+    </div>
+    <div class="ci-topnav__nav">
+      <a href="/admin/" class="ci-topnav__link">Dashboard</a>
+      <a href="/admin/content/" class="ci-topnav__link ci-topnav__link--active">Content Inbox <span class="ci-topnav__badge" id="nav-inbox-count">0</span></a>
+      <a href="/admin/content/review.html" class="ci-topnav__link">Review Queue</a>
+      <a href="/admin/sources/" class="ci-topnav__link">Sources</a>
+    </div>
+    <div class="ci-topnav__right">
+      <div class="ci-topnav__status">
+        <span class="ci-topnav__dot"></span>
+        Supabase Connected
+        <span class="ci-topnav__env">samjho-prod</span>
+      </div>
+      <button class="ci-topnav__add-btn" onclick="document.querySelector('.ci-topnav__add-btn').closest('.ci-topnav').dispatchEvent(new CustomEvent('open-add'))">+ Add Content</button>
+      <div class="ci-topnav__user">
+        <div class="ci-topnav__avatar">AM</div>
+        <div>
+          <div class="ci-topnav__user-name">Aarav M.</div>
+          <div class="ci-topnav__user-email">aarav@samjho.ai</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="ci-breadcrumb">
+    <a href="/admin/" class="ci-breadcrumb__item">Content</a>
+    <span class="ci-breadcrumb__sep">/</span>
+    <span class="ci-breadcrumb__item ci-breadcrumb__item--active">Inbox</span>
+    <span class="ci-breadcrumb__live"><span class="ci-breadcrumb__live-dot"></span> LIVE</span>
+  </div>
+
+  <!-- Page Header -->
+  <div class="ci-header">
+    <div class="ci-header__left">
+      <h1>Content Inbox</h1>
+      <p class="ci-header__subtitle">Review and refine incoming content drafts &bull; <span id="header-count">0</span> items &bull; <span id="header-refine-count">0</span> need refinement</p>
+    </div>
+    <div class="ci-header__refinement-badge">
+      <span class="ci-header__refinement-dot"></span>
+      <span id="refine-badge-count">0</span> need refinement
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="ci-toolbar-wrap">
+    <div class="ci-toolbar">
+      <button class="ci-toolbar__tab" id="inbox-tab">
+        Inbox <span class="ci-toolbar__tab-count" id="inbox-count-badge">0</span>
+      </button>
+      <div class="ci-toolbar__search">
+        <span>🔍</span>
+        <input type="search" id="ci-search" placeholder="Search by title, category..." />
+        <span class="ci-toolbar__search-hint">⌘K</span>
+      </div>
+      <select class="ci-toolbar__filter" id="ci-filter-status"><option value="">All Status</option><option value="draft">Draft</option><option value="review">Review</option><option value="approved">Approved</option></select>
+      <select class="ci-toolbar__filter" id="ci-filter-category"><option value="">All Categories</option><option value="Government">Government</option><option value="Documents">Documents</option><option value="Business">Business</option><option value="Money">Money</option><option value="Education">Education</option></select>
+      <div class="ci-toolbar__sort">
+        Sort by
+        <select id="ci-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A-Z</option></select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="ci-table-wrap">
+    <table class="ci-table" id="ci-inbox-table">
+      <thead>
+        <tr>
+          <th style="min-width:300px">TITLE</th>
+          <th>CATEGORY</th>
+          <th>STATUS</th>
+          <th>REFINEMENT</th>
+          <th style="text-align:right">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="ci-inbox-tbody"></tbody>
+    </table>
+    <div class="ci-empty" id="ci-inbox-empty" hidden>
+      <div class="ci-empty__icon">📭</div>
+      <div class="ci-empty__text">No items match your filters</div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="ci-pagination">
+    <span>Showing <span id="ci-page-showing">0</span> of <span id="ci-page-total">0</span> drafts</span>
+    <div class="ci-pagination__pages" id="ci-pagination-pages"></div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="ci-statusbar">
+    <div class="ci-statusbar__left">
+      <span>⚙️</span> Auto-refine is enabled for Business category &bull; <span id="ci-pending-count">0</span> drafts will be processed next
+    </div>
+    <div class="ci-statusbar__right">
+      Last synced 2 min ago &bull; Supabase &bull; pgvector
+    </div>
+  </div>
+
+  <!-- Refine Modal Overlay -->
+  <div class="ci-modal" id="ci-refine-modal" hidden>
+    <div class="ci-modal__backdrop"></div>
+    <div class="ci-modal__content">
+      <div class="ci-modal__header">
+        <h2 class="ci-modal__title" id="ci-modal-title">Refining Content</h2>
+        <button class="ci-modal__close" id="ci-modal-close">&times;</button>
+      </div>
+      <div class="ci-modal__body" id="ci-modal-body">
+        <!-- Loading state -->
+        <div class="ci-modal__loading" id="ci-modal-loading">
+          <div class="ci-modal__spinner"></div>
+          <div class="ci-modal__status" id="ci-modal-status">Starting refinement...</div>
+          <div class="ci-modal__steps">
+            <div class="ci-modal__step" id="ci-step-categorize">
+              <span class="ci-modal__step-dot"></span>
+              <span>Categorizing content</span>
+            </div>
+            <div class="ci-modal__step" id="ci-step-refine">
+              <span class="ci-modal__step-dot"></span>
+              <span>Refining with DeepSeek AI</span>
+            </div>
+            <div class="ci-modal__step" id="ci-step-preview">
+              <span class="ci-modal__step-dot"></span>
+              <span>Generating preview</span>
+            </div>
+          </div>
+        </div>
+        <!-- Error state -->
+        <div class="ci-modal__error" id="ci-modal-error" hidden>
+          <div class="ci-modal__error-icon">⚠️</div>
+          <div class="ci-modal__error-msg" id="ci-modal-error-msg"></div>
+          <button class="ci-btn-refine" id="ci-modal-retry">Try Again</button>
+        </div>
+        <!-- Preview state -->
+        <div class="ci-modal__preview" id="ci-modal-preview" hidden>
+          <div class="ci-modal__preview-header">
+            <span class="ci-modal__preview-badge">✅ Refined Successfully</span>
+          </div>
+          <div class="ci-modal__preview-body" id="ci-modal-preview-body"></div>
+        </div>
+      </div>
+      <div class="ci-modal__footer" id="ci-modal-footer" hidden>
+        <button class="ci-btn-open" id="ci-modal-edit">✏️ Edit Draft</button>
+        <button class="ci-btn-refine" id="ci-modal-publish">🚀 Publish to Live</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/admin/supabase-config.js"></script>
+  <script src="/admin/auth.js"></script>
+  <script>SamjhoAuth.checkSession();</script>
+  <script src="/admin/content/categorize.js"></script>
+  <script src="/admin/content/supabase-content.js"></script>
+  <script src="/admin/ai/supabase-endpoint.js"></script>
+  <script src="/admin/content/master-guide.js"></script>
+  <script src="/admin/content/inbox.js"></script>
+</body>
+</html>

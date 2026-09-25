@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipeline Test Guide (Mock)</title>
+  <meta name="description" content="Mock summary used only to verify the publishing pipeline." />
+  <link rel="canonical" href="https://samjhoindia.com/guides/test-guide-micro7/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:site_name" content="Samjho" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Pipeline Test Guide (Mock)" />
+  <meta property="og:description" content="Mock summary used only to verify the publishing pipeline." />
+  <meta property="og:url" content="https://samjhoindia.com/guides/test-guide-micro7/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Pipeline Test Guide (Mock)" />
+  <meta name="twitter:description" content="Mock summary used only to verify the publishing pipeline." />
+  <meta property="og:image" content="https://samjhoindia.com/assets/logo/logo-icon.png" />
+  <meta name="twitter:image" content="https://samjhoindia.com/assets/logo/logo-icon.png" />
+  
+  <meta property="article:author" content="Samjho Content Team" />
+  <meta property="article:publisher" content="Samjho India" />
+  <meta property="article:published_time" content="2026-09-18T00:00:00.000Z" />
+  <meta property="article:modified_time" content="2026-09-18T00:00:00.000Z" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/logo-icon.png">
+  <meta name="theme-color" content="#0d9488">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QH2QZWDHMM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-QH2QZWDHMM");
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://samjhoindia.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://samjhoindia.com/guides/"},{"@type":"ListItem","position":3,"name":"Pipeline Test Guide (Mock)","item":"https://samjhoindia.com/guides/test-guide-micro7/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Pipeline Test Guide (Mock)","description":"Mock summary used only to verify the publishing pipeline.","url":"https://samjhoindia.com/guides/test-guide-micro7/","image":"/assets/logo/logo-icon.png","articleSection":"Money","author":{"@type":"Person","name":"Samjho Content Team","url":"https://samjhoindia.com/about/"},"publisher":{"@type":"Organization","name":"Samjho India","url":"https://samjhoindia.com","logo":{"@type":"ImageObject","url":"https://samjhoindia.com/assets/logo/logo-icon.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://samjhoindia.com/guides/test-guide-micro7/"},"dateModified":"2026-09-18T00:00:00.000Z","datePublished":"2026-09-18T00:00:00.000Z"}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  
+  <header class="site-header">
+    <div class="container site-header__bar">
+      <div class="site-header__brand">
+        <a href="/" class="site-logo" aria-label="Samjho India home">
+          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+        </a>
+        <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
+          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+        </a>
+        <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
+      </div>
+      <nav class="main-nav" aria-label="Primary">
+        <ul><li><a href="/">Home</a></li><li><a href="/government/">Government</a></li><li><a href="/documents/">Documents</a></li><li><a href="/business/">Business</a></li><li><a href="/money/">Money</a></li><li><a href="/education/">Education</a></li></ul>
+      </nav>
+      <div class="header-actions">
+        <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav container" id="mobileNav">
+      <ul><li><a href="/">Home</a></li><li><a href="/government/">Government</a></li><li><a href="/documents/">Documents</a></li><li><a href="/business/">Business</a></li><li><a href="/money/">Money</a></li><li><a href="/education/">Education</a></li></ul>
+    </div>
+  </header>
+  <main id="main">
+    <nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/money/">money</a> &nbsp;/&nbsp; <span>Pipeline Test Guide (Mock)</span></nav>
+  <h1 class="guide-title">Pipeline Test Guide (Mock)</h1>
+  <p class="guide-last-updated">Last updated: 18 Sep 2026</p>
+  <div class="article-author"><a href="/about/" class="article-author__link"><div class="article-author__avatar">S</div><div class="article-author__info"><div class="article-author__name">Samjho Content Team</div><div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div></div></a></div>
+  <section class="guide-section guide-section--summary"><h2 class="guide-section__title">Quick Summary</h2><p class="guide-summary">Mock summary used only to verify the publishing pipeline.</p></section>
+  <section class="guide-section guide-section--why-matters"><h2 class="guide-section__title">Why It Matters</h2><div class="guide-prose"><p>This is mock content created to verify the approved-to-published pipeline. Not real production content.</p></div></section>
+  <section class="guide-section guide-section--eligibility"><h2 class="guide-section__title">Eligibility</h2><ul class="guide-list"><li>Mock eligibility line one</li><li>Mock eligibility line two</li></ul></section>
+  <section class="guide-section guide-section--benefits"><h2 class="guide-section__title">Benefits</h2><ul class="guide-list"><li>Mock benefit one</li><li>Mock benefit two</li></ul></section>
+  <section class="guide-section guide-section--documents"><h2 class="guide-section__title">Required Documents</h2><ul class="guide-list"><li>Mock document one</li></ul></section>
+  <section class="guide-section guide-section--apply"><h2 class="guide-section__title">How to Apply</h2><ol class="guide-list"><li>Mock step one</li><li>Mock step two</li></ol></section>
+  <section class="guide-section guide-section--dates"><h2 class="guide-section__title">Important Dates</h2><ul class="guide-list"><li>Mock date: none</li></ul></section>
+  <section class="guide-section guide-section--mistakes"><h2 class="guide-section__title">Common Mistakes</h2><ul class="guide-list"><li>Mock mistake one</li></ul></section>
+  <section class="guide-section guide-section--faqs"><h2 class="guide-section__title">FAQs</h2><div class="guide-faq"><div class="guide-faq__item"><h3 class="guide-faq__q">Is this a real guide?</h3><div class="guide-faq__a">No. This is a mock pipeline test guide.</div></div></div></section>
+  <section class="guide-section guide-section--disclaimer"><h2 class="guide-section__title">Disclaimer</h2><div class="guide-prose"><p>Samjho is an independent informational resource and is not a government website. Content is for general understanding only and is not financial, legal, tax or professional advice. Rules, rates and eligibility can change; always verify current details with official sources before acting.</p></div></section>
+  <section class="guide-section guide-section--related"><h2 class="guide-section__title">Related Guides</h2><div class="related-grid"><a class="card" href="/guides/ckyc-2-0-one-kyc-for-all-financial-products/"><span class="card-eyebrow">Guide</span><h3>CKYC 2.0: One KYC for All Your Financial Products</h3><p>CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.</p></a><a class="card" href="/guides/what-is-gst/"><span class="card-eyebrow">Guide</span><h3>What is GST?</h3><p>GST (Goods and Services Tax) is a single tax charged on the sale of most goods and services in India. It replaced a long list of separate central and state taxes with one system.</p></a><a class="card" href="/guides/what-is-emi/"><span class="card-eyebrow">Guide</span><h3>What is EMI?</h3><p>EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p></a></div></section>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand-col">
+          <strong class="foot-logo">Samjho <span>India</span></strong>
+          <p class="foot-tagline">Information • Tools • For a Better Tomorrow</p>
+          <p class="foot-desc">Helping every Indian access the right information and make better decisions.</p>
+          <div class="foot-social">
+            <a href="https://www.youtube.com/@SamjhoIndia" aria-label="YouTube" class="foot-social-icon" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/samjhoindia" aria-label="Facebook" class="foot-social-icon" target="_blank" rel="noopener">
+            <a href="https://www.instagram.com/samjhoindia" aria-label="Instagram" class="foot-social-icon" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" aria-label="X (Twitter)" class="foot-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook" class="foot-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/samjhoindia" aria-label="LinkedIn" class="foot-social-icon" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <a href="https://x.com/samjhoindia" aria-label="X (Twitter)" class="foot-social-icon" target="_blank" rel="noopener">
+            </a>
+          </div>
+        </div>
+        <div class="foot-links-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/government/">Government</a></li><li><a href="/documents/">Documents</a></li><li><a href="/business/">Business</a></li><li><a href="/money/">Money</a></li><li><a href="/education/">Education</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Helpful</h4>
+          <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
+        </div>
+        <div class="foot-newsletter-col">
+          <h4>Stay Updated</h4>
+           <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Samjho India",
+            url: "https://samjhoindia.com",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://samjhoindia.com/?s={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+          </script>
+          <p>Get important updates, new tools and useful resources.</p>
+          <form class="foot-newsletter-form">
+            <input type="email" placeholder="Enter your email" aria-label="Email for newsletter" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p class="foot-copyright">© 2026 Samjho India. All rights reserved.</p>
+        <p class="foot-tagline-right">A Smarter, More Informed India <span class="foot-flag">🇳</span></p>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/search-data.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  
+</body>
+</html>

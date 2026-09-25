@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login — Samjho India</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; background: #f5f7fb; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-card { background: #fff; border-radius: 12px; padding: 40px; width: 100%; max-width: 380px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .login-card h1 { font-size: 20px; margin-bottom: 4px; color: #1f2a37; }
+    .login-card .subtitle { font-size: 13px; color: #6b7280; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 4px; }
+    .form-group input { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; transition: border 0.15s; }
+    .form-group input:focus { border-color: #2563eb; }
+    .login-btn { width: 100%; padding: 10px; background: #1f2a37; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .login-btn:hover { background: #374151; }
+    .login-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+    .error-msg { color: #dc2626; font-size: 13px; margin-top: 12px; display: none; }
+    .back-link { text-align: center; margin-top: 16px; }
+    .back-link a { font-size: 13px; color: #6b7280; text-decoration: none; }
+    .back-link a:hover { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h1>Samjho Admin</h1>
+    <p class="subtitle">Sign in to access the admin panel</p>
+    <form id="login-form" autocomplete="on">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="admin@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Password" />
+      </div>
+      <button type="submit" class="login-btn" id="login-btn">Sign In</button>
+      <p class="error-msg" id="error-msg"></p>
+    </form>
+    <div class="back-link">
+      <a href="/">← Back to Samjho India</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/admin/supabase-config.js"></script>
+  <script src="/admin/auth.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("login-form");
+      var btn = document.getElementById("login-btn");
+      var errEl = document.getElementById("error-msg");
+
+      // Global error handler — catches uncaught errors that slip past try/catch
+      window.addEventListener("unhandledrejection", function (e) {
+        console.error("[Login] Unhandled rejection:", e.reason);
+        showErr(e.reason && e.reason.message ? e.reason.message : "An unexpected error occurred.");
+      });
+
+      // Diagnostic: confirm scripts loaded
+      console.log("[Login] supabase loaded:", typeof window.supabase);
+      console.log("[Login] config loaded:", typeof window.SamjhoSupabaseConfig);
+      console.log("[Login] SamjhoAuth loaded:", typeof window.SamjhoAuth);
+      if (window.SamjhoSupabaseConfig) {
+        console.log("[Login] Supabase URL:", window.SamjhoSupabaseConfig.SUPABASE_URL);
+        console.log("[Login] Anon key present:", !!window.SamjhoSupabaseConfig.SUPABASE_ANON_KEY);
+      }
+
+      function showErr(msg) {
+        errEl.textContent = msg;
+        errEl.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Sign In";
+        // Scroll error into view on mobile
+        try { errEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); } catch (e) {}
+      }
+
+      // If already logged in, redirect to dashboard
+      if (typeof SamjhoAuth === "undefined") {
+        console.error("[Login] SamjhoAuth NOT LOADED — check auth.js");
+        showErr("Login system not ready. Please refresh the page.");
+        return;
+      }
+      SamjhoAuth.getSession().then(function (session) {
+        if (session) window.location.href = "/admin/";
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("email").value.trim();
+        var password = document.getElementById("password").value;
+        if (!email || !password) return;
+
+        btn.disabled = true;
+        btn.textContent = "Signing in...";
+        errEl.style.display = "none";
+
+        console.log("[Login] Attempting login for:", email);
+
+        // Safety timeout — if nothing happens in 15 seconds, show error
+        var timeout = setTimeout(function () {
+          showErr("Login timed out. Check your connection and try again.");
+          console.error("[Login] Timeout — no response from Supabase after 15s");
+        }, 15000);
+
+        SamjhoAuth.login(email, password)
+          .then(function (result) {
+            clearTimeout(timeout);
+            console.log("[Login] Success — redirecting to /admin/");
+            window.location.href = "/admin/";
+          })
+          .catch(function (err) {
+            clearTimeout(timeout);
+            console.error("[Login] Error:", err);
+            var msg = (err && err.message) || "Login failed. Please check your credentials.";
+            if (msg.indexOf("Invalid login") > -1 || msg.indexOf("invalid") > -1 || msg.indexOf("Invalid") > -1) {
+              msg = "Invalid email or password.";
+            }
+            if (msg.indexOf("not confirm") > -1 || msg.indexOf("Email not") > -1) {
+              msg = "Email not confirmed. Please check your inbox or contact admin.";
+            }
+            showErr(msg);
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

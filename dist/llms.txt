@@ -1,0 +1,27 @@
+# Samjho India
+
+> India ka everyday information aur utility platform. Government schemes, documents, business registration, money concepts, education — sab simple Hindi mein.
+
+## Main Categories
+- [Government Guides](https://samjhoindia.com/guides/government/): Schemes, scholarships, public services
+- [Documents Guides](https://samjhoindia.com/guides/documents/): Aadhaar, PAN, Voter ID, Passport
+- [Business Guides](https://samjhoindia.com/guides/business/): Udyam, GST, FSSAI
+- [Money Guides](https://samjhoindia.com/guides/money/): EMI, Credit Score, Savings
+- [Education Guides](https://samjhoindia.com/guides/education/): CGPA, Scholarships, Exams
+
+## Popular Guides
+- [PM Kisan Yojana 2025](https://samjhoindia.com/guides/pm-kisan-yojana/): ₹6000 saalana income support scheme for eligible farmer families.
+- [Aadhaar Update Guide](https://samjhoindia.com/guides/what-is-aadhaar/): Mobile number, address and demographic update steps.
+- [Udyam Registration](https://samjhoindia.com/guides/what-is-udyam/): Free MSME registration for eligible small businesses.
+- [PAN Card Guide](https://samjhoindia.com/guides/what-is-pan-card/): Apply, correct and track your PAN card online.
+- [Ration Card Guide](https://samjhoindia.com/guides/ration-card/): e-KYC, state list and eligibility for ration cards.
+
+## Calculators
+- [EMI Calculator](https://samjhoindia.com/calculators/emi/): Loan EMI calculate
+- [GST Calculator](https://samjhoindia.com/calculators/gst/): GST add/remove
+- [Age Calculator](https://samjhoindia.com/calculators/age/): Exact age
+
+## How This Site Works
+- Every calculator runs in your browser — nothing is sent to a server.
+- Guides explain what something is, why it matters, and how it works, in simple Hindi-English mix.
+- Samjho is an independent information platform, not a government website.

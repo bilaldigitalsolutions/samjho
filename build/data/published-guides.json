@@ -1,0 +1,433 @@
+[
+  {
+    "id": "pub-test-001",
+    "title": "Pipeline Test Guide (Mock)",
+    "slug": "test-guide-micro7",
+    "category": "money",
+    "summary": "Mock summary used only to verify the publishing pipeline.",
+    "content": "This is mock content created to verify the approved-to-published pipeline. Not real production content.",
+    "eligibility": [
+      "Mock eligibility line one",
+      "Mock eligibility line two"
+    ],
+    "benefits": [
+      "Mock benefit one",
+      "Mock benefit two"
+    ],
+    "required_documents": [
+      "Mock document one"
+    ],
+    "application_process": [
+      "Mock step one",
+      "Mock step two"
+    ],
+    "important_dates": [
+      "Mock date: none"
+    ],
+    "common_mistakes": [
+      "Mock mistake one"
+    ],
+    "faqs": [
+      {
+        "q": "Is this a real guide?",
+        "a": "No. This is a mock pipeline test guide."
+      }
+    ],
+    "source_ids": [
+      "mock-source"
+    ],
+    "status": "approved",
+    "last_updated": "2026-09-18"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is a five-day event by the Ministry of Jal Shakti. The 9th edition started on September 22, 2026 at Bharat Mandapam, New Delhi.",
+        "q": "What is India International Water Week 2026?"
+      },
+      {
+        "a": "The theme is “Climate Resilient Water Management.”",
+        "q": "What is the theme of this year's event?"
+      },
+      {
+        "a": "Vice-President of India Shri C. P. Radhakrishnan launched the event.",
+        "q": "Who launched the event?"
+      },
+      {
+        "a": "The Sustainable Urban River Management (SURM) Framework and an AI/ML-driven Integrated Reservoir Sediment Management system.",
+        "q": "What new tools were launched at the event?"
+      },
+      {
+        "a": "Small habits help. Take a bath with fewer buckets, close the tap while brushing your teeth, and use water wisely at home.",
+        "q": "What can I do to help save water?"
+      }
+    ],
+    "slug": "india-international-water-week-2026",
+    "title": "India International Water Week 2026 Begins: Vice-President Asks Citizens to Save Every Drop",
+    "status": "approved",
+    "content": "## What Happened\n\nVice-President Shri C. P. Radhakrishnan launched the 9th India International Water Week 2026 on September 22. The event is being held at Bharat Mandapam in New Delhi. The Ministry of Jal Shakti is organising it for five days, from September 22 to 26. This year, the focus is on “Climate Resilient Water Management.”\n\nAt the event, the Vice-President launched two new tools. One is the Sustainable Urban River Management (SURM) Framework. The other is an AI and machine learning system for managing sediment in reservoirs. Union Minister for Jal Shakti Shri C. R. Patil and Ministers of State Shri V. Somanna and Shri Raj Bhushan Choudhary were also present. Experts and delegates from India and other countries joined the programme.\n\n## Why It Matters\n\nIndia is home to about 18 per cent of the world's people. But it has only about 4 per cent of the world's freshwater. It also covers only about 2.4 per cent of the world's land area. This means every drop counts for you and for the country.\n\nThe Vice-President said water is the base of life and of civilisations. He shared that he grew up in Tamil Nadu and saw water scarcity himself. He asked citizens to change small daily habits. He said, “We can take a bath using two buckets or twenty buckets. The choice is ours.” He also reminded people to close the tap while brushing their teeth.\n\nHe said climate change, fast urban growth and a rising population are making water management harder. He called for better river-basin management, groundwater recharge, rainwater harvesting and efficient irrigation. He also said India must move from reacting to water problems to predicting them with the help of technology. As India works towards becoming a developed economy by 2047, he said smart and sustainable water use will be key.\n\n## Key Points\n\n- The Vice-President launched the SURM Framework and an AI/ML-based reservoir sediment management system.\n- He said 10 inter-State agreements on water sharing have been signed so far.\n- He praised the Kishau Multipurpose Project agreement among six States as a strong example of teamwork.\n- He recalled his 19,000-km Ratha Yatra across Tamil Nadu, which spread awareness about river interlinking and water conservation.\n- He said river interlinking can help when some regions face floods and others face drought.\n- He supported the Prime Minister's call for “Jal Sanchay Jan Bhagidari” and urged people to make water saving a mass movement.\n- He said, “Jal Suraksha will lead to Jan Suraksha and Rashtra Suraksha.”",
+    "summary": "Vice-President Shri C. P. Radhakrishnan launched the 9th India International Water Week 2026 on September 22 at Bharat Mandapam, New Delhi. The Ministry of Jal Shakti is holding this five-day event from September 22 to 26. This year's theme is “Climate Resilient Water Management.”",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313399"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "September 22, 2026 – India International Water Week 2026 launched at Bharat Mandapam, New Delhi.",
+      "September 22 to 26, 2026 – Five-day event held by the Ministry of Jal Shakti."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "He shared it on 22 September 2026, which is World Rhino Day.",
+        "q": "When did the Prime Minister share this message?"
+      },
+      {
+        "a": "Assam now holds nearly 80 percent of the world's rhino population.",
+        "q": "How many of the world's rhinos live in Assam?"
+      },
+      {
+        "a": "It is a new effort to give financial and technical support to range states for rhino protection and conservation.",
+        "q": "What is Project Rhino?"
+      },
+      {
+        "a": "It will support protection, habitat management, genetic improvement, and understanding of population dynamics.",
+        "q": "What kind of work will Project Rhino support?"
+      },
+      {
+        "a": "Rhinos have returned or are well protected in parts of Bihar and West Bengal. They were also reintroduced in Dudhwa, Uttar Pradesh.",
+        "q": "Where else have rhinos been seen or reintroduced?"
+      }
+    ],
+    "slug": "project-rhino-world-rhino-day-2026",
+    "title": "Project Rhino Started: PM Modi Marks World Rhino Day 2026",
+    "status": "approved",
+    "content": "What Happened\n\nOn 22 September 2026, Prime Minister Shri Narendra Modi marked World Rhino Day. He praised the greater one-horned rhinoceros and thanked all those working on the front lines to protect it. He shared his message in a post on X. In the same post, he announced that Project Rhino has been started.\n\nWhy It Matters\n\nAssam is now home to nearly 80 percent of the world's rhino population. Kaziranga's work to stop rhino poaching has earned wide appreciation. Rhinos have either come back or are well protected in parts of Bihar and West Bengal. In Dudhwa, Uttar Pradesh, rhinos were brought back and that effort is creating history.\n\nThe Prime Minister said these results show the steady commitment of people to animal protection. Project Rhino will give money and technical support to range states. This help covers protection, habitat management, genetic improvement, and understanding of population dynamics. The scheme aims to take species conservation forward across the country.\n\nKey Points\n\n- Assam now holds nearly 80 percent of the world's rhino population.\n- Kaziranga's efforts to end rhino poaching have been widely appreciated.\n- Rhinos have returned or are well protected in parts of Bihar and West Bengal.\n- The reintroduction of rhinos in Dudhwa, Uttar Pradesh, is creating history.\n- Project Rhino will support range states with funds and technical help for protection and habitat work.",
+    "summary": "On World Rhino Day, Prime Minister Narendra Modi praised the greater one-horned rhinoceros and thanked everyone protecting it. He shared that Assam is now home to nearly 80 percent of the world's rhinos. He also announced that Project Rhino has been started to help range states protect the animal and its habitat.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313522"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "22 September 2026 – World Rhino Day, when the Prime Minister shared this update."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The Lieutenant Governor of Andaman and Nicobar Islands, Dr. Dinesh Sharma, met Prime Minister Narendra Modi.",
+        "q": "Who met the Prime Minister?"
+      }
+    ],
+    "slug": "lg-andaman-nicobar-meets-pm-modi",
+    "title": "LG of Andaman and Nicobar Islands Meets PM Modi",
+    "status": "approved",
+    "content": "What Happened: On September 22, 2026, Dr. Dinesh Sharma, the Lieutenant Governor of Andaman and Nicobar Islands, met Prime Minister Narendra Modi. The Prime Minister's Office (PMO) posted about the meeting on X (formerly Twitter). The post included a photo of the two leaders. No other details about the meeting were shared.\n\nWhy It Matters: This meeting is a regular official interaction between the central government and the Union Territory administration. Such meetings help maintain communication between the Prime Minister and Lieutenant Governors. They can be used to discuss important matters related to the Union Territory. However, the source does not say what was discussed.\n\nKey Points:\n- Dr. Dinesh Sharma is the Lieutenant Governor of Andaman and Nicobar Islands.\n- He met Prime Minister Narendra Modi on September 22, 2026.\n- The PMO shared the news on X with a photo.\n- The meeting was a formal one.\n- No further information was given by the source.",
+    "summary": "On September 22, 2026, the Lieutenant Governor of Andaman and Nicobar Islands, Dr. Dinesh Sharma, met Prime Minister Narendra Modi. The Prime Minister's Office shared this news on X. The meeting was a formal interaction.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313395"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "September 22, 2026: Meeting between LG Dr. Dinesh Sharma and PM Narendra Modi."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "India's Women's Cricket Team won the Gold medal at the Asian Games.",
+        "q": "Who won the Gold medal at the Asian Games?"
+      },
+      {
+        "a": "Prime Minister Shri Narendra Modi congratulated the team.",
+        "q": "Who congratulated the team?"
+      },
+      {
+        "a": "It is India's first Gold medal at this edition of the Asian Games.",
+        "q": "Why is this win special for India?"
+      },
+      {
+        "a": "He shared it in a post on X, on September 22, 2026.",
+        "q": "Where did the Prime Minister share his message?"
+      }
+    ],
+    "slug": "pm-modi-congratulates-womens-cricket-team-asian-games-gold",
+    "title": "PM Modi Congratulates Women's Cricket Team on Asian Games Gold",
+    "status": "approved",
+    "content": "What Happened\n\nPrime Minister Shri Narendra Modi congratulated the Women's Cricket Team on winning the Gold medal at the Asian Games. He shared his message on X on September 22, 2026. The Prime Minister's Office posted the message from the PM's official handle. In his message, the PM said the team played with confidence, skill and wonderful teamwork. He also sent his best wishes to the whole squad.\n\nWhy It Matters\n\nThis win gives India its first Gold medal at this edition of the Asian Games. It is a big moment for Indian cricket and for every fan back home. The Prime Minister said the team has made the nation proud.\n\nThe win can inspire many young cricketers across the country. If you are a young player, this shows what focus and teamwork can achieve on a world stage.\n\nKey Points\n\n- India's Women's Cricket Team won the Gold medal at the Asian Games.\n- Prime Minister Narendra Modi congratulated the team on X.\n- This is India's first Gold at this edition of the Games.\n- The PM praised the team's confidence, skill and teamwork.\n- He wished the entire squad the very best.",
+    "summary": "Prime Minister Narendra Modi congratulated India's Women's Cricket Team for winning the Gold medal at the Asian Games. He called it a splendid win for Indian cricket and praised the team's confidence, skill and teamwork. This is India's first Gold medal at this edition of the Games.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313381"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "The Prime Minister shared his congratulatory message on September 22, 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Suchika Tariyal won a Bronze medal in Mixed Martial Arts at the Asian Games.",
+        "q": "Who won the medal for India?"
+      },
+      {
+        "a": "It is India's first ever Asian Games medal in Mixed Martial Arts.",
+        "q": "Why is this medal special?"
+      },
+      {
+        "a": "PM Narendra Modi congratulated her on 22 September 2026.",
+        "q": "When did the Prime Minister congratulate her?"
+      },
+      {
+        "a": "The Prime Minister's Office shared the message in a post on X.",
+        "q": "Where did the Prime Minister share his message?"
+      }
+    ],
+    "slug": "pm-modi-congratulates-suchika-tariyal-asian-games-bronze-mixed-martial-arts",
+    "title": "PM Modi Congratulates Suchika Tariyal for India's First Asian Games Medal in Mixed Martial Arts",
+    "status": "approved",
+    "content": "What Happened\n\nOn 22 September 2026, Prime Minister Narendra Modi congratulated Suchika Tariyal. She won a Bronze medal in Mixed Martial Arts at the Asian Games. Her win gave India its first ever Asian Games medal in this sport. The Prime Minister's Office shared his message on X the same day.\n\nWhy It Matters\n\nMixed Martial Arts is still a new sport for India on the world stage. No Indian athlete had ever reached the Asian Games podium in this event before. This medal shows that Indian fighters can compete with the best in tough, contact sports. It also gives young athletes in India a new dream to chase.\n\nWhy It Matters\n\nThe Prime Minister called the win a historic achievement for the country. He said her dedication and zeal stand out. He also wished her many more successes in the coming years.\n\nKey Points\n\n- Suchika Tariyal won Bronze in Mixed Martial Arts at the Asian Games.\n- This is India's first ever Asian Games medal in Mixed Martial Arts.\n- PM Narendra Modi congratulated her on 22 September 2026.\n- He called the win a historic achievement for India.\n- He praised her dedication and wished her more success.",
+    "summary": "Suchika Tariyal won a Bronze medal in Mixed Martial Arts at the Asian Games. This is India's first ever Asian Games medal in this sport. On 22 September 2026, Prime Minister Narendra Modi congratulated her and wished her more success ahead.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313375"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Yes. The e-PAN has the same legal status as the physical PAN card. It works for banking, investments and tax filing.",
+        "q": "Is the e-PAN card valid like the physical PAN card?"
+      },
+      {
+        "a": "Nothing. The instant e-PAN is completely free through the Instant e-PAN route on the e-Filing portal.",
+        "q": "How much does an instant e-PAN cost?"
+      },
+      {
+        "a": "It is generated in about 5-10 minutes. The download link reaches your email.",
+        "q": "How long does an instant e-PAN take?"
+      },
+      {
+        "a": "You cannot get a new PAN. But you can download a digital copy. Use the Reprint PAN Card section on incometax.gov.in, or DigiLocker.",
+        "q": "I already have a PAN. Can I get an e-PAN too?"
+      },
+      {
+        "a": "The password is your date of birth in DDMMYYYY format. If your birthday is 15 January 1995, the password is 15011995.",
+        "q": "My e-PAN PDF is not opening. What is the password?"
+      },
+      {
+        "a": "You may already have a PAN. Check your PAN status on the Income Tax portal using your Aadhaar number.",
+        "q": "The portal says no PAN found. What does that mean?"
+      }
+    ],
+    "slug": "e-pan-card-digital-pan-free-download-guide",
+    "title": "e-PAN Card: Get Your Digital PAN Free in 5-10 Minutes",
+    "status": "approved",
+    "content": "## What Happened\n\nThe Income Tax Department issues a digital version of your PAN card. This digital card is called e-PAN. It comes as a PDF file that you can save on your phone or computer. It has the same legal value as the plastic PAN card. So you can use it for banking, investments and tax filing.\n\nEvery e-PAN carries a QR code. That code holds your name, PAN number, date of birth and photo. Anyone can scan it to check that your card is genuine.\n\nThe government also approved the PAN 2.0 plan. About Rs 1,435 crore has been set aside for it. Under this plan, new PAN cards will carry a QR code. Your old PAN card will still work. You do not have to replace it.\n\n## Who Is Eligible\n\nYou need three things to get a free e-PAN. You must have a valid Aadhaar number. Your mobile number must be linked to that Aadhaar, because you need it for the OTP. And you must not already have a PAN.\n\nSome people cannot apply. Minors below 18 years cannot apply. Anyone who already has a PAN will not get a second one. If your mobile is not linked to Aadhaar, link it first at aadhaar.gov.in or at an Aadhaar centre.\n\n## Benefits\n\nThe instant e-PAN is completely free. The department charges you nothing for it. It is generated in about 5-10 minutes. A download link lands in your email, and you can open it from anywhere.\n\nThe physical PAN card works differently. It takes 15-20 working days to reach you. You also pay a fee of about Rs 107 for it. The e-PAN is valid for your whole life. You never have to renew it. It works in almost every situation, from banks to tax filing.\n\n## How to Apply\n\nStep 1: Open the Income Tax e-Filing portal at incometax.gov.in.\n\nStep 2: Click the Instant e-PAN section on the homepage.\n\nStep 3: Choose Get New e-PAN.\n\nStep 4: Enter your 12-digit Aadhaar number. Type only the 12 digits. Do not add dashes or spaces.\n\nStep 5: An OTP will reach your Aadhaar-linked mobile. Verify it. If your mobile is not linked, update your Aadhaar first.\n\nStep 6: Pick your date of birth proof from DigiLocker. You can also verify the date of birth yourself.\n\nStep 7: Submit the form. You will get an acknowledgement number. Note it down safely.\n\nStep 8: Within 5-10 minutes, a PDF download link reaches your email. Download it and save it.\n\n## How to Download an Existing PAN\n\nIf you already have a PAN and want a copy, go to incometax.gov.in. Open the Reprint PAN Card section. Enter your PAN number and Aadhaar number. Pay a fee of about Rs 50. Your physical card will arrive in 15-20 working days. You can also download a digital copy from DigiLocker, which is equally valid.\n\n## Watch Out For Scam Emails\n\nThe government has warned about fake emails going around. These emails say your PAN has expired and ask you to update it through a link. The Income Tax Department never asks for your personal details over email. Never click such links and never enter your PAN details there.\n\nIf you see a suspicious email, do not click it. Check everything only on the official portal. You can report it at webmanager@incometax.gov.in. Download the e-PAN only through official apps like mAadhaar and DigiLocker.\n\n## Important Dates\n\nThe PAN 2.0 update was approved with a budget of Rs 1,435 crore. The year 2026 is mentioned for this plan. No exact date is given in the official source.",
+    "summary": "You can now get a digital PAN card, called e-PAN, from the Income Tax Department. It is free, arrives in 5-10 minutes, and is fully valid like the physical card. The government also shared a phishing warning about fake e-PAN emails.",
+    "benefits": [
+      "The instant e-PAN is completely free. There is no charge at all.",
+      "You get a PDF download link in your email.",
+      "It has the same legal status as the physical PAN card.",
+      "It works for banking, investments and tax filing.",
+      "It is valid for your whole life, so you never need to renew it.",
+      "It carries a QR code that anyone can scan to verify your details."
+    ],
+    "category": "Documents",
+    "source_ids": [
+      "https://www.incometax.gov.in/"
+    ],
+    "eligibility": [
+      "You must have a valid Aadhaar number.",
+      "Your mobile number must be linked to your Aadhaar, because the OTP comes there.",
+      "You must not already have a PAN card.",
+      "Minors below 18 years cannot apply for an instant e-PAN.",
+      "People who already hold a PAN will not get a duplicate e-PAN.",
+      "If your mobile is not linked to Aadhaar, link it first before applying."
+    ],
+    "last_updated": "2026-09-24",
+    "common_mistakes": [
+      "Typing dashes or spaces in your Aadhaar number. Enter only the 12 digits.",
+      "Trying to apply with a mobile number that is not linked to Aadhaar. Link it first at aadhaar.gov.in or an Aadhaar centre.",
+      "Applying for a new e-PAN when you already have a PAN. Check your PAN status on the portal first.",
+      "Forgetting the PDF password. It is your date of birth in DDMMYYYY format. For example, 15 January 1995 becomes 15011995.",
+      "Losing your acknowledgement number. If you lose it, apply again with your Aadhaar number. The old application gets cancelled on its own.",
+      "Clicking emails that claim your PAN has expired. These are fake. The department never asks for details over email."
+    ],
+    "important_dates": [
+      "The PAN 2.0 update is planned for the year 2026 according to the official source. No exact date is given.",
+      "A physical PAN card takes 15-20 working days to arrive."
+    ],
+    "required_documents": [
+      "A 12-digit Aadhaar number, typed without dashes or spaces.",
+      "An active mobile number linked to your Aadhaar, for the OTP.",
+      "Date of birth proof selected through DigiLocker, or manual date of birth verification."
+    ],
+    "application_process": [
+      "Step 1: Open the Income Tax e-Filing portal at incometax.gov.in.",
+      "Step 2: Click the Instant e-PAN section shown on the homepage.",
+      "Step 3: Select Get New e-PAN.",
+      "Step 4: Enter your 12-digit Aadhaar number. Do not add dashes or spaces.",
+      "Step 5: Verify the OTP sent to your Aadhaar-linked mobile. Link your mobile first if it is not linked.",
+      "Step 6: Choose your date of birth proof from DigiLocker, or verify the date of birth manually.",
+      "Step 7: Submit the form and note down the acknowledgement number you receive.",
+      "Step 8: Download the PDF from the email link that arrives within 5-10 minutes, and save it."
+    ],
+    "source_published_date": "2026-09-24",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "No. You cannot register directly on the CERSAI portal. You have to go through a regulated financial institution such as a bank, mutual fund company, or insurance company.",
+        "q": "Can I register for CKYC on my own?"
+      },
+      {
+        "a": "Go to cersai.org.in, open the CKYC Status Check section, and enter your 14-digit CKYC number or your PAN number. Your status will appear.",
+        "q": "How do I check my CKYC status?"
+      },
+      {
+        "a": "Contact your bank or financial institution. They can give you your CKYC number.",
+        "q": "I forgot my CKYC number. What should I do?"
+      },
+      {
+        "a": "CKYC stores your details in CERSAI's central registry for long-term use. eKYC is an Aadhaar-based check that happens in real time when you apply for a product.",
+        "q": "What is the difference between CKYC and eKYC?"
+      },
+      {
+        "a": "It is a unique number given to you after your KYC is verified. You can share it to onboard quickly with any financial product.",
+        "q": "What is the 14-digit CKYC identifier?"
+      }
+    ],
+    "slug": "ckyc-2-0-one-kyc-for-all-financial-products",
+    "title": "CKYC 2.0: One KYC for All Your Financial Products",
+    "status": "approved",
+    "content": "## What Happened\n\nCKYC 2.0 started rolling out on August 1, 2026. CKYC stands for Central Know Your Customer. It is one central system built for India's financial sector.\n\nEarlier, every bank, mutual fund, and insurance company did its own KYC. You had to submit the same papers again and again. Under CKYC, your details are verified once and stored in a central registry.\n\nCERSAI manages this registry. CERSAI is the Central Registry of Securitisation Asset Reconstruction and Security Interest of India. It works under the RBI and is the most trusted source for KYC records.\n\n## What Is New In CKYC 2.0\n\n- OTP-based consent: You no longer need to hand over physical documents. One OTP is enough to give your consent.\n- 14-digit CKYC identifier: This is a unique number given to you. Share it to onboard with any financial product.\n- Confidence score: Every KYC record gets a score that shows how verified it is.\n- Digital-first approach: Everything moves online, so paperwork drops.\n\n## Who Can Get CKYC\n\nAny person who wants a CKYC record must go through a regulated financial institution. Banks, mutual fund companies, and insurance companies can all do this for you. You cannot create the record on your own.\n\n## Benefits\n\n- You do not submit the same documents again and again. Do KYC once and use it everywhere.\n- Opening a new account or investment becomes faster.\n- One record covers all your financial products, including bank, mutual fund, and insurance.\n- Your record sits in one secure central place.\n- A central system lowers the risk of fraud.\n\n## CKYC vs eKYC vs Normal KYC\n\n- CKYC: Your data is stored in CERSAI's registry. Any financial institution can access it only after taking your permission.\n- eKYC: This is Aadhaar-based digital verification. It happens in real time when you apply for a financial product.\n- Normal KYC: You carry physical papers like PAN, Aadhaar, and address proof to the institution. They check the papers and keep the record.\n\n## How to Register\n\n1. Visit any regulated financial institution, such as a bank, mutual fund, or insurance company.\n2. Submit the needed documents like PAN, Aadhaar, and a photo.\n3. The institution verifies them and uploads them to CERSAI.\n4. You receive a 14-digit CKYC identifier.\n5. Use this number for fast onboarding at any other financial institution.\n\n## How to Check Your CKYC Status\n\n1. Open the CERSAI website at cersai.org.in.\n2. Go to the CKYC Status Check section.\n3. Enter your 14-digit CKYC number or your PAN number.\n4. Your status will show on the screen.\n\nIf you did CKYC earlier and forgot your number, contact your bank or financial institution. They can share your CKYC number with you.",
+    "summary": "CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.",
+    "benefits": [
+      "You do not have to submit the same documents again and again. One KYC works everywhere.",
+      "Your financial onboarding becomes faster when you open a new account or start an investment.",
+      "One single record works for all your financial products, including bank, mutual fund, and insurance.",
+      "All your KYC details are managed in one central and secure place.",
+      "A central system brings down the risk of fraud."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.cersai.org.in/"
+    ],
+    "eligibility": [
+      "You must go through a regulated financial institution like a bank, mutual fund company, or insurance company.",
+      "You cannot register for CKYC directly on the CERSAI portal on your own."
+    ],
+    "last_updated": "2026-09-24",
+    "common_mistakes": [
+      "Do not try to register for CKYC yourself on the CERSAI portal. You must go through a regulated financial institution."
+    ],
+    "important_dates": [
+      "CKYC 2.0 started rolling out from August 1, 2026."
+    ],
+    "required_documents": [
+      "Proof of identity: PAN card, Aadhaar card, passport, voter ID, or driving licence.",
+      "Proof of address: Aadhaar card, passport, or driving licence.",
+      "PAN card or Form 60.",
+      "A recent passport-size photograph."
+    ],
+    "application_process": [
+      "Go to any regulated financial institution, such as a bank, mutual fund, or insurance company.",
+      "Submit the required documents, including PAN, Aadhaar, and your photo.",
+      "The institution verifies your papers and uploads them to CERSAI.",
+      "You get a 14-digit CKYC identifier.",
+      "Use this number for quick onboarding at any other financial institution."
+    ],
+    "source_published_date": "2026-09-24",
+    "content_type": "Press Release"
+  }
+]

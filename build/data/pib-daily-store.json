@@ -1,0 +1,8 @@
+{
+  "runs": [],
+  "config": {
+    "max_per_category": 4,
+    "categories": ["Government", "Documents", "Business", "Money", "Education"],
+    "listing_url": "https://pib.gov.in/allRel.aspx?reg=48&lang=1"
+  }
+}

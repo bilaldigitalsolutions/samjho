@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Questions Management — Samjho Questions</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">Samjho Questions</div>
+      <nav class="admin-nav">
+        <a href="/admin/">Admin Dashboard</a>
+        <a href="/admin/content/">Content Inbox (Guides)</a>
+        <a href="/admin/content/review/">Guide Review Queue</a>
+        <a href="/questions/admin/" aria-current="page">Questions Management</a>
+      </nav>
+      <div class="admin-separator"></div>
+      <div class="admin-status">Workflow: Draft → Review → Approved · mock data only</div>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-banner">
+        <h1>Questions Management</h1>
+        <p>Question bank workflow: Question → Draft → Review → Approved. Questions are NOT published to the public website yet.</p>
+      </div>
+
+      <section class="admin-panel">
+        <h2 class="admin-panel__title">Questions</h2>
+        <p class="admin-panel__hint" id="q-count"></p>
+        <div class="inbox-table-wrap">
+          <table class="inbox-table" id="q-table">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+                <th>Source IDs</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="q-tbody"><!-- rendered by questions.js --></tbody>
+          </table>
+        </div>
+        <p id="q-empty" class="admin-panel__hint" hidden>No questions yet — use the Add Question form below.</p>
+      </section>
+
+      <section class="admin-panel">
+        <h2 class="admin-panel__title">Add Question</h2>
+        <form id="q-add-form" autocomplete="off">
+          <label class="inbox-form__field">
+            <span>Question</span>
+            <textarea id="f-question" rows="2" required placeholder="e.g. PM Kisan kist status kaise check karein?"></textarea>
+          </label>
+          <div class="inbox-form__row">
+            <label class="inbox-form__field">
+              <span>Category</span>
+              <select id="f-category" required>
+                <option value="government">Government</option>
+                <option value="documents">Documents</option>
+                <option value="business">Business</option>
+                <option value="money">Money</option>
+                <option value="education">Education</option>
+              </select>
+            </label>
+            <label class="inbox-form__field">
+              <span>Status</span>
+              <select id="f-status">
+                <option value="draft">Draft</option>
+                <option value="review">Review</option>
+                <option value="approved">Approved</option>
+              </select>
+            </label>
+          </div>
+          <label class="inbox-form__field">
+            <span>Answer</span>
+            <textarea id="f-answer" rows="3" placeholder="Simple answer for the question"></textarea>
+          </label>
+          <div class="inbox-form__row">
+            <label class="inbox-form__field">
+              <span>Source IDs (comma separated)</span>
+              <input type="text" id="f-source-ids" placeholder="e.g. pmkisan.gov.in" />
+            </label>
+            <label class="inbox-form__field">
+              <span>Last Updated</span>
+              <input type="date" id="f-last-updated" />
+            </label>
+          </div>
+          <div class="inbox-form__actions">
+            <button type="submit" class="admin-btn">Add Question</button>
+            <span id="add-msg" class="inbox-form__msg" role="status"></span>
+          </div>
+        </form>
+      </section>
+
+      <section class="admin-panel admin-panel--editor" id="q-editor" hidden>
+        <h2 class="admin-panel__title">Edit Question — <span id="editor-status-badge"></span></h2>
+        <p class="admin-panel__hint">Workflow transitions: draft → review → approved; review → draft. Questions are not published yet.</p>
+        <form id="q-edit-form" autocomplete="off">
+          <label class="inbox-form__field">
+            <span>Question</span>
+            <textarea id="e-question" rows="2"></textarea>
+          </label>
+          <div class="inbox-form__row">
+            <label class="inbox-form__field">
+              <span>Category</span>
+              <select id="e-category">
+                <option value="government">Government</option>
+                <option value="documents">Documents</option>
+                <option value="business">Business</option>
+                <option value="money">Money</option>
+                <option value="education">Education</option>
+              </select>
+            </label>
+            <label class="inbox-form__field">
+              <span>Last Updated</span>
+              <input type="date" id="e-last-updated" />
+            </label>
+          </div>
+          <label class="inbox-form__field">
+            <span>Answer</span>
+            <textarea id="e-answer" rows="4"></textarea>
+          </label>
+          <label class="inbox-form__field">
+            <span>Source IDs (comma separated)</span>
+            <input type="text" id="e-source-ids" />
+          </label>
+          <div class="inbox-form__actions">
+            <button type="button" id="btn-save-draft" class="admin-btn">Save Draft</button>
+            <button type="button" id="btn-send-review" class="admin-btn" hidden>Send to Review</button>
+            <button type="button" id="btn-approve" class="admin-btn" hidden>Approve</button>
+            <button type="button" id="btn-return-draft" class="admin-btn admin-btn--secondary" hidden>Return to Draft</button>
+            <button type="button" id="editor-close" class="admin-btn admin-btn--secondary">Close</button>
+          </div>
+          <p id="editor-msg" class="inbox-form__msg" role="status"></p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="/questions/admin/question-schema.js"></script>
+  <script src="/questions/admin/questions.js"></script>
+</body>
+</html>

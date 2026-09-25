@@ -1,0 +1,8 @@
+# =============================================================================
+# Supabase CLI configuration — Samjho India MICRO 15A
+# =============================================================================
+[project]
+id = "clxwcivvxyyodahexjao"
+
+[functions.refine-deepseek]
+verify_jwt = true

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard — Samjho India</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="admin-brand"><div class="admin-brand-icon">S</div><div><div class="admin-brand-text">Samjho India</div><div class="admin-brand-sub">Information &bull; Tools &bull; For a Better Tomorrow</div></div></div>
+    <nav class="admin-nav">
+      <a href="/admin/" class="active"><span class="admin-nav-icon">&#x1F4CA;</span> Dashboard</a>
+      <a href="/admin/content/"><span class="admin-nav-icon">&#x1F4C4;</span> Content</a>
+      <a href="/admin/content/review.html"><span class="admin-nav-icon">&#x2705;</span> Review Queue</a>
+      <a href="/admin/sources/"><span class="admin-nav-icon">&#x1F310;</span> Sources</a>
+    </nav>
+    <div class="admin-workflow"><div class="admin-workflow-title">Workflow</div><div class="admin-workflow-steps"><span class="admin-workflow-step">Fetch</span><span class="admin-workflow-step arrow">&rarr;</span><span class="admin-workflow-step">Refine</span><span class="admin-workflow-step arrow">&rarr;</span><span class="admin-workflow-step">Verify</span><span class="admin-workflow-step arrow">&rarr;</span><span class="admin-workflow-step">Review</span><span class="admin-workflow-step arrow">&rarr;</span><span class="admin-workflow-step">Approve</span><span class="admin-workflow-step arrow">&rarr;</span><span class="admin-workflow-step">Publish</span></div></div>
+    <div class="admin-sidebar-footer"><a href="#" class="admin-logout-btn" id="admin-logout-btn">&#x23FB; Sign Out</a><div class="admin-sidebar-version">Trusted Sources Only</div></div>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-header"><div class="admin-header-left"><h1>Admin Dashboard</h1><p>Manage official-source content from fetch and refinement through verification, review, approval, and publishing.</p></div><div class="admin-header-right"><div class="admin-search">&#x1F50D; <input type="text" placeholder="Search content, sources..." /></div><div class="admin-avatar">A</div></div></div>
+    <div class="admin-cards" id="dash-cards">
+      <div class="admin-card"><div class="admin-card-top"><div class="admin-card-icon admin-card-icon--blue">&#x1F4C4;</div></div><div class="admin-card-number" id="card-total">0</div><div class="admin-card-label">Total Content</div><div class="admin-card-sub" id="card-total-sub">Loading...</div></div>
+      <div class="admin-card"><div class="admin-card-top"><div class="admin-card-icon admin-card-icon--purple">&#x1F50D;</div></div><div class="admin-card-number" id="card-review">0</div><div class="admin-card-label">In Review</div><div class="admin-card-sub" id="card-review-sub">Loading...</div></div>
+      <div class="admin-card"><div class="admin-card-top"><div class="admin-card-icon admin-card-icon--green">&#x2705;</div></div><div class="admin-card-number" id="card-verified">0</div><div class="admin-card-label">Verified</div><div class="admin-card-sub" id="card-verified-sub">Loading...</div></div>
+      <div class="admin-card"><div class="admin-card-top"><div class="admin-card-icon admin-card-icon--teal">&#x1F680;</div></div><div class="admin-card-number" id="card-published">0</div><div class="admin-card-label">Published</div><div class="admin-card-sub" id="card-published-sub">Loading...</div></div>
+    </div>
+    <div class="admin-content-area">
+      <div class="admin-table-card"><div class="admin-table-header"><div class="admin-table-title">Content Workflow</div><div class="admin-table-tabs" id="status-tabs"></div></div><table class="admin-table"><thead><tr><th>Title</th><th>Category</th><th>Source</th><th>Status</th><th>Updated</th></tr></thead><tbody id="dash-tbody"></tbody></table><div class="admin-table-empty" id="dash-empty">No content yet. Fetch from official sources to get started.</div></div>
+      <div class="admin-sidebar-right">
+        <div class="admin-side-card"><div class="admin-side-title">Quick Actions</div><a href="/admin/sources/" class="admin-action"><div class="admin-action-icon admin-action-icon--blue">&#x1F4E5;</div><div class="admin-action-text"><div class="admin-action-title">Fetch from official source</div><div class="admin-action-desc">Add new government notification</div></div><div class="admin-action-arrow">&#x2197;</div></a><a href="/admin/content/" class="admin-action"><div class="admin-action-icon admin-action-icon--green">&#x1F50D;</div><div class="admin-action-text"><div class="admin-action-title">Verify pending content</div><div class="admin-action-desc" id="action-verify">Items need source check</div></div><div class="admin-action-arrow">&#x2197;</div></a><div class="admin-action unavailable"><div class="admin-action-icon admin-action-icon--purple">&#x1F680;</div><div class="admin-action-text"><div class="admin-action-title">Publish approved</div><div class="admin-action-desc" id="action-publish">No approved content yet</div></div><div class="admin-action-arrow">&#x2197;</div></div></div>
+        <div class="admin-side-card"><div class="admin-side-title">Popular Tools on Live Site</div><div class="admin-tool"><div class="admin-tool-icon admin-tool-icon--p">P</div><div><div class="admin-tool-name">PAN Status Check</div><div class="admin-tool-meta">Documents</div></div><div class="admin-tool-dot"></div></div><div class="admin-tool"><div class="admin-tool-icon admin-tool-icon--i">I</div><div><div class="admin-tool-name">IFSC Code Finder</div><div class="admin-tool-meta">Money</div></div><div class="admin-tool-dot"></div></div><div class="admin-tool"><div class="admin-tool-icon admin-tool-icon--e">E</div><div><div class="admin-tool-name">EPF Calculator</div><div class="admin-tool-meta">Money</div></div><div class="admin-tool-dot"></div></div><div class="admin-tool"><div class="admin-tool-icon admin-tool-icon--g">G</div><div><div class="admin-tool-name">GST Calculator</div><div class="admin-tool-meta">Business</div></div><div class="admin-tool-dot"></div></div></div>
+        <div class="admin-note"><div class="admin-note-title">&#x1F4DD; Editor Note</div><div class="admin-note-text">Keep tone simple &amp; trustworthy. Official sources only.</div></div>
+        <div class="admin-side-card"><div class="admin-side-title">Verification Checklist</div><ul class="admin-checklist"><li><span class="admin-checklist-check">&#x2713;</span> Source URL from .gov.in / .nic.in</li><li><span class="admin-checklist-check">&#x2713;</span> Official publication date verified</li><li><span class="admin-checklist-check">&#x2713;</span> Source content checked against RAW</li><li><span class="admin-checklist-num">3</span> Clear language, no jargon</li><li><span class="admin-checklist-num">4</span> Tool link tested &amp; working</li></ul></div>
+      </div>
+    </div>
+    <div class="admin-footer">Samjho India &bull; Information &bull; Tools &bull; For a Better Tomorrow</div>
+  </main>
+</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/admin/supabase-config.js"></script>
+<script src="/admin/auth.js"></script>
+<script src="/admin/content/supabase-content.js"></script>
+<script src="/admin/ai/provider.js"></script>
+<script src="/admin/ai/supabase-endpoint.js"></script>
+<script>
+SamjhoAuth.checkSession().then(function(session){
+if(!session)return;
+(function(){
+var db=window.SamjhoContentDB;if(!db)return;
+var TABS=[{label:'All',filter:null},{label:'Fetch',filter:'fetched'},{label:'Refine',filter:'refine'},{label:'Verify',filter:'verify'},{label:'Review',filter:'review'},{label:'Approved',filter:'approved'},{label:'Published',filter:'published'}];
+var allItems=[];var activeTab='All';
+function esc(v){return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function mapStatus(item){
+  var s=item.status||'draft';var vs=item.verification_status||'';
+  var rs=item.review_status||'';var as=item.approval_status||'';
+  if(s==='published')return'published';if(s==='approved'&&as==='approved')return'approved';
+  if(s==='review'&&rs==='in_review')return'review';
+  if(vs==='verified')return'verify';if(item.refinement_status==='completed')return'refine';
+  if(item.fetch_status==='success')return'fetched';return'status-'+s;
+}
+function mapDisplay(status){
+  var m={fetched:'Fetched',refine:'Refine',verify:'Verify',review:'Review',approved:'Approved',published:'Published'};
+  return m[status]||status;
+}
+function badgeClass(status){return'status-badge status-badge--'+status;}
+function catClass(cat){
+  var c={government:'government',documents:'documents',business:'business',money:'money',education:'education'};
+  return c[(cat||'').toLowerCase()]||'government';
+}
+function updateCards(){
+  var total=allItems.length;var inReview=allItems.filter(function(i){return mapStatus(i)==='review';}).length;
+  var verified=allItems.filter(function(i){var s=mapStatus(i);return s==='verify'||s==='review'||s==='approved';}).length;
+  var published=allItems.filter(function(i){return mapStatus(i)==='published';}).length;
+  document.getElementById('card-total').textContent=total;
+  document.getElementById('card-total-sub').textContent='in database';
+  document.getElementById('card-review').textContent=inReview;
+  document.getElementById('card-review-sub').textContent=inReview>0?'Needs attention':'All clear';
+  document.getElementById('card-verified').textContent=verified;
+  document.getElementById('card-verified-sub').textContent='From official sources';
+  document.getElementById('card-published').textContent=published;
+  document.getElementById('card-published-sub').textContent=published>0?'Live on Samjho India':'Not yet published';
+  var verifyPending=allItems.filter(function(i){return mapStatus(i)==='fetched'||mapStatus(i)==='refine';}).length;
+  document.getElementById('action-verify').textContent=verifyPending+' items need source check';
+  var approvePending=allItems.filter(function(i){return mapStatus(i)==='approved';}).length;
+  document.getElementById('action-publish').textContent=approvePending>0?approvePending+' ready to go live':'No approved content yet';
+}
+function renderTabs(){
+  var el=document.getElementById('status-tabs');if(!el)return;
+  var counts={};counts['All']=allItems.length;
+  allItems.forEach(function(i){var s=mapStatus(i);counts[s]=(counts[s]||0)+1;});
+  el.innerHTML='';
+  TABS.forEach(function(t){
+    var c=counts[t.filter]||(t.label==='All'?allItems.length:0);
+    var btn=document.createElement('button');btn.className='admin-tab'+(activeTab===t.label?' active':'');
+    btn.innerHTML=t.label+'<span class="admin-tab-count">'+c+'</span>';
+    btn.onclick=function(){activeTab=t.label;renderTabs();renderTable();};
+    el.appendChild(btn);
+  });
+}
+function renderTable(){
+  var tbody=document.getElementById('dash-tbody');
+  var empty=document.getElementById('dash-empty');
+  var filtered=allItems;
+  if(activeTab!=='All'){
+    var tab=TABS.find(function(t){return t.label===activeTab;});
+    if(tab&&tab.filter)filtered=allItems.filter(function(i){return mapStatus(i)===tab.filter;});
+  }
+  if(filtered.length===0){if(tbody)tbody.innerHTML='';if(empty)empty.style.display='';return;}
+  if(empty)empty.style.display='none';
+  var html='';
+  filtered.forEach(function(item){
+    var cat=item.primary_category||'Government';var catLower=cat.toLowerCase();
+    var status=mapStatus(item);var updated=item.updated_at?item.updated_at.split('T')[0]:'';
+    var source=item.source_name||item.ministry||'';
+    html+='<tr><td>'+esc(item.title||'Untitled')+'</td>';
+    html+='<td><span class="cat-pill cat-pill--'+catClass(cat)+'"><span class="cat-dot"></span>'+esc(cat)+'</span></td>';
+    html+='<td>'+esc(source)+'</td>';
+    html+='<td><span class="'+badgeClass(status)+'">'+mapDisplay(status)+'</span></td>';
+    html+='<td>'+esc(updated)+'</td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+function loadData(){
+  db.select({columns:'*',order:{column:'updated_at',ascending:false}}).then(function(rows){
+    allItems=rows||[];renderTabs();renderTable();updateCards();
+  }).catch(function(e){console.error('Dashboard load failed:',e);var el=document.getElementById('card-total-sub');if(el)el.textContent='Load failed — check console';});
+}
+loadData();
+var logoutBtn=document.getElementById('admin-logout-btn');
+if(logoutBtn)logoutBtn.addEventListener('click',function(e){e.preventDefault();SamjhoAuth.logout();});
+})();
+});
+</script>
+</body></html>

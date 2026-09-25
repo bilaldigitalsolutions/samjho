@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sources — Samjho Admin</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">Samjho Admin</div>
+      <nav class="admin-nav">
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/content/">Content Inbox</a>
+        <a href="/admin/content/review.html">Review Queue</a>
+        <a href="/admin/sources/" aria-current="page">Sources</a>
+      </nav>
+      <div class="admin-separator"></div>
+      <div class="admin-status">Supabase Connected</div>
+      <div style="margin-top:20px;"><a href="#" class="admin-logout-btn" style="color:#fca5a5;font-size:13px;cursor:pointer;">Sign Out</a></div>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-banner">
+        <h1>Sources</h1>
+        <p>Official-source registry. Pilot source: PIB only. Feed URL is configurable — empty means “not configured”. No AI refinement, no auto-publishing.</p>
+      </div>
+
+      <section class="admin-panel">
+        <h2 class="admin-panel__title">Registered Sources</h2>
+        <p class="admin-panel__hint" id="sources-count"></p>
+        <div class="inbox-table-wrap">
+          <table class="inbox-table" id="sources-table">
+            <thead>
+              <tr>
+                <th>Source Name</th>
+                <th>Official Website URL</th>
+                <th>Feed URL</th>
+                <th>Source Type</th>
+                <th>Active / Inactive</th>
+                <th>Last Checked</th>
+              </tr>
+            </thead>
+            <tbody id="sources-tbody"><!-- rendered by sources.js --></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-panel">
+        <h2 class="admin-panel__title">PIB Fetcher (foundation)</h2>
+        <p class="admin-panel__hint">Flow: RSS/Feed → title + link + date → official URL → fetch HTML → extract raw announcement. Raw is preserved separately; successes go to the Content Inbox as RAW. Failures never create articles.</p>
+        <div class="inbox-form__row">
+          <label class="inbox-form__field">
+            <span>Feed URL (configurable — leave empty until the exact official PIB feed URL is known)</span>
+            <input type="url" id="s-feed-url" placeholder="https://… (empty = not configured)" />
+          </label>
+        </div>
+        <div class="inbox-form__actions">
+          <button type="button" id="s-check" class="admin-btn">Check Feed Status</button>
+          <span id="sources-msg" class="inbox-form__msg" role="status"></span>
+        </div>
+        <p class="admin-panel__hint">Status values: FEED_NOT_CONFIGURED · FEED_FETCH_FAILED · ARTICLE_FETCH_FAILED · CONTENT_EXTRACTION_FAILED. Fetching respects robots.txt, access restrictions and source terms; only https://pib.gov.in/ URLs are accepted.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/admin/supabase-config.js"></script>
+  <script src="/admin/auth.js"></script>
+  <script>SamjhoAuth.checkSession();</script>
+  <script>document.querySelectorAll(".admin-logout-btn").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();SamjhoAuth.logout();});});</script>
+  <script src="/admin/sources/registry.js"></script>
+  <script src="/admin/sources/fetcher.js"></script>
+  <script src="/admin/sources/sources.js"></script>
+</body>
+</html>
