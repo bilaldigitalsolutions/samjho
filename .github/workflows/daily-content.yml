@@ -1,0 +1,45 @@
+name: Daily Content Fetch & Refine
+
+on:
+  schedule:
+    # 6:00 AM IST = 12:30 AM UTC
+    - cron: '30 0 * * *'
+  workflow_dispatch:  # Manual trigger option
+    inputs:
+      limit:
+        description: 'Max items to fetch per source'
+        required: false
+        default: '5'
+
+jobs:
+  fetch-and-refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm ci || npm install
+      
+      - name: Fetch from all sources
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          LIMIT="${{ github.event.inputs.limit || '5' }}"
+          echo "Fetching up to $LIMIT items per source..."
+          node scripts/fetch-all-sources.js --limit=$LIMIT
+      
+      - name: Refine new items
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node build/scripts/run-pipeline.js
+      
+      - name: Log completion
+        run: echo "Daily pipeline completed at $(date -u)"
