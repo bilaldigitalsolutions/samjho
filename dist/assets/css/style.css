@@ -843,10 +843,6 @@ details.faq-item p { margin-top: 10px; color: var(--ink-soft); }
   position: relative !important;
   overflow: hidden;
   background-color: #f0f7f2;
-  background-image: url('/assets/hero-illustration-new.png');
-  background-size: cover;
-  background-position: center right;
-  background-repeat: no-repeat;
   border-bottom: 1px solid var(--home-line);
 }
 .home-hero__inner {
