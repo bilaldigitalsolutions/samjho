@@ -3,7 +3,7 @@ module.exports = [
   {
     slug: "what-is-udyam",
     title: "Udyam Registration — Full Form, Apply Online & Benefits (2026 Guide)",
-    metaTitle: "Udyam Full Form & Registration (2026) — Free Process, Benefits, Certificate",
+    metaTitle: "Udyam Registration 2026 — Full Form, Apply Online",
     metaDescription: "Udyam full form is Udyam Registration. Learn what Udyam is, how to register online for free, eligibility, benefits, documents required, and certificate download — complete 2026 guide.",
     lastUpdated: "2026-09-23",
     quickSummary: ["Free registration — ₹0 fees", "Online process (~5 minutes)", "Lifetime validity", "No renewal needed", "MSME benefits access"],

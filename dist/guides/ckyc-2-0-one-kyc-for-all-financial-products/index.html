@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-24T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -47,10 +48,16 @@
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -61,6 +68,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -73,62 +81,72 @@
   <main id="main">
     <nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/Money/">Money</a> &nbsp;/&nbsp; <span>CKYC 2.0: One KYC for All Your Financial Products</span></nav>
   <h1 class="guide-title">CKYC 2.0: One KYC for All Your Financial Products</h1>
-  <p class="guide-last-updated">Last updated: 24 Sep 2026 <span class="guide-new-badge">NEW</span></p>
+  <p class="guide-last-updated">Last updated: 24 Sep 2026</p>
   <div class="article-author"><a href="/about/" class="article-author__link"><div class="article-author__avatar">S</div><div class="article-author__info"><div class="article-author__name">Samjho Content Team</div><div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div></div></a></div>
   <section class="guide-section guide-section--summary"><h2 class="guide-section__title">Quick Summary</h2><p class="guide-summary">CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.</p></section>
-  <section class="guide-section guide-section--why-matters"><h2 class="guide-section__title">Why It Matters</h2><div class="guide-prose"><p>## What Happened
+  <section class="guide-section guide-section--why-matters"><h2 class="guide-section__title">Why It Matters</h2><div class="guide-prose"><h2>What Happened</h2>
 
-CKYC 2.0 started rolling out on August 1, 2026. CKYC stands for Central Know Your Customer. It is one central system built for India's financial sector.
+<p>CKYC 2.0 started rolling out on August 1, 2026. CKYC stands for Central Know Your Customer. It is one central system built for India's financial sector.</p>
 
-Earlier, every bank, mutual fund, and insurance company did its own KYC. You had to submit the same papers again and again. Under CKYC, your details are verified once and stored in a central registry.
+<p>Earlier, every bank, mutual fund, and insurance company did its own KYC. You had to submit the same papers again and again. Under CKYC, your details are verified once and stored in a central registry.</p>
 
-CERSAI manages this registry. CERSAI is the Central Registry of Securitisation Asset Reconstruction and Security Interest of India. It works under the RBI and is the most trusted source for KYC records.
+<p>CERSAI manages this registry. CERSAI is the Central Registry of Securitisation Asset Reconstruction and Security Interest of India. It works under the RBI and is the most trusted source for KYC records.</p>
 
-## What Is New In CKYC 2.0
+<h2>What Is New In CKYC 2.0</h2>
 
-- OTP-based consent: You no longer need to hand over physical documents. One OTP is enough to give your consent.
-- 14-digit CKYC identifier: This is a unique number given to you. Share it to onboard with any financial product.
-- Confidence score: Every KYC record gets a score that shows how verified it is.
-- Digital-first approach: Everything moves online, so paperwork drops.
+<ul>
+<li>OTP-based consent: You no longer need to hand over physical documents. One OTP is enough to give your consent.</li>
+<li>14-digit CKYC identifier: This is a unique number given to you. Share it to onboard with any financial product.</li>
+<li>Confidence score: Every KYC record gets a score that shows how verified it is.</li>
+<li>Digital-first approach: Everything moves online, so paperwork drops.</li>
+</ul>
 
-## Who Can Get CKYC
+<h2>Who Can Get CKYC</h2>
 
-Any person who wants a CKYC record must go through a regulated financial institution. Banks, mutual fund companies, and insurance companies can all do this for you. You cannot create the record on your own.
+<p>Any person who wants a CKYC record must go through a regulated financial institution. Banks, mutual fund companies, and insurance companies can all do this for you. You cannot create the record on your own.</p>
 
-## Benefits
+<h2>Benefits</h2>
 
-- You do not submit the same documents again and again. Do KYC once and use it everywhere.
-- Opening a new account or investment becomes faster.
-- One record covers all your financial products, including bank, mutual fund, and insurance.
-- Your record sits in one secure central place.
-- A central system lowers the risk of fraud.
+<ul>
+<li>You do not submit the same documents again and again. Do KYC once and use it everywhere.</li>
+<li>Opening a new account or investment becomes faster.</li>
+<li>One record covers all your financial products, including bank, mutual fund, and insurance.</li>
+<li>Your record sits in one secure central place.</li>
+<li>A central system lowers the risk of fraud.</li>
+</ul>
 
-## CKYC vs eKYC vs Normal KYC
+<h2>CKYC vs eKYC vs Normal KYC</h2>
 
-- CKYC: Your data is stored in CERSAI's registry. Any financial institution can access it only after taking your permission.
-- eKYC: This is Aadhaar-based digital verification. It happens in real time when you apply for a financial product.
-- Normal KYC: You carry physical papers like PAN, Aadhaar, and address proof to the institution. They check the papers and keep the record.
+<ul>
+<li>CKYC: Your data is stored in CERSAI's registry. Any financial institution can access it only after taking your permission.</li>
+<li>eKYC: This is Aadhaar-based digital verification. It happens in real time when you apply for a financial product.</li>
+<li>Normal KYC: You carry physical papers like PAN, Aadhaar, and address proof to the institution. They check the papers and keep the record.</li>
+</ul>
 
-## How to Register
+<h2>How to Register</h2>
 
-1. Visit any regulated financial institution, such as a bank, mutual fund, or insurance company.
-2. Submit the needed documents like PAN, Aadhaar, and a photo.
-3. The institution verifies them and uploads them to CERSAI.
-4. You receive a 14-digit CKYC identifier.
-5. Use this number for fast onboarding at any other financial institution.
+<ol>
+<li>Visit any regulated financial institution, such as a bank, mutual fund, or insurance company.</li>
+<li>Submit the needed documents like PAN, Aadhaar, and a photo.</li>
+<li>The institution verifies them and uploads them to CERSAI.</li>
+<li>You receive a 14-digit CKYC identifier.</li>
+<li>Use this number for fast onboarding at any other financial institution.</li>
+</ol>
 
-## How to Check Your CKYC Status
+<h2>How to Check Your CKYC Status</h2>
 
-1. Open the CERSAI website at cersai.org.in.
-2. Go to the CKYC Status Check section.
-3. Enter your 14-digit CKYC number or your PAN number.
-4. Your status will show on the screen.
+<ol>
+<li>Open the CERSAI website at cersai.org.in.</li>
+<li>Go to the CKYC Status Check section.</li>
+<li>Enter your 14-digit CKYC number or your PAN number.</li>
+<li>Your status will show on the screen.</li>
+</ol>
 
-If you did CKYC earlier and forgot your number, contact your bank or financial institution. They can share your CKYC number with you.</p></div></section>
+<p>If you did CKYC earlier and forgot your number, contact your bank or financial institution. They can share your CKYC number with you.</p></div></section>
   <section class="guide-section guide-section--dates"><h2 class="guide-section__title">Important Dates</h2><ul class="guide-list"><li>CKYC 2.0 started rolling out from August 1, 2026.</li></ul></section>
   <section class="guide-section guide-section--faqs"><h2 class="guide-section__title">FAQs</h2><div class="guide-faq"><div class="guide-faq__item"><h3 class="guide-faq__q">Can I register for CKYC on my own?</h3><div class="guide-faq__a">No. You cannot register directly on the CERSAI portal. You have to go through a regulated financial institution such as a bank, mutual fund company, or insurance company.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">How do I check my CKYC status?</h3><div class="guide-faq__a">Go to cersai.org.in, open the CKYC Status Check section, and enter your 14-digit CKYC number or your PAN number. Your status will appear.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">I forgot my CKYC number. What should I do?</h3><div class="guide-faq__a">Contact your bank or financial institution. They can give you your CKYC number.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">What is the difference between CKYC and eKYC?</h3><div class="guide-faq__a">CKYC stores your details in CERSAI's central registry for long-term use. eKYC is an Aadhaar-based check that happens in real time when you apply for a product.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">What is the 14-digit CKYC identifier?</h3><div class="guide-faq__a">It is a unique number given to you after your KYC is verified. You can share it to onboard quickly with any financial product.</div></div></div></section>
   <section class="guide-section guide-section--disclaimer"><h2 class="guide-section__title">Disclaimer</h2><div class="guide-prose"><p>Samjho is an independent informational resource and is not a government website. Content is for general understanding only and is not financial, legal, tax or professional advice. Rules, rates and eligibility can change; always verify current details with official sources before acting.</p></div></section>
-  <section class="guide-section guide-section--related"><h2 class="guide-section__title">Related Guides</h2><div class="related-grid"><a class="card" href="/guides/what-is-gst/"><span class="card-eyebrow">Guide</span><h3>What is GST?</h3><p>GST (Goods and Services Tax) is a single tax charged on the sale of most goods and services in India. It replaced a long list of separate central and state taxes with one system.</p></a><a class="card" href="/guides/what-is-emi/"><span class="card-eyebrow">Guide</span><h3>What is EMI?</h3><p>EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p></a><a class="card" href="/guides/what-is-credit-score/"><span class="card-eyebrow">Guide</span><h3>What is a Credit Score?</h3><p>A credit score is a number calculated from your credit history, including repayment behaviour, outstanding debt and credit enquiries. In India, CIBIL commonly uses a 300–900 range, but each credit information company (CIC) calculates its own score and lender decisions also consider income, affordability and other information.</p></a></div></section>
+  <section class="guide-section guide-section--related"><h2 class="guide-section__title">Related Guides</h2><div class="related-grid"><a class="card" href="/guides/sebi-order-omaxe-limited-minimum-public-shareholding-non-compliance/"><span class="card-eyebrow">Guide</span><h3>SEBI Issues Order on Omaxe Limited Over Minimum Public Shareholding Rule</h3><p>SEBI has passed an order in the matter of non-compliance of minimum public shareholding in Omaxe Limited. The order was published on 24 September 2026. The official release does not give details of the penalty or the next steps.</p></a><a class="card" href="/guides/epfo-citizens-charter/"><span class="card-eyebrow">Guide</span><h3>EPFO Citizen's Charter: What It Means for You</h3><p>The Employees' Provident Fund Organisation (EPFO) has issued a document called the Citizen's Charter. It is a public promise that tells you what service you can expect from the office. The source we received shows only the title, so the full details are not listed here.</p></a><a class="card" href="/guides/sebi-release-order-rashesh-purohit-tv-vision-limited-2026/"><span class="card-eyebrow">Guide</span><h3>SEBI Issues Release Order Against Rashesh Purohit in TV Vision Limited Case</h3><p>SEBI has issued a release order against Rashesh Purohit, marked as a defaulter, in the TV Vision Limited matter. The order comes under Certificate No. 7475 of 2023 and lists his PAN as ADQPP1270Q. The notice was published on 24 September 2026.</p></a></div></section>
   </main>
   
   <footer class="site-footer">
@@ -166,6 +184,30 @@ If you did CKYC earlier and forgot your number, contact your bank or financial i
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

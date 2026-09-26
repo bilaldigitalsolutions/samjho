@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-15T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -44,14 +45,20 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   
-  <header class="site-header">
+  <header class="site-header site-header--dark">
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -62,6 +69,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        <div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -75,33 +83,55 @@
     
   <div class="article-head container">
     <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/">Guides</a> &nbsp;/&nbsp; <span>Government Scholarships — Complete Guide</span></div>
+    <span class="article-category-badge">
+      <span class="article-category-badge__dot"></span>
+      EDUCATION &middot; Education GUIDE
+    </span>
     <h1>Government Scholarships — Complete Guide</h1>
-    <p class="article-meta">Last updated: 2026-09-15</p>
-    <div class="short-answer"><p>Government scholarships in India provide financial help to eligible students from school to postgraduate level. The National Scholarships Portal (NSP) at scholarships.gov.in is the official central gateway where students can apply for many central and state schemes and track their status.</p></div>
-    <div class="article-author">
-      <a href="/about/" class="article-author__link">
-        <div class="article-author__avatar">S</div>
-        <div class="article-author__info">
-          <div class="article-author__name">Samjho Content Team</div>
-          <div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div>
-        </div>
+    <div class="article-meta-bar">
+      <span class="article-meta-bar__date">&bull; Last updated: 2026-09-15</span>
+      <span class="article-meta-bar__sep">&middot;</span>
+      <span class="article-meta-bar__read">3 min read</span>
+      
+    <div class="share-buttons">
+      <span class="share-buttons__label">Share:</span>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fscholarship-guide%2F&text=Government%20Scholarships%20%E2%80%94%20Complete%20Guide" target="_blank" rel="noopener" aria-label="Share on Twitter" title="Share on Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
+      <a class="share-btn" href="https://api.whatsapp.com/send?text=Government%20Scholarships%20%E2%80%94%20Complete%20Guide%20https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fscholarship-guide%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="share-btn" onclick="navigator.clipboard.writeText('https://samjhoindia.com/guides/scholarship-guide/').then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>this.innerHTML='&#x1f517;',1500)})" aria-label="Copy link" title="Copy link">
+        &#x1f517;
+      </button>
+    </div>
+    </div>
+    <div class="simple-words-box">
+        <span class="simple-words-box__label">In simple words:</span>
+        <p class="simple-words-box__text">Government scholarships in India provide financial help to eligible students from school to postgraduate level. The National Scholarships Portal (NSP) at scholarships.gov.in is the official central gateway where students can apply for many central and state schemes and track their status.</p>
+      </div>
+    <div class="author-card">
+      <div class="author-card__avatar">S</div>
+      <div>
+        <div class="author-card__name">Samjho Content Team <span class="author-card__verified">&#x2713;</span></div>
+        <p class="author-card__bio">Trusted and policy experts simplifying MSME, tax, and compliance for India. Verified by Chartered Accountants.</p>
+      </div>
     </div>
   </div>
 
-  <div class="article-body container">
+  <div class="container"><div class="guide-layout"><div class="article-body">
     <section>
-      <h2>Simple explanation</h2>
+      <h2 id="sec-1">Simple explanation</h2>
       <p>Scholarship programmes divide roughly into Central Sector scholarships and State Sector scholarships. Central scholarships are funded by the central government (with states sometimes sharing part of the cost), while state scholarships are run by individual state governments, usually through their own portals or through NSP.</p><p>Every scheme defines its own eligibility — typically based on category (such as SC, ST, OBC, EWS or Minority), family income, the course and class the student is studying in, and the marks or scores obtained in the previous year. Meeting the eligibility on paper does not guarantee a grant; applications still go through verification.</p><p>The most common path is: register on NSP (or the state portal), fill the application for the matching scheme, upload the required documents, and let the school, college or nodal officer verify the details before the amount reaches your bank account through Direct Benefit Transfer. A bank account linked to Aadhaar is almost always required.</p>
     </section>
 
     <section>
-      <h2>Why does it matter?</h2>
+      <h2 id="sec-2">Why does it matter?</h2>
       <p>Scholarships can reduce fees and cover books, hostel costs and maintenance for students whose families face financial pressure. Because multiple schemes run on similar eligibility rules, knowing which ones you qualify for — and applying correctly within the window — can make the difference between getting support and missing out for an academic year.</p>
     </section>
 
     <section>
-      <h2>Example</h2>
+      <h2 id="sec-3">Example</h2>
       <div class="example-box">
         <span class="card-eyebrow">In numbers</span>
         <p>Suppose a Class 12 student from a family with an annual income below the limit set for a scheme wants to continue into college. The student would look for a post-matric or college-level scholarship on NSP, check the eligibility and income norms, gather the marksheet, income proof, bank passbook and Aadhaar, apply within the notification window, and then track the application through verification and sanction.</p>
@@ -112,19 +142,19 @@
     
 
     <section>
-      <h2>Types of scholarships</h2>
+      <h2 id="sec-4">Types of scholarships</h2>
       
       <p>Central programmes include pre-matric and post-matric scholarships for students belonging to specific categories, plus merit-based and tuition-fee support schemes. States run their own versions, some attendance-based and some linked to local policy. NSP lists the schemes that are currently open, so treat the NSP scheme list as the starting point rather than relying on old lists.</p><p>There are also separate scholarship channels for minority communities and for students with disabilities, as well as central-sector schemes that follow a fixed number of allocated slots. The scheme-specific guidelines on NSP explain which documents and institutions are involved.</p>
     </section><section>
-      <h2>Eligibility basics</h2>
+      <h2 id="sec-5">Eligibility basics</h2>
       
       <p>Eligibility is set per scheme. Common conditions are: Indian citizenship or domicile as required, enrolment in a recognised school or college, family income below the scheme's ceiling, and category certificates (caste, income, disability or minority) where applicable. Some schemes also require a minimum percentage of marks and, for renewal, a minimum attendance record.</p><p>Read the current guidelines for the academic year. Income norms and mark cut-offs are periodically revised.</p>
     </section><section>
-      <h2>How to apply on NSP</h2>
+      <h2 id="sec-6">How to apply on NSP</h2>
       
       <p>Register on scholarships.gov.in, link your Aadhaar, fill in the scheme application, save the application ID, upload the required documents, and submit. After submission, your institute or district nodal officer verifies the details, and the sanction is processed for Direct Benefit Transfer.</p><p>Keep the application ID and login handy for tracking, and make sure your bank account is Aadhaar-seeded and mobile-number-linked with your institute so verification does not stall.</p>
     </section><section>
-      <h2>Documents and deadlines</h2>
+      <h2 id="sec-7">Documents and deadlines</h2>
       
       <p>Common documents are: Aadhaar, bank passbook, previous-year marksheet, family income certificate, category certificate (caste or minority), and the latest admission or enrolment proof. The exact set varies by scheme.</p><p>NSP announces application windows every year; application is only possible while the portal is open for that scheme. Apply early, keep scanned copies of every document ready, and do not miss the closing date — late applications are generally not accepted.</p>
     </section>
@@ -136,19 +166,19 @@
     <div class="ad-slot ad-slot--incontent" data-ad-slot="incontent">Advertisement</div>
 
     <section>
-      <h2>Important things to know</h2>
-      <ul class="point-list"><li>Actual grant amounts and income ceilings are set by each scheme for each academic year — verify the current guideline.</li><li>Registration and application on NSP are free; never pay an agent to 'guarantee' a scholarship.</li><li>The benefit is usually transferred only after institute and nodal verification, so incomplete documents delay or block the grant.</li><li>Renewal may require a fresh application with the same or updated documents and a passing grade from the previous year.</li><li>If a scheme is sanctioned, the money is sent directly to the student's bank account, not through third parties.</li></ul>
+      <h2 id="sec-8">Important things to know</h2>
+      <ul class="point-list point-list--check"><li>Actual grant amounts and income ceilings are set by each scheme for each academic year — verify the current guideline.</li><li>Registration and application on NSP are free; never pay an agent to 'guarantee' a scholarship.</li><li>The benefit is usually transferred only after institute and nodal verification, so incomplete documents delay or block the grant.</li><li>Renewal may require a fresh application with the same or updated documents and a passing grade from the previous year.</li><li>If a scheme is sanctioned, the money is sent directly to the student's bank account, not through third parties.</li></ul>
     </section>
 
     <section>
-      <h2>Common mistakes</h2>
-      <ul class="mistake-list"><li>Applying for a scheme you do not meet (wrong income limit or course level) and wasting the window.</li><li>Updating bank details after submission, which delays verification.</li><li>Using a different spelling or date of birth in the application and the supporting documents.</li><li>Missing the deadline because of waiting for a certificate that is not actually required for that scheme.</li><li>Not keeping proof of institute approval or the application ID for future reference.</li></ul>
+      <h2 id="sec-9">Common mistakes</h2>
+      <ul class="mistake-list--x"><li>Applying for a scheme you do not meet (wrong income limit or course level) and wasting the window.</li><li>Updating bank details after submission, which delays verification.</li><li>Using a different spelling or date of birth in the application and the supporting documents.</li><li>Missing the deadline because of waiting for a certificate that is not actually required for that scheme.</li><li>Not keeping proof of institute approval or the application ID for future reference.</li></ul>
     </section>
 
     
 
     <section>
-      <h2>Frequently asked questions</h2>
+      <h2 id="sec-10">Frequently asked questions</h2>
       <details class="faq-item" open>
       <summary>What is the National Scholarships Portal?</summary>
       <p>NSP (scholarships.gov.in) is the official central website for applying to listed central and state scholarship schemes, checking eligibility, and tracking application status.</p>
@@ -171,43 +201,41 @@
     </section>
 
     <section>
-      <h2>Related tools</h2>
-      <div class="related-grid"><a class="card" href="/calculators/cgpa/">
-    <span class="card-eyebrow">Calculator</span>
-    <h3>CGPA Calculator</h3>
-    <p>Work out your own numbers for this topic.</p>
-  </a><a class="card" href="/calculators/age/">
-    <span class="card-eyebrow">Calculator</span>
-    <h3>Age Calculator</h3>
-    <p>Work out your own numbers for this topic.</p>
-  </a></div>
+      <h2 id="sec-11">Related tools</h2>
+      <div><div class="related-tools-box"><div class="related-tools-box__icon">&#x1F4CA;</div><div><p class="related-tools-box__label">RELATED TOOLS</p><p class="related-tools-box__title"><a href="/calculators/cgpa/">CGPA Calculator</a></p><p class="related-tools-box__desc">Check if you qualify with our calculator.</p></div></div><div class="related-tools-box"><div class="related-tools-box__icon">&#x1F4CA;</div><div><p class="related-tools-box__label">RELATED TOOLS</p><p class="related-tools-box__title"><a href="/calculators/age/">Age Calculator</a></p><p class="related-tools-box__desc">Check if you qualify with our calculator.</p></div></div></div>
     </section>
 
     <section>
-      <h2>Related guides</h2>
-      <div class="related-grid"><a class="card" href="/guides/what-is-cgpa/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>What is CGPA?</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/career-options/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Career Options After 12th</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/entrance-exams/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Entrance Exams After 12th — Complete Guide</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/income-certificate/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Income Certificate — Apply Online Guide</h3>
-    <p>Read the simple explanation.</p>
-  </a></div>
+      <h2 id="sec-12">Related guides</h2>
+      <div class="related-guides-grid"><a class="related-guide-card" href="/guides/what-is-cgpa/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">What is CGPA?</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/career-options/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Career Options After 12th</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/entrance-exams/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Entrance Exams After 12th — Complete Guide</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/income-certificate/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Income Certificate — Apply Online Guide</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a></div>
     </section>
     <section>
-      <h2>Official references</h2>
-      <ul class="point-list"><li><a href="https://scholarships.gov.in/">National Scholarships Portal (scholarships.gov.in)</a> — Official central gateway for scholarship applications and status tracking.</li><li><a href="https://www.education.gov.in/">Ministry of Education</a> — Scholarship schemes and official announcements</li></ul>
+      <h2 id="sec-13">Official references</h2>
+      <ul class="official-refs"><li><a href="https://scholarships.gov.in/" target="_blank" rel="noopener">National Scholarships Portal (scholarships.gov.in)</a> <span class="ref-desc">Official central gateway for scholarship applications and status tracking.</span></li><li><a href="https://www.education.gov.in/" target="_blank" rel="noopener">Ministry of Education</a> <span class="ref-desc">Scholarship schemes and official announcements</span></li></ul>
     </section>
-  </div>
+  </div><aside class="guide-sidebar"><div class="guide-sidebar__widget"><h3>RELATED ARTICLES</h3><ul class="guide-sidebar__links"><li><a href="/guides/what-is-cgpa/">What is CGPA?</a></li><li><a href="/guides/entrance-exams/">Entrance Exams After 12th — Complete Guide</a></li><li><a href="/guides/career-options/">Career Options After 12th — Complete Guide</a></li></ul></div><div class="guide-sidebar__widget"><h3>QUICK SUMMARY</h3><ul class="guide-sidebar__facts"><li>NSP: scholarships.gov.in</li><li>One portal, many schemes</li><li>Aadhaar + bank + income docs</li><li>Renewal with same login</li><li>Watch deadlines — no late apply</li></ul></div><div class="sidebar-cta">
+    <h3>Get your Education help in 5 minutes</h3>
+    <p>Use our step-by-step checklist and official link. No agent needed.</p>
+    <a href="/guides/scholarship-guide/" class="sidebar-cta__btn">Open checklist &rarr;</a>
+    <p class="sidebar-cta__note">Official &middot; Free &middot; Verified</p>
+  </div><nav class="guide-sidebar__widget" aria-label="On this page"><h3>On this page</h3><div class="guide-sidebar__toc"><a href="#sec-1">Simple explanation</a><a href="#sec-2">Why does it matter?</a><a href="#sec-3">Example</a><a href="#sec-4">Types of scholarships</a><a href="#sec-5">Eligibility basics</a><a href="#sec-6">How to apply on NSP</a><a href="#sec-7">Documents and deadlines</a><a href="#sec-8">Important things to know</a><a href="#sec-9">Common mistakes</a><a href="#sec-10">Frequently asked questions</a><a href="#sec-11">Related tools</a><a href="#sec-12">Related guides</a><a href="#sec-13">Official references</a></div></nav><div class="guide-sidebar__widget"><h3>Related Tools</h3><ul class="guide-sidebar__links"><li><a href="/calculators/cgpa/">CGPA Calculator</a></li><li><a href="/calculators/age/">Age Calculator</a></li></ul></div><div class="guide-sidebar__widget"><h3>Official Sources</h3><ul class="guide-sidebar__links guide-sidebar__links--gov"><li><a href="https://scholarships.gov.in/" target="_blank" rel="noopener">National Scholarships Portal (scholarships.gov.in)</a></li><li><a href="https://www.education.gov.in/" target="_blank" rel="noopener">Ministry of Education</a></li></ul></div><div class="guide-sidebar__widget guide-sidebar__ad"><div class="ad-slot ad-slot--sidebar" data-ad-slot="sidebar">Advertisement</div></div></aside></div></div>
+  <div class="article-disclaimer">SAMJHO INDIA &middot; EXPLAINED SIMPLY</div>
   
   </main>
   
@@ -246,6 +274,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Money — Samjho</title>
+  <title>Money Guide 2026 — EMI, Credit Score, Savings, Loans</title>
   <meta name="description" content="Everyday money explained — banking, savings, loans, inflation, safety and investment basics, with calculators to help you decide." />
   <link rel="canonical" href="https://samjhoindia.com/money/" />
   <meta name="robots" content="index, follow" />
   <meta property="og:site_name" content="Samjho" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Money — Samjho" />
+  <meta property="og:title" content="Money Guide 2026 — EMI, Credit Score, Savings, Loans" />
   <meta property="og:description" content="Everyday money explained — banking, savings, loans, inflation, safety and investment basics, with calculators to help you decide." />
   <meta property="og:url" content="https://samjhoindia.com/money/" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Money — Samjho" />
+  <meta name="twitter:title" content="Money Guide 2026 — EMI, Credit Score, Savings, Loans" />
   <meta name="twitter:description" content="Everyday money explained — banking, savings, loans, inflation, safety and investment basics, with calculators to help you decide." />
   <meta property="og:image" content="https://samjhoindia.com/assets/logo/logo-icon.png" />
   <meta name="twitter:image" content="https://samjhoindia.com/assets/logo/logo-icon.png" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -43,10 +44,16 @@
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -57,6 +64,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -71,7 +79,7 @@
   <div class="gov-page">
     <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
-      <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · 10 MONEY GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
+      <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · 14 MONEY GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">Money <span class="gov-hero__title-grey">— Understand, Calculate, Decide</span></h1>
       <p class="gov-hero__hindi">पैसा, बचत और loan — सब कुछ आसान भाषा में</p>
       <p class="gov-hero__desc">Loans, credit scores, savings accounts, inflation, compound interest — and key calculators to help you manage your money wisely. Simple Hindi me.</p>
@@ -81,7 +89,7 @@
       <div class="gov-stat-card"><span class="gov-stat-card__label">GST CALCULATOR</span><span class="gov-stat-card__value">18% Standard</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--green" style="width:60%"></div></div></div>
     </div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>Credit score 750+ rakhein taaki loan interest rate sasta mile aur credit cards asani se approve ho sakein.</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
     <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Money ●</span><span class="gov-chip">Loans</span><span class="gov-chip">Savings</span><span class="gov-chip">Credit</span><span class="gov-chip">Tax</span><span class="gov-chip">Investment</span></div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
-    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>Popular Money Guides · <span>6 results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid"><article class="gov-card">
+    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>Popular Money Guides · <span>14 results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid"><article class="gov-card">
       <div class="gov-card__top"><span class="gov-card__icon" style="background:#2563eb">📊</span><span class="gov-card__badge" style="background:#2563eb">POPULAR</span></div>
       <h3 class="gov-card__title">What is EMI?</h3><p class="gov-card__hindi">ईएमआई (EMI) क्या है और कैलकुलेशन कैसे होती है</p><p class="gov-card__desc">EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest.</p>
       <div class="gov-card__tags"><span class="gov-card__tag">Loan Guide</span><span class="gov-card__tag">3 min read</span></div>
@@ -157,6 +165,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

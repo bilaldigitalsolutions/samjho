@@ -20,7 +20,8 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -43,10 +44,16 @@
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -57,6 +64,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -95,7 +103,7 @@
           <div class="home-hero__visual">
             <div class="home-hero__illustration-wrapper">
               <div class="home-hero__illustration">
-                <img src="assets/hero-illustration-new.png" alt="India Gate, Parliament and India map illustration" class="hero-illustration-img" />
+                <picture><source srcset="assets/hero-illustration-new.webp" type="image/webp"><img src="assets/hero-illustration-new.png" alt="India Gate, Parliament and India map illustration" class="hero-illustration-img" loading="eager" /></picture>
               </div>
             </div>
           </div>
@@ -116,6 +124,7 @@
         <div class="home-category-grid"><a class="home-category-card home-category-card--government" href="/government/">
         <span class="home-category-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v2h20V7L12 2zM4 10v8H2v2h20v-2h-2v-8h-3v8h-2v-8h-2v8h-2v-8H9v8H7v-8H4z"/></svg></span>
         <h3>Government</h3>
+        <span class="home-category-card__count">13 guides</span>
         <p>Schemes, benefits, scholarships and public services</p>
         <span class="home-category-card__arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
@@ -123,6 +132,7 @@
       </a><a class="home-category-card home-category-card--documents" href="/documents/">
         <span class="home-category-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-6h8v2H8v-2zm0-3h8v2H8v-2zm0-3h5v2H8V8z"/></svg></span>
         <h3>Documents</h3>
+        <span class="home-category-card__count">1 guides</span>
         <p>Aadhaar, PAN, certificates, KYC and government services</p>
         <span class="home-category-card__arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
@@ -130,6 +140,7 @@
       </a><a class="home-category-card home-category-card--business" href="/business/">
         <span class="home-category-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 16H4V8h16v12z"/></svg></span>
         <h3>Business</h3>
+        <span class="home-category-card__count">7 guides</span>
         <p>MSME, GST, registrations, loans and compliance</p>
         <span class="home-category-card__arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
@@ -137,6 +148,7 @@
       </a><a class="home-category-card home-category-card--money" href="/money/">
         <span class="home-category-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.64-2.1 1.64-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/></svg></span>
         <h3>Money</h3>
+        <span class="home-category-card__count">14 guides</span>
         <p>Loans, calculators, credit score, banking and more</p>
         <span class="home-category-card__arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
@@ -144,6 +156,7 @@
       </a><a class="home-category-card home-category-card--education" href="/education/">
         <span class="home-category-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg></span>
         <h3>Education</h3>
+        <span class="home-category-card__count">1 guides</span>
         <p>Scholarships, exams, jobs, career resources</p>
         <span class="home-category-card__arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4"/><path d="M8 12h8"/></svg>
@@ -194,7 +207,7 @@
           <span class="home-card-link">Learn More <span aria-hidden="true">→</span></span>
         </div>
         <div class="home-featured-card__illustration">
-          <img src="assets/featured-kisan.png" alt="PM Kisan Yojana" />
+          <picture><source srcset="assets/featured-kisan.webp" type="image/webp"><img src="assets/featured-kisan.png" alt="PM Kisan Yojana" loading="lazy" /></picture>
         </div>
       </a><a class="home-featured-card home-featured-card--documents" href="/guides/what-is-pan-card/">
         <div class="home-featured-card__content">
@@ -204,7 +217,7 @@
           <span class="home-card-link">Learn More <span aria-hidden="true">→</span></span>
         </div>
         <div class="home-featured-card__illustration">
-          <img src="assets/featured-pan.png" alt="PAN Card" />
+          <picture><source srcset="assets/featured-pan.webp" type="image/webp"><img src="assets/featured-pan.png" alt="PAN Card" loading="lazy" /></picture>
         </div>
       </a><a class="home-featured-card home-featured-card--business" href="/guides/udyam-registration/">
         <div class="home-featured-card__content">
@@ -214,8 +227,201 @@
           <span class="home-card-link">Learn More <span aria-hidden="true">→</span></span>
         </div>
         <div class="home-featured-card__illustration">
-          <img src="assets/featured-udyam.png" alt="Udyam Registration" />
+          <picture><source srcset="assets/featured-udyam.webp" type="image/webp"><img src="assets/featured-udyam.png" alt="Udyam Registration" loading="lazy" /></picture>
         </div>
+      </a></div>
+      </div>
+    </section>
+
+    <section class="home-section home-section--popular-guides">
+      <div class="container">
+        <div class="home-section-heading home-section-heading--row">
+          <h2>Popular Guides</h2>
+          <a href="/guides/" class="home-section-link">All Guides <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="home-section-subtitle">Step-by-step guides on the topics Indians search for most.</p>
+        <div class="home-popular-guides-grid"><a class="home-guide-card" href="/guides/what-is-gst/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        <span class="home-guide-card__index">01</span>
+        <span class="card-eyebrow">Money <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is GST?</h3>
+        <p>GST (Goods and Services Tax) is a single tax charged on the sale of most goods and services in India. It replaced a long list of separate central and state taxes with one system.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-guide-card" href="/guides/what-is-emi/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg></span>
+        <span class="home-guide-card__index">02</span>
+        <span class="card-eyebrow">Money <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is EMI?</h3>
+        <p>EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-guide-card" href="/guides/what-is-credit-score/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span class="home-guide-card__index">03</span>
+        <span class="card-eyebrow">Money <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is a Credit Score?</h3>
+        <p>A credit score is a number calculated from your credit history, including repayment behaviour, outstanding debt and credit enquiries. In India, CIBIL commonly uses a 300–900 range, but each credit information company (CIC) calculates its own score and lender decisions also consider income, affordability and other information.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-guide-card" href="/guides/what-is-uan/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="10"/></svg></span>
+        <span class="home-guide-card__index">04</span>
+        <span class="card-eyebrow">Jobs <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is UAN?</h3>
+        <p>UAN (Universal Account Number) is a 12-digit identifier used to connect an eligible employee's EPF records across jobs. A UAN is different from the employer-specific Member IDs and PF records linked to it. EPFO and UMANG procedures can change, so verify the current instructions on the official services.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-guide-card" href="/guides/what-is-pan-card/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="12" r="1.5"/><line x1="12" y1="10" x2="18" y2="10"/><line x1="12" y1="14" x2="16" y2="14"/></svg></span>
+        <span class="home-guide-card__index">05</span>
+        <span class="card-eyebrow">Documents <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is a PAN Card?</h3>
+        <p>A PAN (Permanent Account Number) card is a 10-character alphanumeric identity document issued by the Income Tax Department of India, mainly used to track financial transactions and file income tax returns.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-guide-card" href="/guides/what-is-savings-account/">
+        <span class="home-guide-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+        <span class="home-guide-card__index">06</span>
+        <span class="card-eyebrow">Money <span aria-hidden="true">/</span> 3 min read</span>
+        <h3>What is a Savings Account?</h3>
+        <p>A savings account is a basic bank account designed for individuals to safely deposit money, earn a modest interest on the balance, and access funds relatively easily through withdrawals, transfers and cards.</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a></div>
+      </div>
+    </section>
+
+    <section class="home-section home-section--latest">
+      <div class="container">
+        <div class="home-section-heading home-section-heading--row">
+          <h2>Latest Articles</h2>
+          <a href="/guides/" class="home-section-link">View All <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="home-section-subtitle">Recently published guides and updates.</p>
+        <div class="home-latest-grid"><a class="home-latest-card" href="/guides/what-is-udyam/">
+        <div class="home-latest-card__top">
+          <span class="home-latest-card__category">business</span>
+          <span class="home-latest-card__date">2026-09-23</span>
+        </div>
+        <h3 class="home-latest-card__title">Udyam Registration — Full Form, Apply Online &amp; Benefits (2026 Guide)</h3>
+        <p class="home-latest-card__desc">Udyam Registration is the government process for recognising a micro, small or medium enterprise. It is free online…</p>
+        <span class="home-card-link">Read more <span aria-hidden="true">→</span></span>
+      </a><a class="home-latest-card" href="/guides/msme-schemes/">
+        <div class="home-latest-card__top">
+          <span class="home-latest-card__category">business</span>
+          <span class="home-latest-card__date">2026-09-15</span>
+        </div>
+        <h3 class="home-latest-card__title">MSME Schemes &amp; Subsidies — Complete Guide</h3>
+        <p class="home-latest-card__desc">MSME schemes can support eligible enterprises through credit guarantees, finance, training, market access and other…</p>
+        <span class="home-card-link">Read more <span aria-hidden="true">→</span></span>
+      </a><a class="home-latest-card" href="/guides/fssai-license/">
+        <div class="home-latest-card__top">
+          <span class="home-latest-card__category">business</span>
+          <span class="home-latest-card__date">2026-09-15</span>
+        </div>
+        <h3 class="home-latest-card__title">FSSAI License — Apply &amp; Renew Guide</h3>
+        <p class="home-latest-card__desc">FSSAI registration or license is mandatory for almost anyone who makes, stores, transports, distributes or sells food…</p>
+        <span class="home-card-link">Read more <span aria-hidden="true">→</span></span>
+      </a><a class="home-latest-card" href="/guides/business-loan/">
+        <div class="home-latest-card__top">
+          <span class="home-latest-card__category">business</span>
+          <span class="home-latest-card__date">2026-09-15</span>
+        </div>
+        <h3 class="home-latest-card__title">Business Loan — Apply &amp; Eligibility Guide</h3>
+        <p class="home-latest-card__desc">A business loan provides funding for working capital, equipment, expansion or other business needs. Eligibility,…</p>
+        <span class="home-card-link">Read more <span aria-hidden="true">→</span></span>
+      </a><a class="home-latest-card" href="/guides/trademark/">
+        <div class="home-latest-card__top">
+          <span class="home-latest-card__category">business</span>
+          <span class="home-latest-card__date">2026-09-15</span>
+        </div>
+        <h3 class="home-latest-card__title">Trademark Registration — Apply Guide</h3>
+        <p class="home-latest-card__desc">A trademark identifies and protects a brand feature such as a name, logo, word or symbol. Registration is applied for…</p>
+        <span class="home-card-link">Read more <span aria-hidden="true">→</span></span>
+      </a></div>
+      </div>
+    </section>
+
+    <section class="home-section home-section--all-articles">
+      <div class="container">
+        <div class="home-section-heading home-section-heading--row">
+          <h2>Browse All Articles</h2>
+          <a href="/explore/" class="home-section-link">Explore Topics <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="home-section-subtitle">Find guides, calculators and information across every category.</p>
+        <div class="home-category-tabs">
+          <a href="/government/" class="home-cat-tab home-cat-tab--active">Government</a><a href="/documents/" class="home-cat-tab">Documents</a><a href="/business/" class="home-cat-tab">Business</a><a href="/money/" class="home-cat-tab">Money</a><a href="/education/" class="home-cat-tab">Education</a>
+        </div>
+        <div class="home-all-articles-grid"><a class="home-all-card" href="/guides/pm-kisan-yojana/">
+        <span class="home-all-card__eyebrow">Government</span>
+        <h3 class="home-all-card__title">PM Kisan Yojana 2026</h3>
+        <p class="home-all-card__desc">PM Kisan Samman Nidhi is a central government scheme that provides ₹6,000 per year in three equal…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-aadhaar/">
+        <span class="home-all-card__eyebrow">Government</span>
+        <h3 class="home-all-card__title">Aadhaar Card Update &amp; Download — Complete Guide</h3>
+        <p class="home-all-card__desc">Aadhaar is a 12-digit unique identity number issued by UIDAI to every resident of India. It serves…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/ration-card/">
+        <span class="home-all-card__eyebrow">Government</span>
+        <h3 class="home-all-card__title">Ration Card — Apply, List &amp; e-KYC Guide</h3>
+        <p class="home-all-card__desc">Ration card ek official document hai jo eligible families ko subsidized food grains (chawal, gehu,…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-pan-card/">
+        <span class="home-all-card__eyebrow">Documents</span>
+        <h3 class="home-all-card__title">What is a PAN Card?</h3>
+        <p class="home-all-card__desc">A PAN (Permanent Account Number) card is a 10-character alphanumeric identity document issued by…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/voter-id/">
+        <span class="home-all-card__eyebrow">Documents</span>
+        <h3 class="home-all-card__title">Voter ID Card — Apply, Download &amp; Correction Guide</h3>
+        <p class="home-all-card__desc">Voter ID Card (EPIC — Electors Photo Identity Card) Election Commission of India dwara issue kiya…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/passport/">
+        <span class="home-all-card__eyebrow">Documents</span>
+        <h3 class="home-all-card__title">Passport Apply Online — Complete Guide</h3>
+        <p class="home-all-card__desc">Indian passport Ministry of External Affairs dwara issue kiya jaata hai. Passport Seva portal…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-udyam/">
+        <span class="home-all-card__eyebrow">Business</span>
+        <h3 class="home-all-card__title">Udyam Registration — Full Form, Apply Online &amp; Benefits (2026 Guide)</h3>
+        <p class="home-all-card__desc">Udyam Registration is the government process for recognising a micro, small or medium enterprise.…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/msme-schemes/">
+        <span class="home-all-card__eyebrow">Business</span>
+        <h3 class="home-all-card__title">MSME Schemes &amp; Subsidies — Complete Guide</h3>
+        <p class="home-all-card__desc">MSME schemes can support eligible enterprises through credit guarantees, finance, training, market…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/fssai-license/">
+        <span class="home-all-card__eyebrow">Business</span>
+        <h3 class="home-all-card__title">FSSAI License — Apply &amp; Renew Guide</h3>
+        <p class="home-all-card__desc">FSSAI registration or license is mandatory for almost anyone who makes, stores, transports,…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-gst/">
+        <span class="home-all-card__eyebrow">Money</span>
+        <h3 class="home-all-card__title">What is GST?</h3>
+        <p class="home-all-card__desc">GST (Goods and Services Tax) is a single tax charged on the sale of most goods and services in…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-emi/">
+        <span class="home-all-card__eyebrow">Money</span>
+        <h3 class="home-all-card__title">What is EMI?</h3>
+        <p class="home-all-card__desc">EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-credit-score/">
+        <span class="home-all-card__eyebrow">Money</span>
+        <h3 class="home-all-card__title">What is a Credit Score?</h3>
+        <p class="home-all-card__desc">A credit score is a number calculated from your credit history, including repayment behaviour,…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/what-is-cgpa/">
+        <span class="home-all-card__eyebrow">Education</span>
+        <h3 class="home-all-card__title">What is CGPA?</h3>
+        <p class="home-all-card__desc">CGPA (Cumulative Grade Point Average) is a way of summarising a student's overall academic…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/scholarship-guide/">
+        <span class="home-all-card__eyebrow">Education</span>
+        <h3 class="home-all-card__title">Government Scholarships — Complete Guide</h3>
+        <p class="home-all-card__desc">Government scholarships in India provide financial help to eligible students from school to…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
+      </a><a class="home-all-card" href="/guides/entrance-exams/">
+        <span class="home-all-card__eyebrow">Education</span>
+        <h3 class="home-all-card__title">Entrance Exams After 12th — Complete Guide</h3>
+        <p class="home-all-card__desc">After Class 12, admission to many professional and university courses is decided through entrance…</p>
+        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
       </a></div>
       </div>
     </section>
@@ -283,6 +489,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

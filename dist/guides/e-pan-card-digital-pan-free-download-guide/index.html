@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-24T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -47,10 +48,16 @@
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -61,6 +68,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -73,60 +81,60 @@
   <main id="main">
     <nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/Documents/">Documents</a> &nbsp;/&nbsp; <span>e-PAN Card: Get Your Digital PAN Free in 5-10 Minutes</span></nav>
   <h1 class="guide-title">e-PAN Card: Get Your Digital PAN Free in 5-10 Minutes</h1>
-  <p class="guide-last-updated">Last updated: 24 Sep 2026 <span class="guide-new-badge">NEW</span></p>
+  <p class="guide-last-updated">Last updated: 24 Sep 2026</p>
   <div class="article-author"><a href="/about/" class="article-author__link"><div class="article-author__avatar">S</div><div class="article-author__info"><div class="article-author__name">Samjho Content Team</div><div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div></div></a></div>
   <section class="guide-section guide-section--summary"><h2 class="guide-section__title">Quick Summary</h2><p class="guide-summary">You can now get a digital PAN card, called e-PAN, from the Income Tax Department. It is free, arrives in 5-10 minutes, and is fully valid like the physical card. The government also shared a phishing warning about fake e-PAN emails.</p></section>
-  <section class="guide-section guide-section--why-matters"><h2 class="guide-section__title">Why It Matters</h2><div class="guide-prose"><p>## What Happened
+  <section class="guide-section guide-section--why-matters"><h2 class="guide-section__title">Why It Matters</h2><div class="guide-prose"><h2>What Happened</h2>
 
-The Income Tax Department issues a digital version of your PAN card. This digital card is called e-PAN. It comes as a PDF file that you can save on your phone or computer. It has the same legal value as the plastic PAN card. So you can use it for banking, investments and tax filing.
+<p>The Income Tax Department issues a digital version of your PAN card. This digital card is called e-PAN. It comes as a PDF file that you can save on your phone or computer. It has the same legal value as the plastic PAN card. So you can use it for banking, investments and tax filing.</p>
 
-Every e-PAN carries a QR code. That code holds your name, PAN number, date of birth and photo. Anyone can scan it to check that your card is genuine.
+<p>Every e-PAN carries a QR code. That code holds your name, PAN number, date of birth and photo. Anyone can scan it to check that your card is genuine.</p>
 
-The government also approved the PAN 2.0 plan. About Rs 1,435 crore has been set aside for it. Under this plan, new PAN cards will carry a QR code. Your old PAN card will still work. You do not have to replace it.
+<p>The government also approved the PAN 2.0 plan. About Rs 1,435 crore has been set aside for it. Under this plan, new PAN cards will carry a QR code. Your old PAN card will still work. You do not have to replace it.</p>
 
-## Who Is Eligible
+<h2>Who Is Eligible</h2>
 
-You need three things to get a free e-PAN. You must have a valid Aadhaar number. Your mobile number must be linked to that Aadhaar, because you need it for the OTP. And you must not already have a PAN.
+<p>You need three things to get a free e-PAN. You must have a valid Aadhaar number. Your mobile number must be linked to that Aadhaar, because you need it for the OTP. And you must not already have a PAN.</p>
 
-Some people cannot apply. Minors below 18 years cannot apply. Anyone who already has a PAN will not get a second one. If your mobile is not linked to Aadhaar, link it first at aadhaar.gov.in or at an Aadhaar centre.
+<p>Some people cannot apply. Minors below 18 years cannot apply. Anyone who already has a PAN will not get a second one. If your mobile is not linked to Aadhaar, link it first at aadhaar.gov.in or at an Aadhaar centre.</p>
 
-## Benefits
+<h2>Benefits</h2>
 
-The instant e-PAN is completely free. The department charges you nothing for it. It is generated in about 5-10 minutes. A download link lands in your email, and you can open it from anywhere.
+<p>The instant e-PAN is completely free. The department charges you nothing for it. It is generated in about 5-10 minutes. A download link lands in your email, and you can open it from anywhere.</p>
 
-The physical PAN card works differently. It takes 15-20 working days to reach you. You also pay a fee of about Rs 107 for it. The e-PAN is valid for your whole life. You never have to renew it. It works in almost every situation, from banks to tax filing.
+<p>The physical PAN card works differently. It takes 15-20 working days to reach you. You also pay a fee of about Rs 107 for it. The e-PAN is valid for your whole life. You never have to renew it. It works in almost every situation, from banks to tax filing.</p>
 
-## How to Apply
+<h2>How to Apply</h2>
 
-Step 1: Open the Income Tax e-Filing portal at incometax.gov.in.
+<p>Step 1: Open the Income Tax e-Filing portal at incometax.gov.in.</p>
 
-Step 2: Click the Instant e-PAN section on the homepage.
+<p>Step 2: Click the Instant e-PAN section on the homepage.</p>
 
-Step 3: Choose Get New e-PAN.
+<p>Step 3: Choose Get New e-PAN.</p>
 
-Step 4: Enter your 12-digit Aadhaar number. Type only the 12 digits. Do not add dashes or spaces.
+<p>Step 4: Enter your 12-digit Aadhaar number. Type only the 12 digits. Do not add dashes or spaces.</p>
 
-Step 5: An OTP will reach your Aadhaar-linked mobile. Verify it. If your mobile is not linked, update your Aadhaar first.
+<p>Step 5: An OTP will reach your Aadhaar-linked mobile. Verify it. If your mobile is not linked, update your Aadhaar first.</p>
 
-Step 6: Pick your date of birth proof from DigiLocker. You can also verify the date of birth yourself.
+<p>Step 6: Pick your date of birth proof from DigiLocker. You can also verify the date of birth yourself.</p>
 
-Step 7: Submit the form. You will get an acknowledgement number. Note it down safely.
+<p>Step 7: Submit the form. You will get an acknowledgement number. Note it down safely.</p>
 
-Step 8: Within 5-10 minutes, a PDF download link reaches your email. Download it and save it.
+<p>Step 8: Within 5-10 minutes, a PDF download link reaches your email. Download it and save it.</p>
 
-## How to Download an Existing PAN
+<h2>How to Download an Existing PAN</h2>
 
-If you already have a PAN and want a copy, go to incometax.gov.in. Open the Reprint PAN Card section. Enter your PAN number and Aadhaar number. Pay a fee of about Rs 50. Your physical card will arrive in 15-20 working days. You can also download a digital copy from DigiLocker, which is equally valid.
+<p>If you already have a PAN and want a copy, go to incometax.gov.in. Open the Reprint PAN Card section. Enter your PAN number and Aadhaar number. Pay a fee of about Rs 50. Your physical card will arrive in 15-20 working days. You can also download a digital copy from DigiLocker, which is equally valid.</p>
 
-## Watch Out For Scam Emails
+<h2>Watch Out For Scam Emails</h2>
 
-The government has warned about fake emails going around. These emails say your PAN has expired and ask you to update it through a link. The Income Tax Department never asks for your personal details over email. Never click such links and never enter your PAN details there.
+<p>The government has warned about fake emails going around. These emails say your PAN has expired and ask you to update it through a link. The Income Tax Department never asks for your personal details over email. Never click such links and never enter your PAN details there.</p>
 
-If you see a suspicious email, do not click it. Check everything only on the official portal. You can report it at webmanager@incometax.gov.in. Download the e-PAN only through official apps like mAadhaar and DigiLocker.
+<p>If you see a suspicious email, do not click it. Check everything only on the official portal. You can report it at webmanager@incometax.gov.in. Download the e-PAN only through official apps like mAadhaar and DigiLocker.</p>
 
-## Important Dates
+<h2>Important Dates</h2>
 
-The PAN 2.0 update was approved with a budget of Rs 1,435 crore. The year 2026 is mentioned for this plan. No exact date is given in the official source.</p></div></section>
+<p>The PAN 2.0 update was approved with a budget of Rs 1,435 crore. The year 2026 is mentioned for this plan. No exact date is given in the official source.</p></div></section>
   <section class="guide-section guide-section--dates"><h2 class="guide-section__title">Important Dates</h2><ul class="guide-list"><li>The PAN 2.0 update is planned for the year 2026 according to the official source. No exact date is given.</li><li>A physical PAN card takes 15-20 working days to arrive.</li></ul></section>
   <section class="guide-section guide-section--faqs"><h2 class="guide-section__title">FAQs</h2><div class="guide-faq"><div class="guide-faq__item"><h3 class="guide-faq__q">Is the e-PAN card valid like the physical PAN card?</h3><div class="guide-faq__a">Yes. The e-PAN has the same legal status as the physical PAN card. It works for banking, investments and tax filing.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">How much does an instant e-PAN cost?</h3><div class="guide-faq__a">Nothing. The instant e-PAN is completely free through the Instant e-PAN route on the e-Filing portal.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">How long does an instant e-PAN take?</h3><div class="guide-faq__a">It is generated in about 5-10 minutes. The download link reaches your email.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">I already have a PAN. Can I get an e-PAN too?</h3><div class="guide-faq__a">You cannot get a new PAN. But you can download a digital copy. Use the Reprint PAN Card section on incometax.gov.in, or DigiLocker.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">My e-PAN PDF is not opening. What is the password?</h3><div class="guide-faq__a">The password is your date of birth in DDMMYYYY format. If your birthday is 15 January 1995, the password is 15011995.</div></div><div class="guide-faq__item"><h3 class="guide-faq__q">The portal says no PAN found. What does that mean?</h3><div class="guide-faq__a">You may already have a PAN. Check your PAN status on the Income Tax portal using your Aadhaar number.</div></div></div></section>
   <section class="guide-section guide-section--disclaimer"><h2 class="guide-section__title">Disclaimer</h2><div class="guide-prose"><p>Samjho is an independent informational resource and is not a government website. Content is for general understanding only and is not financial, legal, tax or professional advice. Rules, rates and eligibility can change; always verify current details with official sources before acting.</p></div></section>
@@ -168,6 +176,30 @@ The PAN 2.0 update was approved with a budget of Rs 1,435 crore. The year 2026 i
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

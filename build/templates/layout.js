@@ -8,7 +8,8 @@ function esc(str = "") {
     .replace(/"/g, "&quot;");
 }
 
-function renderHeader(activeHref, showSearch = true) {
+function renderHeader(activeHref, showSearch = true, dark = false) {
+  const darkClass = dark ? ' site-header--dark' : '';
   const navItems = site.nav
     .map((item) => {
       const current = item.href === activeHref ? ' aria-current="page"' : "";
@@ -20,15 +21,23 @@ function renderHeader(activeHref, showSearch = true) {
     .map((item) => `<li><a href="${item.href}">${item.label}</a></li>`)
     .join("");
 
+  const langHtml = dark ? `<div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>` : '';
+
   return `
-  <header class="site-header">
+  <header class="site-header${darkClass}">
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -39,6 +48,7 @@ function renderHeader(activeHref, showSearch = true) {
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        ${langHtml}
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -97,6 +107,21 @@ function renderFooter() {
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            ${site.footerPopularGuides.map((g) => '<li><a href="' + g.href + '">' + g.label + '</a></li>').join("\n            ")}
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            ${site.nav.map((n) => '<li><a href="' + n.href + '">' + n.label + '</a></li>').join("\n            ")}
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul>${links}</ul>
         </div>
@@ -159,7 +184,8 @@ function renderHead({ title, description, canonical, ogType = "website", robots 
   ${articleMetaTags}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="${stylesheetHref}" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -188,6 +214,7 @@ function renderPage({
   extraScripts = "",
   stylesheetHref = "/assets/css/style.css",
   articleMeta = null,
+  darkHeader = false,
 }) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -196,7 +223,7 @@ function renderPage({
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  ${renderHeader(activeHref, showHeaderSearch)}
+  ${renderHeader(activeHref, showHeaderSearch, darkHeader)}
   <main id="main">
     ${bodyHtml}
   </main>

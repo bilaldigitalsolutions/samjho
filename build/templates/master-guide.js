@@ -53,6 +53,84 @@ function renderSection(classes, innerHtml) {
   return '<section class="' + classes + '">' + innerHtml + '</section>';
 }
 
+// ---------------------------------------------------------------------------
+// Markdown-to-HTML converter for DeepSeek content
+// Handles: ## headings, - list items, 1. numbered items, **bold**, paragraphs
+// ---------------------------------------------------------------------------
+function mdToHtml(text) {
+  if (!text || typeof text !== 'string') return '';
+  var s = String(text).trim();
+  if (!s) return '';
+
+  var lines = s.split('\n');
+  var out = [];
+  var inUl = false;
+  var inOl = false;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    var trimmed = line.trim();
+
+    // Heading: ## or ### or ####
+    var headingMatch = trimmed.match(/^(#{1,4})\s+(.+)/);
+    if (headingMatch) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      var level = Math.min(headingMatch[1].length, 3);
+      out.push('<h' + level + '>' + esc(headingMatch[2]) + '</h' + level + '>');
+      continue;
+    }
+
+    // Unordered list item: - or * or •
+    var ulMatch = trimmed.match(/^[-*•]\s+(.+)/);
+    if (ulMatch) {
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (!inUl) { out.push('<ul>'); inUl = true; }
+      out.push('<li>' + esc(ulMatch[1]) + '</li>');
+      continue;
+    }
+
+    // Ordered list item: 1. or 2. etc.
+    var olMatch = trimmed.match(/^\d+\.\s+(.+)/);
+    if (olMatch) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (!inOl) { out.push('<ol>'); inOl = true; }
+      out.push('<li>' + esc(olMatch[1]) + '</li>');
+      continue;
+    }
+
+    // End any open lists
+    if (inUl) { out.push('</ul>'); inUl = false; }
+    if (inOl) { out.push('</ol>'); inOl = false; }
+
+    // Empty line = paragraph break
+    if (!trimmed) {
+      out.push('');
+      continue;
+    }
+
+    // Regular paragraph text — handle bold
+    var pText = trimmed;
+    pText = pText.replace(/\*\*(.+?)\*\*/g, function (m, inner) { return '<strong>' + esc(inner) + '</strong>'; });
+    pText = pText.replace(/__(.+?)__/g, function (m, inner) { return '<strong>' + esc(inner) + '</strong>'; });
+    // Already escaped above, so re-check for plain text
+    if (!pText.includes('<strong>')) {
+      pText = esc(pText);
+    }
+    out.push('<p>' + pText + '</p>');
+  }
+
+  if (inUl) out.push('</ul>');
+  if (inOl) out.push('</ol>');
+
+  return out.join('\n');
+}
+
+function renderProse(text) {
+  var html = mdToHtml(text);
+  return html ? '<div class="guide-prose">' + html + '</div>' : '';
+}
+
 function renderList(items, ordered) {
   if (!Array.isArray(items) || items.length === 0) return '';
   const tag = ordered ? 'ol' : 'ul';
@@ -199,7 +277,7 @@ function buildWhyItMatters(guide) {
   if (!String(content).trim()) return '';
   return renderSection('guide-section guide-section--why-matters',
     '<h2 class="guide-section__title">Why It Matters</h2>' +
-    '<div class="guide-prose"><p>' + esc(content) + '</p></div>');
+    renderProse(content));
 }
 
 function buildEligibility(guide) {
@@ -212,7 +290,7 @@ function buildEligibility(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--eligibility',
     '<h2 class="guide-section__title">Eligibility</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildBenefits(guide) {
@@ -225,7 +303,7 @@ function buildBenefits(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--benefits',
     '<h2 class="guide-section__title">Benefits</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildRequiredDocuments(guide) {
@@ -238,7 +316,7 @@ function buildRequiredDocuments(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--documents',
     '<h2 class="guide-section__title">Required Documents</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildApplicationProcess(guide) {
@@ -251,7 +329,7 @@ function buildApplicationProcess(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--apply',
     '<h2 class="guide-section__title">How to Apply</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildImportantDates(guide) {
@@ -264,7 +342,7 @@ function buildImportantDates(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--dates',
     '<h2 class="guide-section__title">Important Dates</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildCommonMistakes(guide) {
@@ -277,7 +355,7 @@ function buildCommonMistakes(guide) {
   if (!String(value).trim()) return '';
   return renderSection('guide-section guide-section--mistakes',
     '<h2 class="guide-section__title">Common Mistakes</h2>' +
-    '<div class="guide-prose"><p>' + esc(value) + '</p></div>');
+    renderProse(value));
 }
 
 function buildFaqs(guide) {

@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-15T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -44,14 +45,20 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   
-  <header class="site-header">
+  <header class="site-header site-header--dark">
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -62,6 +69,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        <div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -75,33 +83,55 @@
     
   <div class="article-head container">
     <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/">Guides</a> &nbsp;/&nbsp; <span>What is EMI?</span></div>
+    <span class="article-category-badge">
+      <span class="article-category-badge__dot"></span>
+      MONEY &middot; Money GUIDE
+    </span>
     <h1>What is EMI?</h1>
-    <p class="article-meta">Last updated: 2026-09-15</p>
-    <div class="short-answer"><p>EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p></div>
-    <div class="article-author">
-      <a href="/about/" class="article-author__link">
-        <div class="article-author__avatar">S</div>
-        <div class="article-author__info">
-          <div class="article-author__name">Samjho Content Team</div>
-          <div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div>
-        </div>
+    <div class="article-meta-bar">
+      <span class="article-meta-bar__date">&bull; Last updated: 2026-09-15</span>
+      <span class="article-meta-bar__sep">&middot;</span>
+      <span class="article-meta-bar__read">3 min read</span>
+      
+    <div class="share-buttons">
+      <span class="share-buttons__label">Share:</span>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fwhat-is-emi%2F&text=What%20is%20EMI%3F" target="_blank" rel="noopener" aria-label="Share on Twitter" title="Share on Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
+      <a class="share-btn" href="https://api.whatsapp.com/send?text=What%20is%20EMI%3F%20https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fwhat-is-emi%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="share-btn" onclick="navigator.clipboard.writeText('https://samjhoindia.com/guides/what-is-emi/').then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>this.innerHTML='&#x1f517;',1500)})" aria-label="Copy link" title="Copy link">
+        &#x1f517;
+      </button>
+    </div>
+    </div>
+    <div class="simple-words-box">
+        <span class="simple-words-box__label">In simple words:</span>
+        <p class="simple-words-box__text">EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p>
+      </div>
+    <div class="author-card">
+      <div class="author-card__avatar">S</div>
+      <div>
+        <div class="author-card__name">Samjho Content Team <span class="author-card__verified">&#x2713;</span></div>
+        <p class="author-card__bio">Trusted and policy experts simplifying MSME, tax, and compliance for India. Verified by Chartered Accountants.</p>
+      </div>
     </div>
   </div>
 
-  <div class="article-body container">
+  <div class="container"><div class="guide-layout"><div class="article-body">
     <section>
-      <h2>Simple explanation</h2>
+      <h2 id="sec-1">Simple explanation</h2>
       <p>When you take a loan — for a home, car, or personal expense — the lender doesn't ask you to repay the whole amount at once. Instead, it's split into equal monthly payments over an agreed period, called the loan tenure. Each of these equal payments is your EMI.</p><p>Every EMI actually contains two parts: a bit that goes toward reducing what you originally borrowed (the principal), and a bit that pays interest for the month. In the early months of a loan, a larger share of your EMI goes toward interest; as the loan matures, a larger share goes toward the principal, even though the EMI amount itself stays the same.</p><p>The EMI amount depends on three things: how much you borrow (loan amount), the interest rate, and the tenure. Borrow more, pay a higher rate, or choose a shorter tenure, and your EMI generally goes up. With a fixed-rate loan, the scheduled EMI generally stays fixed; with a floating-rate loan, a rate reset may change the EMI, the tenure, or both according to the lender's terms.</p>
     </section>
 
     <section>
-      <h2>Why does it matter?</h2>
+      <h2 id="sec-2">Why does it matter?</h2>
       <p>EMI decides how much of your monthly income goes toward loan repayment, which affects your budget for years at a stretch. Comparing EMIs (not just headline loan amounts) is how you judge whether a loan is actually affordable, and understanding the tenure trade-off helps you avoid paying far more interest than necessary.</p>
     </section>
 
     <section>
-      <h2>Example</h2>
+      <h2 id="sec-3">Example</h2>
       <div class="example-box">
         <span class="card-eyebrow">In numbers</span>
         <p>Illustrative example: a ₹5,00,000 loan at 10% annual interest for 60 months has an EMI of about ₹10,624. In month one, interest is about ₹4,167 (₹5,00,000 × 10% ÷ 12), so about ₹6,457 of the EMI reduces principal and the remaining principal is about ₹4,93,543. Over 60 months, total repayment is about ₹6,37,411 and total interest is about ₹1,37,411.</p>
@@ -120,19 +150,19 @@
     <div class="ad-slot ad-slot--incontent" data-ad-slot="incontent">Advertisement</div>
 
     <section>
-      <h2>Important things to know</h2>
-      <ul class="point-list"><li>EMI = [P × R × (1+R)^N] / [(1+R)^N − 1], where P is the principal, R is the monthly interest rate, and N is the number of monthly instalments.</li><li>A longer tenure generally reduces the EMI amount but increases the total interest paid over the life of the loan. In the same ₹5,00,000 at 10% illustration, a 3-year tenure is about ₹16,134 per month and ₹80,809 total interest, while a 7-year tenure is about ₹8,301 per month and ₹1,97,250 total interest.</li><li>Reducing-balance interest is calculated on the outstanding principal as it changes. A flat-rate method calculates interest differently, often from the original principal for the stated period; lenders and products can differ, so check the loan documents.</li><li>Missing EMIs can affect your credit score and may attract late payment charges, so lenders check your income against EMI amount before approving a loan.</li><li>Part-prepayment means paying an extra amount while the loan continues; full foreclosure means settling the outstanding loan before the scheduled end. Either may have conditions or charges depending on the lender and product, so check the current agreement, Key Facts Statement (KFS) and lender terms. Savings depend on timing, outstanding principal and applicable charges.</li><li>EMI is not always the complete borrowing cost: processing fees, insurance, taxes and other applicable charges can increase the total amount you pay.</li></ul>
+      <h2 id="sec-4">Important things to know</h2>
+      <ul class="point-list point-list--check"><li>EMI = [P × R × (1+R)^N] / [(1+R)^N − 1], where P is the principal, R is the monthly interest rate, and N is the number of monthly instalments.</li><li>A longer tenure generally reduces the EMI amount but increases the total interest paid over the life of the loan. In the same ₹5,00,000 at 10% illustration, a 3-year tenure is about ₹16,134 per month and ₹80,809 total interest, while a 7-year tenure is about ₹8,301 per month and ₹1,97,250 total interest.</li><li>Reducing-balance interest is calculated on the outstanding principal as it changes. A flat-rate method calculates interest differently, often from the original principal for the stated period; lenders and products can differ, so check the loan documents.</li><li>Missing EMIs can affect your credit score and may attract late payment charges, so lenders check your income against EMI amount before approving a loan.</li><li>Part-prepayment means paying an extra amount while the loan continues; full foreclosure means settling the outstanding loan before the scheduled end. Either may have conditions or charges depending on the lender and product, so check the current agreement, Key Facts Statement (KFS) and lender terms. Savings depend on timing, outstanding principal and applicable charges.</li><li>EMI is not always the complete borrowing cost: processing fees, insurance, taxes and other applicable charges can increase the total amount you pay.</li></ul>
     </section>
 
     <section>
-      <h2>Common mistakes</h2>
-      <ul class="mistake-list"><li>Choosing the longest tenure only to get the lowest EMI, without checking how much extra interest that adds up to overall.</li><li>Assuming EMI is calculated on the original loan amount for the entire tenure, rather than the reducing outstanding balance.</li><li>Not accounting for EMI alongside other monthly expenses, leading to a loan that is technically approved but hard to sustain.</li><li>Ignoring processing fees and other charges that add to the real cost of a loan beyond the EMI itself.</li><li>Assuming a floating-rate loan will keep the same EMI and tenure throughout its life.</li></ul>
+      <h2 id="sec-5">Common mistakes</h2>
+      <ul class="mistake-list--x"><li>Choosing the longest tenure only to get the lowest EMI, without checking how much extra interest that adds up to overall.</li><li>Assuming EMI is calculated on the original loan amount for the entire tenure, rather than the reducing outstanding balance.</li><li>Not accounting for EMI alongside other monthly expenses, leading to a loan that is technically approved but hard to sustain.</li><li>Ignoring processing fees and other charges that add to the real cost of a loan beyond the EMI itself.</li><li>Assuming a floating-rate loan will keep the same EMI and tenure throughout its life.</li></ul>
     </section>
 
     
 
     <section>
-      <h2>Frequently asked questions</h2>
+      <h2 id="sec-6">Frequently asked questions</h2>
       <details class="faq-item" open>
       <summary>Does the EMI amount change during the loan?</summary>
       <p>For a fixed-rate loan, no — the EMI stays the same every month for the full tenure. For a floating-rate loan, the EMI (or tenure) can change if the lender's interest rate changes.</p>
@@ -164,35 +194,37 @@
     </section>
 
     <section>
-      <h2>Related tools</h2>
-      <div class="related-grid"><a class="card" href="/calculators/emi/">
-    <span class="card-eyebrow">Calculator</span>
-    <h3>EMI Calculator</h3>
-    <p>Work out your own numbers for this topic.</p>
-  </a></div>
+      <h2 id="sec-7">Related tools</h2>
+      <div><div class="related-tools-box"><div class="related-tools-box__icon">&#x1F4CA;</div><div><p class="related-tools-box__label">RELATED TOOLS</p><p class="related-tools-box__title"><a href="/calculators/emi/">EMI Calculator</a></p><p class="related-tools-box__desc">Check if you qualify with our calculator.</p></div></div></div>
     </section>
 
     <section>
-      <h2>Related guides</h2>
-      <div class="related-grid"><a class="card" href="/guides/what-is-credit-score/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>What is a Credit Score?</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/what-is-compound-interest/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>What is Compound Interest?</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/business-loan/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Business Loan — Apply &amp; Eligibility Guide</h3>
-    <p>Read the simple explanation.</p>
-  </a></div>
+      <h2 id="sec-8">Related guides</h2>
+      <div class="related-guides-grid"><a class="related-guide-card" href="/guides/what-is-credit-score/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">What is a Credit Score?</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/what-is-compound-interest/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">What is Compound Interest?</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/business-loan/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Business Loan — Apply &amp; Eligibility Guide</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a></div>
     </section>
     <section>
-      <h2>Official references</h2>
-      <ul class="point-list"><li><a href="https://www.rbi.org.in/">Reserve Bank of India</a> — Official banking regulation, loan-related updates and consumer information.</li><li><a href="https://www.rbi.org.in/FinancialEducation/">RBI Financial Education</a> — RBI financial-literacy material and consumer education resources.</li><li><a href="https://www.rbi.org.in/Scripts/FAQDisplay.aspx">RBI FAQs</a> — RBI's official FAQ index for banking and financial topics.</li><li><a href="https://www.nhb.org.in/">National Housing Bank</a> — Official housing-finance regulator and development institution resources.</li></ul>
+      <h2 id="sec-9">Official references</h2>
+      <ul class="official-refs"><li><a href="https://www.rbi.org.in/" target="_blank" rel="noopener">Reserve Bank of India</a> <span class="ref-desc">Official banking regulation, loan-related updates and consumer information.</span></li><li><a href="https://www.rbi.org.in/FinancialEducation/" target="_blank" rel="noopener">RBI Financial Education</a> <span class="ref-desc">RBI financial-literacy material and consumer education resources.</span></li><li><a href="https://www.rbi.org.in/Scripts/FAQDisplay.aspx" target="_blank" rel="noopener">RBI FAQs</a> <span class="ref-desc">RBI's official FAQ index for banking and financial topics.</span></li><li><a href="https://www.nhb.org.in/" target="_blank" rel="noopener">National Housing Bank</a> <span class="ref-desc">Official housing-finance regulator and development institution resources.</span></li></ul>
     </section>
-  </div>
+  </div><aside class="guide-sidebar"><div class="guide-sidebar__widget"><h3>RELATED ARTICLES</h3><ul class="guide-sidebar__links"><li><a href="/guides/what-is-gst/">What is GST?</a></li><li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li><li><a href="/guides/what-is-inflation/">What is Inflation?</a></li><li><a href="/guides/what-is-compound-interest/">What is Compound Interest?</a></li><li><a href="/guides/what-is-credit-card/">What is a Credit Card?</a></li></ul></div><div class="guide-sidebar__widget"><h3>QUICK SUMMARY</h3><ul class="guide-sidebar__facts"><li>EMI = principal + interest</li><li>Fixed or floating rate</li><li>Longer tenure = lower EMI, more interest</li><li>EMI = P×r×(1+r)ⁿ ÷ ((1+r)ⁿ−1)</li><li>Try the free EMI calculator</li></ul></div><div class="sidebar-cta">
+    <h3>Get your Money help in 5 minutes</h3>
+    <p>Use our step-by-step checklist and official link. No agent needed.</p>
+    <a href="/guides/what-is-emi/" class="sidebar-cta__btn">Open checklist &rarr;</a>
+    <p class="sidebar-cta__note">Official &middot; Free &middot; Verified</p>
+  </div><nav class="guide-sidebar__widget" aria-label="On this page"><h3>On this page</h3><div class="guide-sidebar__toc"><a href="#sec-1">Simple explanation</a><a href="#sec-2">Why does it matter?</a><a href="#sec-3">Example</a><a href="#sec-4">Important things to know</a><a href="#sec-5">Common mistakes</a><a href="#sec-6">Frequently asked questions</a><a href="#sec-7">Related tools</a><a href="#sec-8">Related guides</a><a href="#sec-9">Official references</a></div></nav><div class="guide-sidebar__widget"><h3>Related Tools</h3><ul class="guide-sidebar__links"><li><a href="/calculators/emi/">EMI Calculator</a></li></ul></div><div class="guide-sidebar__widget"><h3>Official Sources</h3><ul class="guide-sidebar__links guide-sidebar__links--gov"><li><a href="https://www.rbi.org.in/" target="_blank" rel="noopener">Reserve Bank of India</a></li><li><a href="https://www.rbi.org.in/FinancialEducation/" target="_blank" rel="noopener">RBI Financial Education</a></li><li><a href="https://www.rbi.org.in/Scripts/FAQDisplay.aspx" target="_blank" rel="noopener">RBI FAQs</a></li><li><a href="https://www.nhb.org.in/" target="_blank" rel="noopener">National Housing Bank</a></li></ul></div><div class="guide-sidebar__widget guide-sidebar__ad"><div class="ad-slot ad-slot--sidebar" data-ad-slot="sidebar">Advertisement</div></div></aside></div></div>
+  <div class="article-disclaimer">SAMJHO INDIA &middot; EXPLAINED SIMPLY</div>
   
   </main>
   
@@ -231,6 +263,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

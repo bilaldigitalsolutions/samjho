@@ -3,10 +3,10 @@ const fs = require('fs');
 const path = require('path');
 const D = path.join(__dirname, '..', '..', 'dist');
 const S = /admin|questions|404/;
-function g(d) { let r = []; for (const e of fs.readdirSync(d, {withFileTypes:true})) { const f = path.join(d, e.name); if (e.isDirectory()) r = r.concat(g(f)); else if (e.name.endsWith('.html') && !S.test(f)) r.push(f); } return r; }
+function g(d) { let r = []; try { for (const e of fs.readdirSync(d, {withFileTypes:true})) { const f = path.join(d, e.name); if (e.isDirectory()) r = r.concat(g(f)); else if (e.name.endsWith('.html') && !S.test(f)) r.push(f); } } catch(ex) {} return r; }
 const files = g(D), P = [], I = [];
 for (const f of files) {
-  const h = fs.readFileSync(f, 'utf8');
+  let h; try { h = fs.readFileSync(f, 'utf8'); } catch (e) { continue; }
   const r = f.replace(D, '').replace(/\\/g, '/').replace('/index.html', '/').replace('.html', '');
   const p = { f: r };
   const tm = h.match(/<title[^>]*>(.*?)<\/title>/is); p.t = tm ? tm[1].trim() : null; p.tl = p.t ? p.t.length : 0;

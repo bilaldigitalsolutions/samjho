@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-15T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -44,14 +45,20 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   
-  <header class="site-header">
+  <header class="site-header site-header--dark">
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -62,6 +69,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        <div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -75,33 +83,55 @@
     
   <div class="article-head container">
     <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/guides/">Guides</a> &nbsp;/&nbsp; <span>Caste Certificate — Apply Online Guide</span></div>
+    <span class="article-category-badge">
+      <span class="article-category-badge__dot"></span>
+      DOCUMENTS &middot; Documents GUIDE
+    </span>
     <h1>Caste Certificate — Apply Online Guide</h1>
-    <p class="article-meta">Last updated: 2026-09-15</p>
-    <div class="short-answer"><p>Caste Certificate state government dwara issue kiya jaata hai aur yeh prove karta hai ki aap kaunsi caste category (SC/ST/OBC) se belong karte hain. Education admission, government jobs, aur reservation benefits ke liye yeh zaroori document hai.</p></div>
-    <div class="article-author">
-      <a href="/about/" class="article-author__link">
-        <div class="article-author__avatar">S</div>
-        <div class="article-author__info">
-          <div class="article-author__name">Samjho Content Team</div>
-          <div class="article-author__bio">Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.</div>
-        </div>
+    <div class="article-meta-bar">
+      <span class="article-meta-bar__date">&bull; Last updated: 2026-09-15</span>
+      <span class="article-meta-bar__sep">&middot;</span>
+      <span class="article-meta-bar__read">3 min read</span>
+      
+    <div class="share-buttons">
+      <span class="share-buttons__label">Share:</span>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fcaste-certificate%2F&text=Caste%20Certificate%20%E2%80%94%20Apply%20Online%20Guide" target="_blank" rel="noopener" aria-label="Share on Twitter" title="Share on Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
+      <a class="share-btn" href="https://api.whatsapp.com/send?text=Caste%20Certificate%20%E2%80%94%20Apply%20Online%20Guide%20https%3A%2F%2Fsamjhoindia.com%2Fguides%2Fcaste-certificate%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="share-btn" onclick="navigator.clipboard.writeText('https://samjhoindia.com/guides/caste-certificate/').then(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>this.innerHTML='&#x1f517;',1500)})" aria-label="Copy link" title="Copy link">
+        &#x1f517;
+      </button>
+    </div>
+    </div>
+    <div class="simple-words-box">
+        <span class="simple-words-box__label">In simple words:</span>
+        <p class="simple-words-box__text">Caste Certificate state government dwara issue kiya jaata hai aur yeh prove karta hai ki aap kaunsi caste category (SC/ST/OBC) se belong karte hain. Education admission, government jobs, aur reservation benefits ke liye yeh zaroori document hai.</p>
+      </div>
+    <div class="author-card">
+      <div class="author-card__avatar">S</div>
+      <div>
+        <div class="author-card__name">Samjho Content Team <span class="author-card__verified">&#x2713;</span></div>
+        <p class="author-card__bio">Trusted and policy experts simplifying MSME, tax, and compliance for India. Verified by Chartered Accountants.</p>
+      </div>
     </div>
   </div>
 
-  <div class="article-body container">
+  <div class="container"><div class="guide-layout"><div class="article-body">
     <section>
-      <h2>Simple explanation</h2>
+      <h2 id="sec-1">Simple explanation</h2>
       <p>Caste Certificate ek official document hai jo certify karta hai ki aap SC (Scheduled Caste), ST (Scheduled Tribe), ya OBC (Other Backward Class) category se belong karte hain. Yeh Revenue Department (Tehsildar / SDM) issue karta hai.</p><p>Caste certificate 3 main categories ke liye hota hai: SC — jo Scheduled Castes list mein aate hain (Constitution order 1950), ST — jo Scheduled Tribes list mein aate hain, aur OBC — jo Central ya State OBC list mein notified hain. Har state ki apni list hoti hai.</p><p>Apply karne ke liye apne state ke e-District portal par jaayein ya nearest CSC / Tehsil office. Form bharein, documents upload karein, fees pay karein. Required documents: <a href="/guides/what-is-aadhaar/">Aadhaar</a>, parents ka caste certificate (agar pehle se hai), school records, aur self-declaration.</p><p>Caste certificate ki validity: SC/ST ke liye usually lifetime validity hoti hai (jab tak state change na ho). OBC ke liye kuch states mein annual renewal lagta hai, especially Non-Creamy Layer (NCL) certificate jo har saal renew hota hai.</p>
     </section>
 
     <section>
-      <h2>Why does it matter?</h2>
+      <h2 id="sec-2">Why does it matter?</h2>
       <p>Caste certificate reservation policy ke under benefits access karne ke liye zaroori hai — government job vacancies mein reserved seats, education institutions mein quota, scholarship schemes, aur kai welfare programmes. Bina valid caste certificate ke aap in benefits claim nahi kar sakte.</p>
     </section>
 
     <section>
-      <h2>Example</h2>
+      <h2 id="sec-3">Example</h2>
       <div class="example-box">
         <span class="card-eyebrow">In numbers</span>
         <p>Aap OBC category se hain aur engineering college mein OBC quota seat ke liye apply karna chahte hain. Aap e-District portal par caste certificate ke liye apply karte hain — father ka caste certificate, school records, aur <a href="/guides/what-is-aadhaar/">Aadhaar</a> upload karte hain. Tehsildar verify karta hai aur 15-30 din mein certificate mil jaata hai. Yeh certificate admission form mein lagta hai.</p>
@@ -120,19 +150,19 @@
     <div class="ad-slot ad-slot--incontent" data-ad-slot="incontent">Advertisement</div>
 
     <section>
-      <h2>Important things to know</h2>
-      <ul class="point-list"><li>Caste Certificate Revenue Department (Tehsildar/SDM) issue karta hai — state government ke under.</li><li>3 main categories: SC (Scheduled Caste), ST (Scheduled Tribe), OBC (Other Backward Class).</li><li>Apply online: e-District portal ya nearest CSC / Tehsil office se.</li><li>Required documents: Aadhaar, parents ka caste certificate (primary proof), school records, self-declaration.</li><li>SC/ST certificate: Usually lifetime validity. OBC certificate: Kuch states mein annual renewal.</li><li>Non-Creamy Layer (NCL) certificate: OBC ke liye alag se chahiye — family income ₹8 lakh se kam honi chahiye. Har saal renew hota hai.</li><li>Fees: Nominal (₹10-₹50). Processing time: 15-30 din.</li><li>Central list aur State list alag hain — job ke liye Central list, state benefits ke liye State list ka certificate chahiye.</li></ul>
+      <h2 id="sec-4">Important things to know</h2>
+      <ul class="point-list point-list--check"><li>Caste Certificate Revenue Department (Tehsildar/SDM) issue karta hai — state government ke under.</li><li>3 main categories: SC (Scheduled Caste), ST (Scheduled Tribe), OBC (Other Backward Class).</li><li>Apply online: e-District portal ya nearest CSC / Tehsil office se.</li><li>Required documents: Aadhaar, parents ka caste certificate (primary proof), school records, self-declaration.</li><li>SC/ST certificate: Usually lifetime validity. OBC certificate: Kuch states mein annual renewal.</li><li>Non-Creamy Layer (NCL) certificate: OBC ke liye alag se chahiye — family income ₹8 lakh se kam honi chahiye. Har saal renew hota hai.</li><li>Fees: Nominal (₹10-₹50). Processing time: 15-30 din.</li><li>Central list aur State list alag hain — job ke liye Central list, state benefits ke liye State list ka certificate chahiye.</li></ul>
     </section>
 
     <section>
-      <h2>Common mistakes</h2>
-      <ul class="mistake-list"><li>Galat category select karna — SC, ST, OBC mein se apni exact category choose karein. Galat category se certificate invalid ho jaata hai.</li><li>Parents ka caste certificate na dena — yeh sabse important proof hai. Agar parents ka certificate nahi hai toh process mushkil hota hai.</li><li>Inter-state caste mismatch — aapki caste jis state mein notified hai, doosri state mein shayad nahi hai. Central vs State list check karein.</li><li>NCL certificate bhool jaana — OBC reservation ke liye sirf caste certificate kaafi nahi, Non-Creamy Layer certificate bhi chahiye.</li><li>School records mein caste galat likhi hona — pehle check karein ki school records mein caste sahi hai, warna pehle school se correction karwayein.</li></ul>
+      <h2 id="sec-5">Common mistakes</h2>
+      <ul class="mistake-list--x"><li>Galat category select karna — SC, ST, OBC mein se apni exact category choose karein. Galat category se certificate invalid ho jaata hai.</li><li>Parents ka caste certificate na dena — yeh sabse important proof hai. Agar parents ka certificate nahi hai toh process mushkil hota hai.</li><li>Inter-state caste mismatch — aapki caste jis state mein notified hai, doosri state mein shayad nahi hai. Central vs State list check karein.</li><li>NCL certificate bhool jaana — OBC reservation ke liye sirf caste certificate kaafi nahi, Non-Creamy Layer certificate bhi chahiye.</li><li>School records mein caste galat likhi hona — pehle check karein ki school records mein caste sahi hai, warna pehle school se correction karwayein.</li></ul>
     </section>
 
     
 
     <section>
-      <h2>Frequently asked questions</h2>
+      <h2 id="sec-6">Frequently asked questions</h2>
       <details class="faq-item" open>
       <summary>Caste certificate ke liye online apply kaise karein?</summary>
       <p>Apne state ke e-District portal par jaayein. 'Caste Certificate' service select karein, form bharein (personal details, caste details, family details). Parents ka caste certificate, Aadhaar, school records upload karein. Fees pay karein. Reference number se status track ho sakta hai.</p>
@@ -155,35 +185,41 @@
     </section>
 
     <section>
-      <h2>Related tools</h2>
+      <h2 id="sec-7">Related tools</h2>
       <p class="empty-note">There isn't a dedicated calculator for this topic yet — <a href="/calculators/">browse all calculators</a> in the meantime.</p>
     </section>
 
     <section>
-      <h2>Related guides</h2>
-      <div class="related-grid"><a class="card" href="/guides/income-certificate/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Income Certificate</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/what-is-aadhaar/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>What is Aadhaar?</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/scholarship-guide/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Government Scholarships — Complete Guide</h3>
-    <p>Read the simple explanation.</p>
-  </a><a class="card" href="/guides/birth-certificate/">
-    <span class="card-eyebrow">Guide</span>
-    <h3>Birth Certificate — Apply &amp; Download Guide</h3>
-    <p>Read the simple explanation.</p>
-  </a></div>
+      <h2 id="sec-8">Related guides</h2>
+      <div class="related-guides-grid"><a class="related-guide-card" href="/guides/income-certificate/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Income Certificate</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/what-is-aadhaar/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">What is Aadhaar?</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/scholarship-guide/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Government Scholarships — Complete Guide</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a><a class="related-guide-card" href="/guides/birth-certificate/">
+      <span class="related-guide-card__tag">Guide</span>
+      <h3 class="related-guide-card__title">Birth Certificate — Apply &amp; Download Guide</h3>
+      <span class="related-guide-card__link">Read the simple explanation.</span>
+    </a></div>
     </section>
     <section>
-      <h2>Official references</h2>
-      <ul class="point-list"><li><a href="https://edistrict.gov.in">e-District Portal</a> — National gateway for district-level services including caste certificate</li><li><a href="https://ncsc.nic.in">National Commission for Scheduled Castes</a> — Official information on SC status, rights, and lists</li><li><a href="https://socialjustice.gov.in/">Ministry of Social Justice</a> — SC/OBC welfare schemes and certificate guidance</li></ul>
+      <h2 id="sec-9">Official references</h2>
+      <ul class="official-refs"><li><a href="https://edistrict.gov.in" target="_blank" rel="noopener">e-District Portal</a> <span class="ref-desc">National gateway for district-level services including caste certificate</span></li><li><a href="https://ncsc.nic.in" target="_blank" rel="noopener">National Commission for Scheduled Castes</a> <span class="ref-desc">Official information on SC status, rights, and lists</span></li><li><a href="https://socialjustice.gov.in/" target="_blank" rel="noopener">Ministry of Social Justice</a> <span class="ref-desc">SC/OBC welfare schemes and certificate guidance</span></li></ul>
     </section>
-  </div>
+  </div><aside class="guide-sidebar"><div class="guide-sidebar__widget"><h3>RELATED ARTICLES</h3><ul class="guide-sidebar__links"><li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li><li><a href="/guides/voter-id/">Voter ID Card — Apply, Download &amp; Correction Guide</a></li><li><a href="/guides/passport/">Passport Apply Online — Complete Guide</a></li><li><a href="/guides/driving-licence/">Driving Licence Apply &amp; Renew — Guide</a></li><li><a href="/guides/birth-certificate/">Birth Certificate — Apply &amp; Download Guide</a></li></ul></div><div class="guide-sidebar__widget"><h3>QUICK SUMMARY</h3><ul class="guide-sidebar__facts"><li>SC/ST/OBC status proof</li><li>Apply via e-District portal</li><li>Needed for reservations</li><li>Caste + residence proof required</li><li>Validity: usually lifetime (SC/ST)</li></ul></div><div class="sidebar-cta">
+    <h3>Get your Documents help in 5 minutes</h3>
+    <p>Use our step-by-step checklist and official link. No agent needed.</p>
+    <a href="/guides/caste-certificate/" class="sidebar-cta__btn">Open checklist &rarr;</a>
+    <p class="sidebar-cta__note">Official &middot; Free &middot; Verified</p>
+  </div><nav class="guide-sidebar__widget" aria-label="On this page"><h3>On this page</h3><div class="guide-sidebar__toc"><a href="#sec-1">Simple explanation</a><a href="#sec-2">Why does it matter?</a><a href="#sec-3">Example</a><a href="#sec-4">Important things to know</a><a href="#sec-5">Common mistakes</a><a href="#sec-6">Frequently asked questions</a><a href="#sec-7">Related tools</a><a href="#sec-8">Related guides</a><a href="#sec-9">Official references</a></div></nav><div class="guide-sidebar__widget"><h3>Official Sources</h3><ul class="guide-sidebar__links guide-sidebar__links--gov"><li><a href="https://edistrict.gov.in" target="_blank" rel="noopener">e-District Portal</a></li><li><a href="https://ncsc.nic.in" target="_blank" rel="noopener">National Commission for Scheduled Castes</a></li><li><a href="https://socialjustice.gov.in/" target="_blank" rel="noopener">Ministry of Social Justice</a></li></ul></div><div class="guide-sidebar__widget guide-sidebar__ad"><div class="ad-slot ad-slot--sidebar" data-ad-slot="sidebar">Advertisement</div></div></aside></div></div>
+  <div class="article-disclaimer">SAMJHO INDIA &middot; EXPLAINED SIMPLY</div>
   
   </main>
   
@@ -222,6 +258,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>

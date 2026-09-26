@@ -24,7 +24,8 @@
   <meta property="article:modified_time" content="2026-09-18T00:00:00.000Z" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" href="/assets/logo/logo-icon.png">
@@ -47,10 +48,16 @@
     <div class="container site-header__bar">
       <div class="site-header__brand">
         <a href="/" class="site-logo" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          <picture>
+            <source srcset="/assets/logo/logo-full.webp" type="image/webp">
+            <img src="/assets/logo/logo-full.png" alt="Samjho India — Information • Tools • For a Better Tomorrow" class="site-logo__img" width="200" height="48" />
+          </picture>
         </a>
         <a href="/" class="site-logo site-logo--mobile" aria-label="Samjho India home">
-          <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          <picture>
+            <source srcset="/assets/logo/logo-icon.webp" type="image/webp">
+            <img src="/assets/logo/logo-icon.png" alt="Samjho India" class="site-logo__img site-logo__img--icon" width="40" height="40" />
+          </picture>
         </a>
         <p class="site-header__tagline">Information • Tools • For a Better Tomorrow</p>
       </div>
@@ -61,6 +68,7 @@
         <button class="header-search-btn" aria-label="Search" onclick="document.querySelector('.home-search input')?.focus(); window.scrollTo({top:0,behavior:'smooth'});">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
+        
         <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
           <span></span>
         </button>
@@ -85,7 +93,7 @@
   <section class="guide-section guide-section--mistakes"><h2 class="guide-section__title">Common Mistakes</h2><ul class="guide-list"><li>Mock mistake one</li></ul></section>
   <section class="guide-section guide-section--faqs"><h2 class="guide-section__title">FAQs</h2><div class="guide-faq"><div class="guide-faq__item"><h3 class="guide-faq__q">Is this a real guide?</h3><div class="guide-faq__a">No. This is a mock pipeline test guide.</div></div></div></section>
   <section class="guide-section guide-section--disclaimer"><h2 class="guide-section__title">Disclaimer</h2><div class="guide-prose"><p>Samjho is an independent informational resource and is not a government website. Content is for general understanding only and is not financial, legal, tax or professional advice. Rules, rates and eligibility can change; always verify current details with official sources before acting.</p></div></section>
-  <section class="guide-section guide-section--related"><h2 class="guide-section__title">Related Guides</h2><div class="related-grid"><a class="card" href="/guides/ckyc-2-0-one-kyc-for-all-financial-products/"><span class="card-eyebrow">Guide</span><h3>CKYC 2.0: One KYC for All Your Financial Products</h3><p>CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.</p></a><a class="card" href="/guides/what-is-gst/"><span class="card-eyebrow">Guide</span><h3>What is GST?</h3><p>GST (Goods and Services Tax) is a single tax charged on the sale of most goods and services in India. It replaced a long list of separate central and state taxes with one system.</p></a><a class="card" href="/guides/what-is-emi/"><span class="card-eyebrow">Guide</span><h3>What is EMI?</h3><p>EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest. Fixed-rate loans generally keep the EMI fixed, while floating-rate loans may change the EMI or tenure.</p></a></div></section>
+  <section class="guide-section guide-section--related"><h2 class="guide-section__title">Related Guides</h2><div class="related-grid"><a class="card" href="/guides/ckyc-2-0-one-kyc-for-all-financial-products/"><span class="card-eyebrow">Guide</span><h3>CKYC 2.0: One KYC for All Your Financial Products</h3><p>CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.</p></a><a class="card" href="/guides/sebi-order-omaxe-limited-minimum-public-shareholding-non-compliance/"><span class="card-eyebrow">Guide</span><h3>SEBI Issues Order on Omaxe Limited Over Minimum Public Shareholding Rule</h3><p>SEBI has passed an order in the matter of non-compliance of minimum public shareholding in Omaxe Limited. The order was published on 24 September 2026. The official release does not give details of the penalty or the next steps.</p></a><a class="card" href="/guides/epfo-citizens-charter/"><span class="card-eyebrow">Guide</span><h3>EPFO Citizen's Charter: What It Means for You</h3><p>The Employees' Provident Fund Organisation (EPFO) has issued a document called the Citizen's Charter. It is a public promise that tells you what service you can expect from the office. The source we received shows only the title, so the full details are not listed here.</p></a></div></section>
   </main>
   
   <footer class="site-footer">
@@ -123,6 +131,30 @@
           </ul>
         </div>
         <div class="foot-links-col">
+        <div class="foot-links-col">
+          <h4>Popular Articles</h4>
+          <ul>
+            <li><a href="/guides/what-is-gst/">What is GST?</a></li>
+            <li><a href="/guides/what-is-emi/">What is EMI?</a></li>
+            <li><a href="/guides/what-is-credit-score/">What is a Credit Score?</a></li>
+            <li><a href="/guides/what-is-pan-card/">What is a PAN Card?</a></li>
+            <li><a href="/guides/what-is-uan/">What is UAN?</a></li>
+            <li><a href="/guides/pm-kisan-yojana/">PM Kisan Yojana</a></li>
+          </ul>
+        </div>
+        <div class="foot-links-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/government/">Government</a></li>
+            <li><a href="/documents/">Documents</a></li>
+            <li><a href="/business/">Business</a></li>
+            <li><a href="/money/">Money</a></li>
+            <li><a href="/education/">Education</a></li>
+            <li><a href="/calculators/">Calculators</a></li>
+            <li><a href="/schemes/">Schemes</a></li>
+            <li><a href="/guides/">All Guides</a></li>
+          </ul>
+        </div>
           <h4>Helpful</h4>
           <ul><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/privacy/">Privacy Policy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/disclaimer/">Disclaimer</a></li></ul>
         </div>
