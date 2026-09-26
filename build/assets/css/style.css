@@ -863,7 +863,6 @@ details.faq-item p { margin-top: 10px; color: var(--ink-soft); }
   max-width: 100%;
 }
 .home-hero__illustration-wrapper {
-  display: none;
   position: relative;
   width: 100%;
 }
