@@ -1855,7 +1855,6 @@ function buildGuidesIndex() {
       description: "Read plain-English Samjho guides about GST, credit scores, CGPA, documents, loans and everyday decisions. Updated for 2026.",
       canonical: site.domain + "/guides/",
       activeHref: "/guides/",
-      darkHeader: true,
       bodyHtml: body,
       structuredData: [
         webPageSchema({
@@ -2178,7 +2177,6 @@ function buildGuideArticle(a) {
       bodyHtml: layoutBody,
       structuredData,
       extraScripts: `<script src="/assets/js/toc.js" defer></script>`,
-      darkHeader: true,
       articleMeta: {
         author: site.author.name,
         datePublished: a.lastUpdated ? new Date(a.lastUpdated).toISOString() : undefined,

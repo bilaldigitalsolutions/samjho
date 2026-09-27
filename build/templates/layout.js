@@ -203,7 +203,7 @@ function renderPage({
   extraScripts = "",
   stylesheetHref = "/assets/css/style.css",
   articleMeta = null,
-  darkHeader = true,
+  darkHeader = false,
 }) {
   return `<!DOCTYPE html>
 <html lang="en">
