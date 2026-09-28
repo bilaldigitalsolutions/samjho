@@ -3315,9 +3315,9 @@ details.faq-item p { margin-top: 10px; color: var(--ink-soft); }
 
 /* Language toggle */
 .lang-toggle { display: inline-flex; align-items: center; gap: 4px; margin-left: 12px; }
-.lang-toggle a { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; color: rgba(255,255,255,0.6); transition: all 0.15s; }
-.lang-toggle a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-.lang-toggle a.active { color: #fff; background: rgba(255,255,255,0.12); }
+.lang-toggle a { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; color: #64748b; transition: all 0.15s; }
+.lang-toggle a:hover { color: #0f172a; background: #f1f5f9; }
+.lang-toggle a.active { color: #14b8a6; background: #f0fdfa; }
 
 /* --- ARTICLE PAGE: "IN SIMPLE WORDS" BOX --- */
 .simple-words-box { background: #f0fdfa; border-left: 4px solid #0d9488; border-radius: 0 12px 12px 0; padding: 20px 24px; margin-bottom: 28px; }

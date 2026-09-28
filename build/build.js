@@ -919,14 +919,6 @@ function buildGovernmentPage() {
 
   const body = `
   <div class="gov-page">
-
-    <div class="gov-utility-bar">
-      <div class="container gov-utility-bar__inner">
-        <span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span>
-        <span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span>
-      </div>
-    </div>
-
     <section class="gov-hero">
       <div class="container gov-hero__grid">
         <div class="gov-hero__left">
@@ -1195,14 +1187,6 @@ function buildDocumentsPage() {
 
   const body = `
   <div class="gov-page">
-
-    <div class="gov-utility-bar">
-      <div class="container gov-utility-bar__inner">
-        <span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span>
-        <span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span>
-      </div>
-    </div>
-
     <section class="gov-hero">
       <div class="container gov-hero__grid">
         <div class="gov-hero__left">
@@ -1372,7 +1356,6 @@ function buildBusinessPage() {
 
   const body = `
   <div class="gov-page">
-    <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.business || 7} BUSINESS GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">Business <span class="gov-hero__title-grey">— Register, Comply, Grow</span></h1>
@@ -1447,7 +1430,6 @@ function buildMoneyPage() {
 
   const body = `
   <div class="gov-page">
-    <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.money || 10} MONEY GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">Money <span class="gov-hero__title-grey">— Understand, Calculate, Decide</span></h1>
@@ -1522,7 +1504,6 @@ function buildEducationPage() {
 
   const body = `
   <div class="gov-page">
-    <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.education || 6} EDUCATION GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">Education <span class="gov-hero__title-grey">— Learn, Score, Succeed</span></h1>
@@ -1729,7 +1710,6 @@ function buildGuidesSubPage(cfg) {
 
   const body = `
   <div class="gov-page">
-    <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${count} ${esc(cfg.label.toUpperCase())} GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">${esc(cfg.h1)}</h1>
@@ -1825,7 +1805,6 @@ function buildGuidesIndex() {
 
   const body = `
   <div class="gov-page">
-    <div class="gov-utility-bar"><div class="container gov-utility-bar__inner"><span class="gov-utility-bar__left">AAJ KI YOJANA · UPDATED TODAY</span><span class="gov-utility-bar__right">हिंदी | <span class="gov-utility-bar__active">ENGLISH</span></span></div></div>
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${totalGuides}+ GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
       <h1 class="gov-hero__title">All Guides <span class="gov-hero__title-grey">— Everything Explained</span></h1>

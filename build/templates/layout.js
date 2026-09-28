@@ -21,7 +21,7 @@ function renderHeader(activeHref, showSearch = true, dark = false) {
     .map((item) => `<li><a href="${item.href}">${item.label}</a></li>`)
     .join("");
 
-  const langHtml = dark ? `<div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>` : '';
+  const langHtml = `<div class="lang-toggle"><a href="#" class="active" aria-label="English">EN</a><a href="#" aria-label="Hindi">&#x939;&#x93F;&#x926;&#x940;</a></div>`;
 
   return `
   <header class="site-header${darkClass}">
