@@ -49,13 +49,17 @@ async function optimizeImage(img) {
     }
   }
 
-  // Also compress the original PNG (re-save with optimization)
+  // Also recompress the original PNG so the fallback shipped in dist/ is
+  // small too (FIX 3 site weight): palette quantisation for illustrations,
+  // lossless re-encode as the conservative fallback — keep whichever is
+  // smallest and only replace when it actually shrinks the file.
   const pngOptPath = path.join(img.dir, img.src);
   try {
-    const pngOpt = await sharp(srcBuf).png({ compressionLevel: 9 }).toBuffer();
-    if (pngOpt.length < srcSize) {
-      fs.writeFileSync(pngOptPath, pngOpt);
-    }
+    const candidates = [];
+    try { candidates.push(await sharp(srcBuf).png({ compressionLevel: 9, palette: true, quality: 92 }).toBuffer()); } catch (e) {}
+    try { candidates.push(await sharp(srcBuf).png({ compressionLevel: 9 }).toBuffer()); } catch (e) {}
+    const best = candidates.filter((b) => b.length < srcSize).sort((a, b) => a.length - b.length)[0];
+    if (best) fs.writeFileSync(pngOptPath, best);
   } catch (e) {}
 
   const saved = srcSize - webpBuf.length;

@@ -55,6 +55,16 @@ module.exports = [
     keywords: ["simple interest", "interest calculator", "principal rate time"],
   },
   {
+    slug: "compound-interest",
+    metaTitle: "Compound Interest Calculator— Formula + Example",
+    metaDescription: "Compound interest kaise nikalein? Principal, rate, time aur compounding frequency se maturity amount aur byaaj — free calculator + formula yahan.",
+    title: "Compound Interest Calculator",
+    short: "Calculate maturity amount with compounding.",
+    description: "Work out the maturity amount and total interest when interest compounds yearly, half-yearly, quarterly or monthly — with a year-by-year growth breakdown.",
+    category: "money",
+    keywords: ["compound interest calculator", "compound interest", "fd calculator", "maturity amount", "interest on interest"],
+  },
+  {
     slug: "cgpa",
     metaTitle: "CGPA Calculator— SGPA to CGPA + Percentage",
     metaDescription: "CGPA calculate karna hai? Semester SGPA se CGPA aur percentage — students ke liye freeonline calculator.",

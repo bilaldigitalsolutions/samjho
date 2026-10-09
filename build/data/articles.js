@@ -214,7 +214,7 @@ module.exports = [
     slug: "what-is-gst",
     title: "What is GST?",
     metaTitle: "GST Kya Hai? Types, Rates, Registration",
-    metaDescription: "GST kya hai aur kitne types hote hain? Rates, registration aur calculation — bill samajhne ke liye simple Hindi meupdated guide.",
+    metaDescription: "GST kya hai aur kitne types hote hain? Rates, registration aur calculation — bill samajhne ke liye simple Hindi me updated guide.",
     lastUpdated: "2026-09-15",
     quickSummary: ["4 main slabs: 5/12/18/28%", "Registration on gst.gov.in", "CGST+SGST intra-state, IGST inter-state", "Input tax credit reduces cost", "Threshold-based registration"],
     category: "money",
@@ -596,7 +596,58 @@ module.exports = [
         a: "No. While a 10-point scale is common in India, some universities (especially those following international patterns) use a 4-point scale instead.",
       },
     ],
-    relatedTools: [{ title: "CGPA Calculator", href: "/calculators/cgpa/" }], relatedGuides: [{ title: "What is a Credit Score?", href: "/guides/what-is-credit-score/" }, { title: "Government Scholarships — Complete Guide", href: "/guides/scholarship-guide/" }, { title: "Entrance Exams After 12th", href: "/guides/entrance-exams/" }, { title: "Career Options After 12th — Complete Guide", href: "/guides/career-options/" }], officialReferences: [{ label: "CBSE Official Website", href: "https://www.cbse.gov.in/", description: "CBSE's official CGPA grading scheme and percentage conversion guidance" }, { label: "University Grants Commission (UGC)", href: "https://www.ugc.gov.in/", description: "Official higher-education grading and CGPA-to-percentage guidelines" }]
+    relatedTools: [{ title: "CGPA Calculator", href: "/calculators/cgpa/" }], relatedGuides: [{ title: "What is a Credit Score?", href: "/guides/what-is-credit-score/" }, { title: "Government Scholarships — Complete Guide", href: "/guides/scholarship-guide/" }, { title: "Entrance Exams After 12th", href: "/guides/entrance-exams/" }, { title: "Career Options After 12th — Complete Guide", href: "/guides/career-options/" }], officialReferences: [{ label: "CBSE Official Website", href: "https://www.cbse.gov.in/", description: "CBSE's official CGPA grading scheme and percentage conversion guidance" }, { label: "University Grants Commission (UGC)", href: "https://www.ugc.gov.in/", description: "Official higher-education grading and CGPA-to-percentage guidelines" }],
+    // --- GSC depth expansion: later keys override the originals above (JS object rules).
+    simpleExplanation: [
+      "Instead of scoring each subject purely out of 100 marks, some education boards and universities assign a grade point for each subject (for example, on a 10-point scale), based on the marks or grade a student receives. The average of these grade points, taken across all subjects, gives the CGPA.",
+      "\"Cumulative\" means it usually reflects performance across multiple terms, semesters or years, not just one exam — so a CGPA often represents a broader picture of consistent performance rather than a single test.",
+      "Because different institutions use different scales and conversion methods, a CGPA is meaningful mainly within the system that issued it — comparing CGPA across two different boards or universities directly isn't always accurate without knowing their specific scale.",
+      "To convert CGPA into a percentage, the multiplier depends on the issuing institution. Under the CBSE pattern the long-used conversion is percentage = CGPA × 9.5, so a CGPA of 8 becomes about 76%. Many universities instead use ×10 (making 8 equal to 80%), and some publish their own formula altogether. For applications abroad, credential-evaluation services such as WES apply their own conversion based on the issuing university's grading system, so the percentage can differ from both.",
+      "In most universities, CGPA is credit-weighted rather than a flat average — each semester's grade point is multiplied by that semester's credit load before everything is averaged. This means a high grade in a high-credit subject moves the CGPA more than a high grade in a low-credit subject, which is why backlogs in core subjects hurt the cumulative score disproportionately.",
+    ],
+    whyMatters:
+      "CGPA is often what appears on school and college report cards and transcripts, and many college admissions, scholarship applications and even some job applications ask for it — sometimes requiring it to be converted into an equivalent percentage. For students aiming at placements or higher studies abroad, the CGPA is usually the first number recruiters and universities look at, long before individual subject marks are discussed.",
+    example:
+      "A board might use a 10-point grading scale where a student scoring 91–100 marks in a subject gets a grade point of 10, 81–90 gets 9, and so on. If a student's grade points across five subjects are 9, 8, 9, 7 and 8, the CGPA is the average: (9+8+9+7+8) ÷ 5 = 8.2.\n\nOn the common CBSE-style conversion, the same CGPA converts like this: 7.0 becomes 66.5%, 8.0 becomes 76%, 8.5 becomes 80.75%, 9.0 becomes 85.5% and 10.0 becomes 95%. On a ×10 scale those same CGPAs read 70%, 80%, 85%, 90% and 100% — which is exactly why application forms ask for the conversion formula of the issuing institution rather than accepting a generic multiplier.",
+    importantPoints: [
+      "CGPA scales commonly used in India include a 10-point scale, though some universities use 4-point scales similar to international systems.",
+      "A widely used (though not universal) approximation is CGPA × 9.5 = percentage, but the exact formula depends entirely on the specific board or university's own rules.",
+      "Some institutions publish an official conversion formula and it's always safer to use that rather than a generic multiplier.",
+      "CGPA is usually cumulative across terms or years, while a single term's or semester's average may be shown separately as SGPA (Semester Grade Point Average).",
+      "Different subjects may be weighted differently (for example, based on credit hours in college), so CGPA isn't always a simple flat average.",
+      "Foreign universities usually evaluate transcripts through credential services (for example WES), which apply their own conversion to the official grading scale — the percentage shown there can differ from both the ×9.5 and ×10 calculations.",
+      "A CGPA is only as meaningful as its scale: a 7.5 on a 4-point scale is excellent, while the same number on a 10-point scale is below average — always quote the scale alongside the CGPA.",
+    ],
+    faq: [
+      {
+        q: "How do I convert CGPA to percentage?",
+        a: "Check your board or university's official conversion formula first — many CBSE-pattern schools traditionally used CGPA × 9.5, but this isn't universal, so always confirm with your institution's own guidelines.",
+      },
+      {
+        q: "Is a higher CGPA always better than a higher percentage?",
+        a: "They aren't directly comparable systems — a CGPA and a percentage are just two different ways of expressing performance, and neither is inherently \"better\" than the other.",
+      },
+      {
+        q: "What's the difference between CGPA and SGPA?",
+        a: "SGPA typically reflects performance in a single semester, while CGPA is the cumulative average across all semesters or years completed so far.",
+      },
+      {
+        q: "Do all colleges use a 10-point CGPA scale?",
+        a: "No. While a 10-point scale is common in India, some universities (especially those following international patterns) use a 4-point scale instead.",
+      },
+      {
+        q: "How do I calculate percentage from CGPA at home?",
+        a: "Multiply your CGPA by the conversion factor your institution publishes — commonly 9.5 (CBSE pattern) or 10 (many universities). For example, 8.0 becomes 76% on ×9.5 and 80% on ×10. Use the formula printed on your transcript when in doubt.",
+      },
+      {
+        q: "Is 8.0 CGPA a good score?",
+        a: "Generally, yes — 8.0 and above is usually considered strong in the Indian system and meets eligibility cut-offs for many placements and postgraduate programmes. What counts as \"good\" still depends on your university's grading strictness.",
+      },
+      {
+        q: "How does WES convert CGPA for foreign universities?",
+        a: "WES and similar credential evaluators apply their own conversion based on the official grading scale of the issuing university, using your official transcripts — not a generic multiplier, so their percentage can differ from your own calculation.",
+      },
+    ],
   },
 
   // ---------------------------------------------------------------- Inflation
@@ -604,7 +655,7 @@ module.exports = [
     slug: "what-is-inflation",
     title: "What is Inflation?",
     metaTitle: "Inflation Kya Hai? India Rate— Full Guide",
-    metaDescription: "Inflation kya hai aur aapki savings par kya asar dalta hai? India ka current rate, causes — simple Hindi meupdated guide.",
+    metaDescription: "Inflation kya hai aur aapki savings par kya asar dalta hai? India ka current rate, causes — simple Hindi me updated guide.",
     lastUpdated: "2026-09-15",
     quickSummary: ["Prices rise, money buys less", "WPI/CPI tracked by MoSPI", "RBI targets ~4% CPI", "Erodes savings, hits EMIs less", "Invest to outpace inflation"],
     category: "money",
@@ -860,7 +911,58 @@ module.exports = [
         a: "It's better when you are earning it, such as on savings and investments. It works against you when you are the one owing money and it keeps compounding unpaid.",
       },
     ],
-    relatedTools: [{ title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }, { title: "EMI Calculator", href: "/calculators/emi/" }], relatedGuides: [{ title: "What is Inflation?", href: "/guides/what-is-inflation/" }, { title: "What is a Savings Account?", href: "/guides/what-is-savings-account/" }, { title: "What is EMI?", href: "/guides/what-is-emi/" }], officialReferences: [{ label: "RBI Financial Education", href: "https://www.rbi.org.in/FinancialEducation/", description: "RBI's official explanation of compounding and saving concepts" }, { label: "India Post - Savings Schemes", href: "https://www.indiapost.gov.in/", description: "Official small-savings interest rates and schemes" }]
+    relatedTools: [{ title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }, { title: "EMI Calculator", href: "/calculators/emi/" }], relatedGuides: [{ title: "What is Inflation?", href: "/guides/what-is-inflation/" }, { title: "What is a Savings Account?", href: "/guides/what-is-savings-account/" }, { title: "What is EMI?", href: "/guides/what-is-emi/" }], officialReferences: [{ label: "RBI Financial Education", href: "https://www.rbi.org.in/FinancialEducation/", description: "RBI's official explanation of compounding and saving concepts" }, { label: "India Post - Savings Schemes", href: "https://www.indiapost.gov.in/", description: "Official small-savings interest rates and schemes" }],
+    // --- GSC depth expansion: later keys override the originals above (JS object rules).
+    simpleExplanation: [
+      "With simple interest, you earn (or pay) interest only on the original principal amount, every single period. With compound interest, once interest is added to the principal at the end of a period, the next period's interest is calculated on this new, larger amount — meaning you start earning \"interest on interest.\"",
+      "This effect is small at first but becomes more noticeable the longer money is left to compound, and the more frequently interest is added (for example, compounding monthly grows money faster than compounding yearly, at the same annual rate).",
+      "Compound interest works both ways: it helps savings and investments grow faster over time, but it can also make debts grow faster if interest isn't paid off and keeps compounding.",
+      "A quick way to estimate how long compounding takes to double your money is the Rule of 72: divide 72 by the annual interest rate. At 8%, that works out to roughly 72 ÷ 8 = 9 years to double. It's only an estimate, but it's a fast mental shortcut for comparing opportunities.",
+      "In India, bank fixed deposits typically compound quarterly, so the effective annual yield is a little higher than the annual rate quoted on the FD receipt. This is why two FDs quoting the same annual percentage can pay slightly different final amounts — the compounding frequency decides the difference.",
+      "Every time interest is added, the base for the next round of interest becomes larger. That is the whole engine of compounding: the gap between compound and simple interest keeps widening with every passing year, which is why long horizons matter more than the rate alone.",
+    ],
+    example:
+      "₹1,00,000 invested at 8% annual interest, compounded yearly, grows to about ₹1,08,000 after year one. In year two, the 8% is calculated on ₹1,08,000, not the original ₹1,00,000, giving about ₹1,16,640. Over 10 years, this compounding effect grows the amount to roughly ₹2,15,900 — noticeably more than the ₹1,80,000 that simple interest at the same rate would have given.\n\nThe compounding frequency changes the final number even further. For the same ₹1,00,000 at 8% over 5 years: compounded yearly it grows to about ₹1,46,933; compounded half-yearly to about ₹1,47,746; compounded quarterly to about ₹1,48,595; and compounded monthly to about ₹1,48,985. Simple interest at the same rate for 5 years would add a flat ₹40,000, taking the total to exactly ₹1,40,000 — so even yearly compounding already earns about ₹6,933 more, and monthly compounding about ₹8,985 more.",
+    importantPoints: [
+      "The compound interest formula is A = P × (1 + r/n)^(n×t), where P is principal, r is annual interest rate, n is how many times per year it compounds, and t is time in years.",
+      "The more frequently interest compounds (yearly, half-yearly, monthly), the faster the amount grows, even at the same stated annual rate.",
+      "Compounding rewards time — money compounding for a longer period grows disproportionately more than the same amount compounding for a short period.",
+      "Compound interest applies to many everyday products: fixed deposits, recurring deposits, and some loans and credit card balances all use compounding in some form.",
+      "A small difference in interest rate can lead to a surprisingly large difference in final amount over long periods, due to compounding.",
+      "The Rule of 72 is a quick mental shortcut: divide 72 by your annual rate to estimate the years needed to double the amount at that rate.",
+      "In India, bank fixed deposits usually compound quarterly, so the effective annual yield is a little higher than the quoted annual percentage rate.",
+    ],
+    faq: [
+      {
+        q: "What's the real difference between simple and compound interest?",
+        a: "Simple interest is calculated only on the original principal every period. Compound interest is calculated on the principal plus any interest already added, so it grows faster over time.",
+      },
+      {
+        q: "Does a higher compounding frequency always mean more money for a saver?",
+        a: "Yes, for the same stated annual rate, more frequent compounding (like monthly instead of yearly) results in a slightly higher effective return.",
+      },
+      {
+        q: "Where is compound interest used in everyday finance?",
+        a: "Fixed deposits, recurring deposits, many mutual fund return calculations, and the way unpaid credit card balances accumulate interest are common everyday examples.",
+      },
+      {
+        q: "Is compound interest always better for me?",
+        a: "It's better when you are earning it, such as on savings and investments. It works against you when you are the one owing money and it keeps compounding unpaid.",
+      },
+      {
+        q: "What is the compound interest formula?",
+        a: "A = P × (1 + r/n)^(n × t) — P is principal, r the annual rate as a decimal, n the compounding periods per year and t the years. Interest earned is A − P.",
+      },
+      {
+        q: "How often do banks compound fixed deposit interest in India?",
+        a: "Most Indian banks compound FD interest quarterly, so the effective yield is slightly higher than the rate printed on the FD receipt — worth checking when comparing two FD offers.",
+      },
+      {
+        q: "Do credit card balances also compound?",
+        a: "Yes. Unpaid credit card balances typically attract interest on the outstanding amount, and that interest can compound quickly. Paying full statement dues each month avoids it.",
+      },
+    ],
+    relatedTools: [{ title: "Compound Interest Calculator", href: "/calculators/compound-interest/" }, { title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }, { title: "EMI Calculator", href: "/calculators/emi/" }],
   },
 
   // ---------------------------------------------------------------- PAN Card
@@ -868,7 +970,7 @@ module.exports = [
     slug: "what-is-pan-card",
     title: "What is a PAN Card?",
     metaTitle: "PAN Card Apply Online— Fees, Status, Documents",
-    metaDescription: "PAN card online apply karna hai? Fees, documents, e-PAN aur status check — naye card ke liye simple Hindi meupdated guide.",
+    metaDescription: "PAN card online apply karna hai? Fees, documents, e-PAN aur status check — naye card ke liye simple Hindi me updated guide.",
     lastUpdated: "2026-09-15",
     quickSummary: ["10-character alphanumeric ID", "Issued by Income Tax Dept", "Apply online (₹107 incl. tax)", "e-PAN instant PDF option", "Aadhaar–PAN linking required"],
     category: "documents",
@@ -1025,7 +1127,63 @@ module.exports = [
         a: "It's good for money you need easy access to, but for larger amounts not needed immediately, other options like fixed deposits often offer meaningfully higher interest.",
       },
     ],
-    relatedTools: [{ title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }], relatedGuides: [{ title: "What is Compound Interest?", href: "/guides/what-is-compound-interest/" }, { title: "What is Inflation?", href: "/guides/what-is-inflation/" }, { title: "What is GST?", href: "/guides/what-is-gst/" }], officialReferences: [{ label: "Reserve Bank of India", href: "https://www.rbi.org.in/", description: "RBI's official information on savings bank interest rates and banking rules" }]
+    relatedTools: [{ title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }], relatedGuides: [{ title: "What is Compound Interest?", href: "/guides/what-is-compound-interest/" }, { title: "What is Inflation?", href: "/guides/what-is-inflation/" }, { title: "What is GST?", href: "/guides/what-is-gst/" }], officialReferences: [{ label: "Reserve Bank of India", href: "https://www.rbi.org.in/", description: "RBI's official information on savings bank interest rates and banking rules" }],
+    // --- GSC depth expansion: later keys override the originals above (JS object rules).
+    simpleExplanation: [
+      "A savings account is usually the first kind of bank account most people open. You can deposit money into it any time, withdraw when needed (through a branch, ATM, cheque or online transfer), and the bank pays you a small interest on whatever balance sits in the account.",
+      "Interest on a savings account is typically calculated on the daily closing balance and credited to the account periodically, often quarterly, though this can vary by bank.",
+      "Most savings accounts also require you to maintain a minimum balance, and may charge a penalty if the balance falls below this threshold, along with offering services like a debit card, chequebook, and mobile/net banking.",
+      "Beyond the regular savings account, banks in India offer several variants: salary accounts (often zero-balance, opened through an employer tie-up), Basic Savings Bank Deposit Accounts or BSBDA (RBI's no-frills option with no minimum balance but limited free services), senior citizen accounts with extra benefits, and NRE/NRO accounts for non-resident Indians. Choosing the right type depends on how you will use the account, not just on the interest rate.",
+      "Since 2016, many Indian banks link their savings account interest rates to the RBI's repo rate, so the rate you earn can change over time. Rates vary widely between banks — public sector banks, private banks and small finance banks may all offer different rates for the same kind of account — so comparing before opening an account usually pays off.",
+      "Modern savings accounts come with UPI access, auto-debit mandates for bills and EMIs, and sometimes a sweep-in facility that moves money above a threshold into a fixed deposit. These features make the savings account the hub of most people's everyday banking, even when the bulk of their savings sits elsewhere.",
+    ],
+    example:
+      "If you keep an average balance of ₹50,000 in a savings account offering 3.5% annual interest, you would earn roughly ₹1,750 in interest over a year, credited to your account periodically rather than as one lump sum at year-end.\n\nTwo everyday scenarios show how the account type matters. Under the Basic Savings Bank Deposit Account (BSBDA) framework, a bank cannot insist on a minimum balance, though the free withdrawals and transfers may be limited compared to a regular savings account — useful when you want an account purely to receive salary or benefits. And for deposit safety, remember that the Deposit Insurance and Credit Guarantee Corporation (DICGC) insures deposits up to ₹5,00,000 per depositor, per bank, covering the balance in your savings, fixed and recurring deposits together.",
+    importantPoints: [
+      "Savings account interest rates are generally lower than fixed deposits or many other investment options, prioritising easy access over higher returns.",
+      "Interest earned above a certain limit in a financial year may be taxable, depending on current income tax rules.",
+      "Types of savings accounts vary — basic no-frills accounts, salary accounts, and premium accounts with added features and different minimum balance rules.",
+      "Failing to maintain the required minimum balance can lead to a penalty fee being deducted by the bank.",
+      "Most savings accounts today come with mobile banking, UPI access, and a debit card as standard features.",
+      "Deposits in scheduled banks are insured by the DICGC up to ₹5 lakh per depositor, per bank — a safety net covering savings, fixed and recurring deposits together.",
+      "Typical documents to open a savings account: Aadhaar or PAN (identity), a recent address proof, a photograph, and sometimes an initial deposit for regular accounts.",
+      "Savings account interest rates in India generally range from about 3% to 7% a year depending on the bank and balance slab — always check the bank's official rate table, since rates can change.",
+    ],
+    faq: [
+      {
+        q: "How is interest on a savings account calculated?",
+        a: "Most Indian banks calculate it on the daily closing balance in the account and credit the interest to the account periodically, commonly every quarter.",
+      },
+      {
+        q: "Is interest earned on a savings account taxable?",
+        a: "It can be, beyond a certain exemption limit under prevailing income tax rules, so it's worth checking current tax provisions or consulting a tax professional for your specific situation.",
+      },
+      {
+        q: "What happens if I don't maintain the minimum balance?",
+        a: "The bank may deduct a penalty fee from your account, the amount of which depends on the bank's policy and how far the balance fell short.",
+      },
+      {
+        q: "Is a savings account a good place to keep all my money?",
+        a: "It's good for money you need easy access to, but for larger amounts not needed immediately, other options like fixed deposits often offer meaningfully higher interest.",
+      },
+      {
+        q: "How much minimum balance do savings accounts require?",
+        a: "It varies by bank and branch location — from zero (BSBDA and salary accounts) to a few thousand rupees for regular metro-branch accounts. Check the bank's schedule of charges before opening.",
+      },
+      {
+        q: "What is a zero-balance or BSBDA savings account?",
+        a: "A Basic Savings Bank Deposit Account (BSBDA) is RBI's no-frills account with no minimum balance requirement. Free services are limited compared to a regular account, but it cannot attract minimum-balance penalties.",
+      },
+      {
+        q: "Which documents are needed to open a savings account?",
+        a: "Usually one photo-ID proof (Aadhaar or PAN), one address proof and a passport-size photograph — originals for in-branch verification, or video KYC where the bank offers it.",
+      },
+      {
+        q: "How much interest do savings accounts pay in India?",
+        a: "Typically 3% to 7% per year depending on the bank and balance slab, with small finance banks often higher. Many banks now link savings rates to the RBI repo rate, so check the current rate table.",
+      },
+    ],
+    relatedTools: [{ title: "Compound Interest Calculator", href: "/calculators/compound-interest/" }, { title: "Simple Interest Calculator", href: "/calculators/simple-interest/" }], officialReferences: [{ label: "Reserve Bank of India", href: "https://www.rbi.org.in/", description: "RBI's official information on savings bank interest rates and banking rules" }, { label: "DICGC — Deposit Insurance", href: "https://dicgc.org.in/", description: "Official deposit insurance cover of ₹5 lakh per depositor per bank" }],
   },
 
   // ---------------------------------------------------------------- Aadhaar Card
@@ -1033,7 +1191,7 @@ module.exports = [
     slug: "what-is-aadhaar",
     title: "Aadhaar Card Update & Download — Complete Guide",
     metaTitle: "Aadhaar Mobile Update Online— Free Guide",
-    metaDescription: "Aadhaar me mobile number update karna hai? Online free process, documents, fees aur status check — sab kuch simple Hindi meupdated.",
+    metaDescription: "Aadhaar me mobile number update karna hai? Online free process, documents, fees aur status check — sab kuch simple Hindi me updated.",
     lastUpdated: "2026-09-15",
     quickSummary: ["12-digit unique ID (UIDAI)", "Free update online", "Mobile + address changeable", "myAadhaar portal self-service", "Works as ID + address proof"],
     category: "government",

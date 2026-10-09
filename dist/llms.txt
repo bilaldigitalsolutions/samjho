@@ -19,9 +19,13 @@
 ## Calculators
 - [EMI Calculator](https://samjhoindia.com/calculators/emi/): Loan EMI calculate
 - [GST Calculator](https://samjhoindia.com/calculators/gst/): GST add/remove
+- [Compound Interest Calculator](https://samjhoindia.com/calculators/compound-interest/): FD & savings maturity amount
 - [Age Calculator](https://samjhoindia.com/calculators/age/): Exact age
 
 ## How This Site Works
 - Every calculator runs in your browser — nothing is sent to a server.
 - Guides explain what something is, why it matters, and how it works, in simple Hindi-English mix.
 - Samjho is an independent information platform, not a government website.
+
+## Editorial Policy
+- [Editorial Policy](https://samjhoindia.com/editorial-policy/): official sourcing, the quality bar every guide meets, and how corrections are handled.

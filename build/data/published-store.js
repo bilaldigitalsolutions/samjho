@@ -15,6 +15,7 @@ const STORE_PATH = path.join(__dirname, "published-guides.json");
 const articles = require("./articles");
 const schemes = require("./schemes");
 const calculators = require("./calculators");
+const { guideQualityErrors } = require("../quality");
 
 const RESERVED_SLUGS = new Set(
   []
@@ -75,6 +76,15 @@ function stageApprovedGuide(guide) {
   const entry = Object.assign({}, guide);
   entry.last_updated = entry.last_updated || new Date().toISOString().slice(0, 10);
 
+  // Quality gate — thin (< 300 words or < 3 FAQs) or test/mock content is
+  // never staged. Expand the guide to 300+ words with 3+ FAQs, then publish
+  // again; the build's noindex + sitemap filters remain as a safety net for
+  // anything already in the store.
+  const qualityErrors = guideQualityErrors(entry);
+  if (qualityErrors.length) {
+    throw new Error("Quality gate rejected \"" + (guide.slug || "(no slug)") + "\": " + qualityErrors.join("; "));
+  }
+
   if (existingIndex === -1) {
     list.push(entry);
   } else {
@@ -102,4 +112,5 @@ module.exports = {
   stageApprovedGuide,
   removePublishedGuide,
   isSlugReserved,
+  guideQualityErrors,
 };

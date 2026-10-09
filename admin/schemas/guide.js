@@ -10,6 +10,10 @@ const GUIDE_FIELDS = [
   "category",
   "summary",
   "content",
+  // Pre-rendered body HTML. Used by legacy articles whose body contains tables,
+  // ordered step lists or tool cards that the markdown renderer cannot express.
+  // When present it wins over `content` (see buildBody in master-guide.js).
+  "content_html",
   "eligibility",
   "benefits",
   "required_documents",
@@ -18,6 +22,11 @@ const GUIDE_FIELDS = [
   "common_mistakes",
   "faqs",
   "source_ids",
+  "officialReferences",
+  "sources",
+  // Explicit related-guide links carried over from the legacy article schema.
+  // buildRelatedGuides prefers these and falls back to the category listing.
+  "relatedGuides",
   "status",
   "last_updated",
   "hero_image",
@@ -27,6 +36,7 @@ const GUIDE_FIELDS = [
 ];
 
 const OPTIONAL_GUIDE_FIELDS = [
+  "content_html",
   "eligibility",
   "benefits",
   "required_documents",
@@ -35,6 +45,8 @@ const OPTIONAL_GUIDE_FIELDS = [
   "common_mistakes",
   "faqs",
   "source_ids",
+  "officialReferences",
+  "sources",
 ];
 
 function normalizeGuide(data = {}) {
@@ -45,6 +57,16 @@ function normalizeGuide(data = {}) {
       if (field === "source_ids") {
         if (!Array.isArray(value)) value = [];
         value = value.filter((id) => id != null && String(id).trim() !== "");
+      }
+
+      // Outbound authoritative links (label + href + description) or plain
+      // URL strings. Kept as-is so the template can render real anchors.
+      if (field === "officialReferences" || field === "sources") {
+        if (!Array.isArray(value)) value = [];
+        value = value.filter((ref) => {
+          if (typeof ref === "string") return /^https?:\/\//i.test(ref.trim());
+          return !!(ref && typeof ref === "object" && (ref.href || ref.source_url));
+        });
       }
 
       if (field === "faqs") {

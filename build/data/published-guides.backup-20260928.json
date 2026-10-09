@@ -1,0 +1,1615 @@
+[
+  {
+    "id": "pub-test-001",
+    "title": "Pipeline Test Guide (Mock)",
+    "slug": "test-guide-micro7",
+    "category": "money",
+    "summary": "Mock summary used only to verify the publishing pipeline.",
+    "content": "This is mock content created to verify the approved-to-published pipeline. Not real production content.",
+    "eligibility": [
+      "Mock eligibility line one",
+      "Mock eligibility line two"
+    ],
+    "benefits": [
+      "Mock benefit one",
+      "Mock benefit two"
+    ],
+    "required_documents": [
+      "Mock document one"
+    ],
+    "application_process": [
+      "Mock step one",
+      "Mock step two"
+    ],
+    "important_dates": [
+      "Mock date: none"
+    ],
+    "common_mistakes": [
+      "Mock mistake one"
+    ],
+    "faqs": [
+      {
+        "q": "Is this a real guide?",
+        "a": "No. This is a mock pipeline test guide."
+      }
+    ],
+    "source_ids": [
+      "mock-source"
+    ],
+    "status": "approved",
+    "last_updated": "2026-09-18"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is a five-day event by the Ministry of Jal Shakti. The 9th edition started on September 22, 2026 at Bharat Mandapam, New Delhi.",
+        "q": "What is India International Water Week 2026?"
+      },
+      {
+        "a": "The theme is “Climate Resilient Water Management.”",
+        "q": "What is the theme of this year's event?"
+      },
+      {
+        "a": "Vice-President of India Shri C. P. Radhakrishnan launched the event.",
+        "q": "Who launched the event?"
+      },
+      {
+        "a": "The Sustainable Urban River Management (SURM) Framework and an AI/ML-driven Integrated Reservoir Sediment Management system.",
+        "q": "What new tools were launched at the event?"
+      },
+      {
+        "a": "Small habits help. Take a bath with fewer buckets, close the tap while brushing your teeth, and use water wisely at home.",
+        "q": "What can I do to help save water?"
+      }
+    ],
+    "slug": "india-international-water-week-2026",
+    "title": "India International Water Week 2026 Begins: Vice-President Asks Citizens to Save Every Drop",
+    "status": "approved",
+    "content": "## What Happened\n\nVice-President Shri C. P. Radhakrishnan launched the 9th India International Water Week 2026 on September 22. The event is being held at Bharat Mandapam in New Delhi. The Ministry of Jal Shakti is organising it for five days, from September 22 to 26. This year, the focus is on “Climate Resilient Water Management.”\n\nAt the event, the Vice-President launched two new tools. One is the Sustainable Urban River Management (SURM) Framework. The other is an AI and machine learning system for managing sediment in reservoirs. Union Minister for Jal Shakti Shri C. R. Patil and Ministers of State Shri V. Somanna and Shri Raj Bhushan Choudhary were also present. Experts and delegates from India and other countries joined the programme.\n\n## Why It Matters\n\nIndia is home to about 18 per cent of the world's people. But it has only about 4 per cent of the world's freshwater. It also covers only about 2.4 per cent of the world's land area. This means every drop counts for you and for the country.\n\nThe Vice-President said water is the base of life and of civilisations. He shared that he grew up in Tamil Nadu and saw water scarcity himself. He asked citizens to change small daily habits. He said, “We can take a bath using two buckets or twenty buckets. The choice is ours.” He also reminded people to close the tap while brushing their teeth.\n\nHe said climate change, fast urban growth and a rising population are making water management harder. He called for better river-basin management, groundwater recharge, rainwater harvesting and efficient irrigation. He also said India must move from reacting to water problems to predicting them with the help of technology. As India works towards becoming a developed economy by 2047, he said smart and sustainable water use will be key.\n\n## Key Points\n\n- The Vice-President launched the SURM Framework and an AI/ML-based reservoir sediment management system.\n- He said 10 inter-State agreements on water sharing have been signed so far.\n- He praised the Kishau Multipurpose Project agreement among six States as a strong example of teamwork.\n- He recalled his 19,000-km Ratha Yatra across Tamil Nadu, which spread awareness about river interlinking and water conservation.\n- He said river interlinking can help when some regions face floods and others face drought.\n- He supported the Prime Minister's call for “Jal Sanchay Jan Bhagidari” and urged people to make water saving a mass movement.\n- He said, “Jal Suraksha will lead to Jan Suraksha and Rashtra Suraksha.”",
+    "summary": "Vice-President Shri C. P. Radhakrishnan launched the 9th India International Water Week 2026 on September 22 at Bharat Mandapam, New Delhi. The Ministry of Jal Shakti is holding this five-day event from September 22 to 26. This year's theme is “Climate Resilient Water Management.”",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313399"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "September 22, 2026 – India International Water Week 2026 launched at Bharat Mandapam, New Delhi.",
+      "September 22 to 26, 2026 – Five-day event held by the Ministry of Jal Shakti."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "He shared it on 22 September 2026, which is World Rhino Day.",
+        "q": "When did the Prime Minister share this message?"
+      },
+      {
+        "a": "Assam now holds nearly 80 percent of the world's rhino population.",
+        "q": "How many of the world's rhinos live in Assam?"
+      },
+      {
+        "a": "It is a new effort to give financial and technical support to range states for rhino protection and conservation.",
+        "q": "What is Project Rhino?"
+      },
+      {
+        "a": "It will support protection, habitat management, genetic improvement, and understanding of population dynamics.",
+        "q": "What kind of work will Project Rhino support?"
+      },
+      {
+        "a": "Rhinos have returned or are well protected in parts of Bihar and West Bengal. They were also reintroduced in Dudhwa, Uttar Pradesh.",
+        "q": "Where else have rhinos been seen or reintroduced?"
+      }
+    ],
+    "slug": "project-rhino-world-rhino-day-2026",
+    "title": "Project Rhino Started: PM Modi Marks World Rhino Day 2026",
+    "status": "approved",
+    "content": "What Happened\n\nOn 22 September 2026, Prime Minister Shri Narendra Modi marked World Rhino Day. He praised the greater one-horned rhinoceros and thanked all those working on the front lines to protect it. He shared his message in a post on X. In the same post, he announced that Project Rhino has been started.\n\nWhy It Matters\n\nAssam is now home to nearly 80 percent of the world's rhino population. Kaziranga's work to stop rhino poaching has earned wide appreciation. Rhinos have either come back or are well protected in parts of Bihar and West Bengal. In Dudhwa, Uttar Pradesh, rhinos were brought back and that effort is creating history.\n\nThe Prime Minister said these results show the steady commitment of people to animal protection. Project Rhino will give money and technical support to range states. This help covers protection, habitat management, genetic improvement, and understanding of population dynamics. The scheme aims to take species conservation forward across the country.\n\nKey Points\n\n- Assam now holds nearly 80 percent of the world's rhino population.\n- Kaziranga's efforts to end rhino poaching have been widely appreciated.\n- Rhinos have returned or are well protected in parts of Bihar and West Bengal.\n- The reintroduction of rhinos in Dudhwa, Uttar Pradesh, is creating history.\n- Project Rhino will support range states with funds and technical help for protection and habitat work.",
+    "summary": "On World Rhino Day, Prime Minister Narendra Modi praised the greater one-horned rhinoceros and thanked everyone protecting it. He shared that Assam is now home to nearly 80 percent of the world's rhinos. He also announced that Project Rhino has been started to help range states protect the animal and its habitat.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313522"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "22 September 2026 – World Rhino Day, when the Prime Minister shared this update."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The Lieutenant Governor of Andaman and Nicobar Islands, Dr. Dinesh Sharma, met Prime Minister Narendra Modi.",
+        "q": "Who met the Prime Minister?"
+      }
+    ],
+    "slug": "lg-andaman-nicobar-meets-pm-modi",
+    "title": "LG of Andaman and Nicobar Islands Meets PM Modi",
+    "status": "approved",
+    "content": "What Happened: On September 22, 2026, Dr. Dinesh Sharma, the Lieutenant Governor of Andaman and Nicobar Islands, met Prime Minister Narendra Modi. The Prime Minister's Office (PMO) posted about the meeting on X (formerly Twitter). The post included a photo of the two leaders. No other details about the meeting were shared.\n\nWhy It Matters: This meeting is a regular official interaction between the central government and the Union Territory administration. Such meetings help maintain communication between the Prime Minister and Lieutenant Governors. They can be used to discuss important matters related to the Union Territory. However, the source does not say what was discussed.\n\nKey Points:\n- Dr. Dinesh Sharma is the Lieutenant Governor of Andaman and Nicobar Islands.\n- He met Prime Minister Narendra Modi on September 22, 2026.\n- The PMO shared the news on X with a photo.\n- The meeting was a formal one.\n- No further information was given by the source.",
+    "summary": "On September 22, 2026, the Lieutenant Governor of Andaman and Nicobar Islands, Dr. Dinesh Sharma, met Prime Minister Narendra Modi. The Prime Minister's Office shared this news on X. The meeting was a formal interaction.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313395"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "September 22, 2026: Meeting between LG Dr. Dinesh Sharma and PM Narendra Modi."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "India's Women's Cricket Team won the Gold medal at the Asian Games.",
+        "q": "Who won the Gold medal at the Asian Games?"
+      },
+      {
+        "a": "Prime Minister Shri Narendra Modi congratulated the team.",
+        "q": "Who congratulated the team?"
+      },
+      {
+        "a": "It is India's first Gold medal at this edition of the Asian Games.",
+        "q": "Why is this win special for India?"
+      },
+      {
+        "a": "He shared it in a post on X, on September 22, 2026.",
+        "q": "Where did the Prime Minister share his message?"
+      }
+    ],
+    "slug": "pm-modi-congratulates-womens-cricket-team-asian-games-gold",
+    "title": "PM Modi Congratulates Women's Cricket Team on Asian Games Gold",
+    "status": "approved",
+    "content": "What Happened\n\nPrime Minister Shri Narendra Modi congratulated the Women's Cricket Team on winning the Gold medal at the Asian Games. He shared his message on X on September 22, 2026. The Prime Minister's Office posted the message from the PM's official handle. In his message, the PM said the team played with confidence, skill and wonderful teamwork. He also sent his best wishes to the whole squad.\n\nWhy It Matters\n\nThis win gives India its first Gold medal at this edition of the Asian Games. It is a big moment for Indian cricket and for every fan back home. The Prime Minister said the team has made the nation proud.\n\nThe win can inspire many young cricketers across the country. If you are a young player, this shows what focus and teamwork can achieve on a world stage.\n\nKey Points\n\n- India's Women's Cricket Team won the Gold medal at the Asian Games.\n- Prime Minister Narendra Modi congratulated the team on X.\n- This is India's first Gold at this edition of the Games.\n- The PM praised the team's confidence, skill and teamwork.\n- He wished the entire squad the very best.",
+    "summary": "Prime Minister Narendra Modi congratulated India's Women's Cricket Team for winning the Gold medal at the Asian Games. He called it a splendid win for Indian cricket and praised the team's confidence, skill and teamwork. This is India's first Gold medal at this edition of the Games.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313381"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "The Prime Minister shared his congratulatory message on September 22, 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Suchika Tariyal won a Bronze medal in Mixed Martial Arts at the Asian Games.",
+        "q": "Who won the medal for India?"
+      },
+      {
+        "a": "It is India's first ever Asian Games medal in Mixed Martial Arts.",
+        "q": "Why is this medal special?"
+      },
+      {
+        "a": "PM Narendra Modi congratulated her on 22 September 2026.",
+        "q": "When did the Prime Minister congratulate her?"
+      },
+      {
+        "a": "The Prime Minister's Office shared the message in a post on X.",
+        "q": "Where did the Prime Minister share his message?"
+      }
+    ],
+    "slug": "pm-modi-congratulates-suchika-tariyal-asian-games-bronze-mixed-martial-arts",
+    "title": "PM Modi Congratulates Suchika Tariyal for India's First Asian Games Medal in Mixed Martial Arts",
+    "status": "approved",
+    "content": "What Happened\n\nOn 22 September 2026, Prime Minister Narendra Modi congratulated Suchika Tariyal. She won a Bronze medal in Mixed Martial Arts at the Asian Games. Her win gave India its first ever Asian Games medal in this sport. The Prime Minister's Office shared his message on X the same day.\n\nWhy It Matters\n\nMixed Martial Arts is still a new sport for India on the world stage. No Indian athlete had ever reached the Asian Games podium in this event before. This medal shows that Indian fighters can compete with the best in tough, contact sports. It also gives young athletes in India a new dream to chase.\n\nWhy It Matters\n\nThe Prime Minister called the win a historic achievement for the country. He said her dedication and zeal stand out. He also wished her many more successes in the coming years.\n\nKey Points\n\n- Suchika Tariyal won Bronze in Mixed Martial Arts at the Asian Games.\n- This is India's first ever Asian Games medal in Mixed Martial Arts.\n- PM Narendra Modi congratulated her on 22 September 2026.\n- He called the win a historic achievement for India.\n- He praised her dedication and wished her more success.",
+    "summary": "Suchika Tariyal won a Bronze medal in Mixed Martial Arts at the Asian Games. This is India's first ever Asian Games medal in this sport. On 22 September 2026, Prime Minister Narendra Modi congratulated her and wished her more success ahead.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313375"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-23",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Yes. The e-PAN has the same legal status as the physical PAN card. It works for banking, investments and tax filing.",
+        "q": "Is the e-PAN card valid like the physical PAN card?"
+      },
+      {
+        "a": "Nothing. The instant e-PAN is completely free through the Instant e-PAN route on the e-Filing portal.",
+        "q": "How much does an instant e-PAN cost?"
+      },
+      {
+        "a": "It is generated in about 5-10 minutes. The download link reaches your email.",
+        "q": "How long does an instant e-PAN take?"
+      },
+      {
+        "a": "You cannot get a new PAN. But you can download a digital copy. Use the Reprint PAN Card section on incometax.gov.in, or DigiLocker.",
+        "q": "I already have a PAN. Can I get an e-PAN too?"
+      },
+      {
+        "a": "The password is your date of birth in DDMMYYYY format. If your birthday is 15 January 1995, the password is 15011995.",
+        "q": "My e-PAN PDF is not opening. What is the password?"
+      },
+      {
+        "a": "You may already have a PAN. Check your PAN status on the Income Tax portal using your Aadhaar number.",
+        "q": "The portal says no PAN found. What does that mean?"
+      }
+    ],
+    "slug": "e-pan-card-digital-pan-free-download-guide",
+    "title": "e-PAN Card: Get Your Digital PAN Free in 5-10 Minutes",
+    "status": "approved",
+    "content": "## What Happened\n\nThe Income Tax Department issues a digital version of your PAN card. This digital card is called e-PAN. It comes as a PDF file that you can save on your phone or computer. It has the same legal value as the plastic PAN card. So you can use it for banking, investments and tax filing.\n\nEvery e-PAN carries a QR code. That code holds your name, PAN number, date of birth and photo. Anyone can scan it to check that your card is genuine.\n\nThe government also approved the PAN 2.0 plan. About Rs 1,435 crore has been set aside for it. Under this plan, new PAN cards will carry a QR code. Your old PAN card will still work. You do not have to replace it.\n\n## Who Is Eligible\n\nYou need three things to get a free e-PAN. You must have a valid Aadhaar number. Your mobile number must be linked to that Aadhaar, because you need it for the OTP. And you must not already have a PAN.\n\nSome people cannot apply. Minors below 18 years cannot apply. Anyone who already has a PAN will not get a second one. If your mobile is not linked to Aadhaar, link it first at aadhaar.gov.in or at an Aadhaar centre.\n\n## Benefits\n\nThe instant e-PAN is completely free. The department charges you nothing for it. It is generated in about 5-10 minutes. A download link lands in your email, and you can open it from anywhere.\n\nThe physical PAN card works differently. It takes 15-20 working days to reach you. You also pay a fee of about Rs 107 for it. The e-PAN is valid for your whole life. You never have to renew it. It works in almost every situation, from banks to tax filing.\n\n## How to Apply\n\nStep 1: Open the Income Tax e-Filing portal at incometax.gov.in.\n\nStep 2: Click the Instant e-PAN section on the homepage.\n\nStep 3: Choose Get New e-PAN.\n\nStep 4: Enter your 12-digit Aadhaar number. Type only the 12 digits. Do not add dashes or spaces.\n\nStep 5: An OTP will reach your Aadhaar-linked mobile. Verify it. If your mobile is not linked, update your Aadhaar first.\n\nStep 6: Pick your date of birth proof from DigiLocker. You can also verify the date of birth yourself.\n\nStep 7: Submit the form. You will get an acknowledgement number. Note it down safely.\n\nStep 8: Within 5-10 minutes, a PDF download link reaches your email. Download it and save it.\n\n## How to Download an Existing PAN\n\nIf you already have a PAN and want a copy, go to incometax.gov.in. Open the Reprint PAN Card section. Enter your PAN number and Aadhaar number. Pay a fee of about Rs 50. Your physical card will arrive in 15-20 working days. You can also download a digital copy from DigiLocker, which is equally valid.\n\n## Watch Out For Scam Emails\n\nThe government has warned about fake emails going around. These emails say your PAN has expired and ask you to update it through a link. The Income Tax Department never asks for your personal details over email. Never click such links and never enter your PAN details there.\n\nIf you see a suspicious email, do not click it. Check everything only on the official portal. You can report it at webmanager@incometax.gov.in. Download the e-PAN only through official apps like mAadhaar and DigiLocker.\n\n## Important Dates\n\nThe PAN 2.0 update was approved with a budget of Rs 1,435 crore. The year 2026 is mentioned for this plan. No exact date is given in the official source.",
+    "summary": "You can now get a digital PAN card, called e-PAN, from the Income Tax Department. It is free, arrives in 5-10 minutes, and is fully valid like the physical card. The government also shared a phishing warning about fake e-PAN emails.",
+    "benefits": [
+      "The instant e-PAN is completely free. There is no charge at all.",
+      "You get a PDF download link in your email.",
+      "It has the same legal status as the physical PAN card.",
+      "It works for banking, investments and tax filing.",
+      "It is valid for your whole life, so you never need to renew it.",
+      "It carries a QR code that anyone can scan to verify your details."
+    ],
+    "category": "Documents",
+    "source_ids": [
+      "https://www.incometax.gov.in/"
+    ],
+    "eligibility": [
+      "You must have a valid Aadhaar number.",
+      "Your mobile number must be linked to your Aadhaar, because the OTP comes there.",
+      "You must not already have a PAN card.",
+      "Minors below 18 years cannot apply for an instant e-PAN.",
+      "People who already hold a PAN will not get a duplicate e-PAN.",
+      "If your mobile is not linked to Aadhaar, link it first before applying."
+    ],
+    "last_updated": "2026-09-24",
+    "common_mistakes": [
+      "Typing dashes or spaces in your Aadhaar number. Enter only the 12 digits.",
+      "Trying to apply with a mobile number that is not linked to Aadhaar. Link it first at aadhaar.gov.in or an Aadhaar centre.",
+      "Applying for a new e-PAN when you already have a PAN. Check your PAN status on the portal first.",
+      "Forgetting the PDF password. It is your date of birth in DDMMYYYY format. For example, 15 January 1995 becomes 15011995.",
+      "Losing your acknowledgement number. If you lose it, apply again with your Aadhaar number. The old application gets cancelled on its own.",
+      "Clicking emails that claim your PAN has expired. These are fake. The department never asks for details over email."
+    ],
+    "important_dates": [
+      "The PAN 2.0 update is planned for the year 2026 according to the official source. No exact date is given.",
+      "A physical PAN card takes 15-20 working days to arrive."
+    ],
+    "required_documents": [
+      "A 12-digit Aadhaar number, typed without dashes or spaces.",
+      "An active mobile number linked to your Aadhaar, for the OTP.",
+      "Date of birth proof selected through DigiLocker, or manual date of birth verification."
+    ],
+    "application_process": [
+      "Step 1: Open the Income Tax e-Filing portal at incometax.gov.in.",
+      "Step 2: Click the Instant e-PAN section shown on the homepage.",
+      "Step 3: Select Get New e-PAN.",
+      "Step 4: Enter your 12-digit Aadhaar number. Do not add dashes or spaces.",
+      "Step 5: Verify the OTP sent to your Aadhaar-linked mobile. Link your mobile first if it is not linked.",
+      "Step 6: Choose your date of birth proof from DigiLocker, or verify the date of birth manually.",
+      "Step 7: Submit the form and note down the acknowledgement number you receive.",
+      "Step 8: Download the PDF from the email link that arrives within 5-10 minutes, and save it."
+    ],
+    "source_published_date": "2026-09-24",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "No. You cannot register directly on the CERSAI portal. You have to go through a regulated financial institution such as a bank, mutual fund company, or insurance company.",
+        "q": "Can I register for CKYC on my own?"
+      },
+      {
+        "a": "Go to cersai.org.in, open the CKYC Status Check section, and enter your 14-digit CKYC number or your PAN number. Your status will appear.",
+        "q": "How do I check my CKYC status?"
+      },
+      {
+        "a": "Contact your bank or financial institution. They can give you your CKYC number.",
+        "q": "I forgot my CKYC number. What should I do?"
+      },
+      {
+        "a": "CKYC stores your details in CERSAI's central registry for long-term use. eKYC is an Aadhaar-based check that happens in real time when you apply for a product.",
+        "q": "What is the difference between CKYC and eKYC?"
+      },
+      {
+        "a": "It is a unique number given to you after your KYC is verified. You can share it to onboard quickly with any financial product.",
+        "q": "What is the 14-digit CKYC identifier?"
+      }
+    ],
+    "slug": "ckyc-2-0-one-kyc-for-all-financial-products",
+    "title": "CKYC 2.0: One KYC for All Your Financial Products",
+    "status": "approved",
+    "content": "## What Happened\n\nCKYC 2.0 started rolling out on August 1, 2026. CKYC stands for Central Know Your Customer. It is one central system built for India's financial sector.\n\nEarlier, every bank, mutual fund, and insurance company did its own KYC. You had to submit the same papers again and again. Under CKYC, your details are verified once and stored in a central registry.\n\nCERSAI manages this registry. CERSAI is the Central Registry of Securitisation Asset Reconstruction and Security Interest of India. It works under the RBI and is the most trusted source for KYC records.\n\n## What Is New In CKYC 2.0\n\n- OTP-based consent: You no longer need to hand over physical documents. One OTP is enough to give your consent.\n- 14-digit CKYC identifier: This is a unique number given to you. Share it to onboard with any financial product.\n- Confidence score: Every KYC record gets a score that shows how verified it is.\n- Digital-first approach: Everything moves online, so paperwork drops.\n\n## Who Can Get CKYC\n\nAny person who wants a CKYC record must go through a regulated financial institution. Banks, mutual fund companies, and insurance companies can all do this for you. You cannot create the record on your own.\n\n## Benefits\n\n- You do not submit the same documents again and again. Do KYC once and use it everywhere.\n- Opening a new account or investment becomes faster.\n- One record covers all your financial products, including bank, mutual fund, and insurance.\n- Your record sits in one secure central place.\n- A central system lowers the risk of fraud.\n\n## CKYC vs eKYC vs Normal KYC\n\n- CKYC: Your data is stored in CERSAI's registry. Any financial institution can access it only after taking your permission.\n- eKYC: This is Aadhaar-based digital verification. It happens in real time when you apply for a financial product.\n- Normal KYC: You carry physical papers like PAN, Aadhaar, and address proof to the institution. They check the papers and keep the record.\n\n## How to Register\n\n1. Visit any regulated financial institution, such as a bank, mutual fund, or insurance company.\n2. Submit the needed documents like PAN, Aadhaar, and a photo.\n3. The institution verifies them and uploads them to CERSAI.\n4. You receive a 14-digit CKYC identifier.\n5. Use this number for fast onboarding at any other financial institution.\n\n## How to Check Your CKYC Status\n\n1. Open the CERSAI website at cersai.org.in.\n2. Go to the CKYC Status Check section.\n3. Enter your 14-digit CKYC number or your PAN number.\n4. Your status will show on the screen.\n\nIf you did CKYC earlier and forgot your number, contact your bank or financial institution. They can share your CKYC number with you.",
+    "summary": "CKYC 2.0 started rolling out on August 1, 2026. It lets you verify your KYC once and use the same record across banks, mutual funds, and insurance companies. The system is run by CERSAI, which works under the RBI.",
+    "benefits": [
+      "You do not have to submit the same documents again and again. One KYC works everywhere.",
+      "Your financial onboarding becomes faster when you open a new account or start an investment.",
+      "One single record works for all your financial products, including bank, mutual fund, and insurance.",
+      "All your KYC details are managed in one central and secure place.",
+      "A central system brings down the risk of fraud."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.cersai.org.in/"
+    ],
+    "eligibility": [
+      "You must go through a regulated financial institution like a bank, mutual fund company, or insurance company.",
+      "You cannot register for CKYC directly on the CERSAI portal on your own."
+    ],
+    "last_updated": "2026-09-24",
+    "common_mistakes": [
+      "Do not try to register for CKYC yourself on the CERSAI portal. You must go through a regulated financial institution."
+    ],
+    "important_dates": [
+      "CKYC 2.0 started rolling out from August 1, 2026."
+    ],
+    "required_documents": [
+      "Proof of identity: PAN card, Aadhaar card, passport, voter ID, or driving licence.",
+      "Proof of address: Aadhaar card, passport, or driving licence.",
+      "PAN card or Form 60.",
+      "A recent passport-size photograph."
+    ],
+    "application_process": [
+      "Go to any regulated financial institution, such as a bank, mutual fund, or insurance company.",
+      "Submit the required documents, including PAN, Aadhaar, and your photo.",
+      "The institution verifies your papers and uploads them to CERSAI.",
+      "You get a 14-digit CKYC identifier.",
+      "Use this number for quick onboarding at any other financial institution."
+    ],
+    "source_published_date": "2026-09-24",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "sebi-order-omaxe-limited-minimum-public-shareholding-non-compliance",
+    "title": "SEBI Issues Order on Omaxe Limited Over Minimum Public Shareholding Rule",
+    "status": "approved",
+    "content": "What Happened\nSEBI has issued an order about Omaxe Limited. The order is about the company not meeting the minimum public shareholding rule. SEBI shared the order on its website on 24 September 2026. The public note only carries the title of the order. It does not explain what action SEBI has taken.\n\nWhat Changes\nThe order is part of SEBI's enforcement work against listed companies. A listed company must keep a set share of its stock with the public. If it fails to do so, SEBI can step in. This order deals with that failure for Omaxe Limited. The release does not spell out any penalty, timeline, or remedy.\n\nWhat You Need to Do\nIf you hold shares in Omaxe Limited, read the full order on the SEBI website. If you do not hold any shares, this order does not need any action from you. Do not act on forwarded messages about this order. Always check the official SEBI page for facts.\n\nDeadline\nThe release does not mention any deadline. The order was published on 24 September 2026.",
+    "summary": "SEBI has passed an order in the matter of non-compliance of minimum public shareholding in Omaxe Limited. The order was published on 24 September 2026. The official release does not give details of the penalty or the next steps.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/orders/sep-2026/order-in-the-matter-of-non-compliance-of-minimum-public-shareholding-in-omaxe-limited_104726.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "24 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "He sent warm greetings to all citizens. He said Ayurveda is not only a system of treatment but a strong medium for a healthy and balanced lifestyle. He also asked people to embrace this rich heritage.",
+        "q": "What did the Prime Minister say on Ayurveda Day?"
+      },
+      {
+        "a": "He posted the message on X, the social media platform.",
+        "q": "Where did PM Modi share his Ayurveda Day message?"
+      },
+      {
+        "a": "It explains the holistic nature of Ayurveda. It says Ayurveda is the science that describes which habits help or harm you, what makes life happy or unhappy, how to live long and healthy, and the nature and measure of lifespan.",
+        "q": "What is the Sanskrit Subhashitam shared by PM Modi about?"
+      },
+      {
+        "a": "No. As per the PM's message, Ayurveda is a strong medium for a healthy and balanced lifestyle, and not just a way to treat illness.",
+        "q": "Is Ayurveda only about medicines?"
+      }
+    ],
+    "slug": "pm-modi-ayurveda-day-wishes-2026",
+    "title": "PM Modi Sends Ayurveda Day Wishes, Calls Ayurveda a Way of Healthy Living",
+    "status": "approved",
+    "content": "## What Happened\n\nOn 23 September 2026, Prime Minister Shri Narendra Modi extended warm greetings to all citizens on Ayurveda Day. He shared his message on X, the social media platform. In it, he said Ayurveda is not merely a system of treatment. He called it a powerful medium for a healthy and balanced lifestyle. He asked every Indian to strengthen their resolve to embrace this rich heritage. Along with the message, he also posted a Sanskrit Subhashitam on the holistic nature of Ayurveda.\n\n## Why It Matters\n\nAyurveda is one of India's oldest systems of medicine. It looks at the whole person, not just the disease. It links your daily habits to your overall health. That is the idea the PM wanted to highlight on this day.\n\nThe Sanskrit verse he shared explains this clearly. It says Ayurveda is the science that tells you which habits help you and which harm you. It also speaks about what makes life happy or unhappy, and what separates a healthy life from a diseased one. Most importantly, it talks about how to live long and well, and it discusses the nature and measure of a person's lifespan. In simple words, the verse asks you to think about your everyday routine, not just your medicines.\n\n## Key Points\n\n- PM Modi greeted all citizens with warm wishes on Ayurveda Day.\n- He said Ayurveda is more than a treatment system, it is a way of living well.\n- He shared a Sanskrit Subhashitam on X to explain the true meaning of Ayurveda.\n- The verse says Ayurveda covers helpful and harmful habits, happy and sad life, and lifespan.\n- He urged people to renew their commitment to this rich heritage.\n\n## What You Can Do\n\nYou can read the PM's full post on X. You can also learn one small healthy habit from Ayurveda and try it in your daily routine. Small steps towards balance can make a big difference over time.",
+    "summary": "Prime Minister Narendra Modi greeted all Indians on Ayurveda Day with a warm message. He said Ayurveda is not just a way to treat illness, but a strong path to a healthy and balanced life. He also shared a Sanskrit verse on X to explain what Ayurveda truly means.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313726"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "PM Modi shared his Ayurveda Day message on 23 September 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "REWARD stands for Rejuvenating Watersheds for Agricultural Resilience through Innovative Development. It is a programme that works on improving watersheds so farming becomes more resilient.",
+        "q": "What is the REWARD programme?"
+      },
+      {
+        "a": "Members reviewed the second draft of the National Technical Guidelines. They also discussed data sharing, better watershed planning and faster project report preparation.",
+        "q": "What was discussed at the meeting?"
+      },
+      {
+        "a": "Odisha and Karnataka took part through their State Level Nodal Agencies. Odisha joined in person and Karnataka joined online.",
+        "q": "Which states took part in the meeting?"
+      },
+      {
+        "a": "The guidelines will guide future watershed development work in the country under Watershed Development Component - Pradhan Mantri Krishi Sinchayee Yojana 3.0.",
+        "q": "How will these guidelines be used?"
+      }
+    ],
+    "slug": "nraa-nltc-meeting-reward-watershed-guidelines",
+    "title": "NRAA Reviews Draft Watershed Guidelines Under REWARD Programme",
+    "status": "approved",
+    "content": "## What Happened\n\nThe National Rainfed Area Authority (NRAA) held a National Level Technical Committee (NLTC) meeting on 22 September 2026. The venue was the NASC Complex in New Delhi. The meeting took place under the REWARD programme, which works on improving watersheds for farming.\n\nDr. Chandra Shekhar Kumar, CEO of NRAA, led the meeting. Dr. A. K. Nayak from ICAR, Shri Nitin Khade from the Department of Land Resources, and officials from Odisha and Karnataka also joined. Scientists, state nodal agency teams, technical partners, NGOs and the REWARD project team took part. Around 45 people attended in total. Dr. Susama Sudhishri coordinated the session.\n\n## Why It Matters\n\nWatersheds decide how well rain-fed farms store water and stay productive. The draft National Technical Guidelines (NTG) will guide future watershed work across India under Watershed Development Component - Pradhan Mantri Krishi Sinchayee Yojana 3.0. So the decisions taken here can affect farmers in many states.\n\nThe CEO asked for proof behind every claim made in the draft guidelines. He used data from the REWARD programme as the base. He also told Odisha and Karnataka to share their watershed data and Decision Support System with all stakeholders. Dr. A. K. Nayak pushed for linking Land Resource Inventory with hydrology for better planning. Officials also discussed finishing project reports faster and building web portals soon.\n\n## Key Points\n\n- NRAA held the National Level Technical Committee meeting on 22 September 2026 at NASC Complex, New Delhi.\n- Around 45 participants joined, including officials from Odisha and Karnataka.\n- Members reviewed the additions made in the second draft of the National Technical Guidelines.\n- The CEO asked states to share watershed data and the Decision Support System with all stakeholders.\n- A suggestion was made to cut project report preparation time from 6 months to 3 months.\n- The final guidelines will support watershed development under PMKSY 3.0.",
+    "summary": "The National Rainfed Area Authority held a National Level Technical Committee meeting on 22 September 2026 in New Delhi. About 45 experts reviewed the second draft of the National Technical Guidelines under the REWARD programme. These guidelines will shape future watershed development work under PMKSY 3.0.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313738"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "epfo-citizens-charter",
+    "title": "EPFO Citizen's Charter: What It Means for You",
+    "status": "approved",
+    "content": "## What Happened\n\nThe Employees' Provident Fund Organisation, or EPFO, has brought out a document titled Citizen's Charter. A Citizen's Charter is a written promise from a government office. It usually lists the services the office gives you and how fast it aims to give them. The source we received shows only the title and nothing else.\n\n## What Changes\n\nNothing changes for you right away. You do not get any new benefit or payment because of this document. A charter mostly sets out service standards, not new rules for members. The exact standards, time limits and office contacts are not given in the source we have.\n\n## What You Need to Do\n\nYou do not have to apply, register or pay anything for this. There is no form to fill and no fee to pay. Since the full text is not in the source we received, we cannot list the steps written inside it. If you want the details, ask at your nearest EPFO office or look up the document on the EPFO website.\n\n## Deadline\n\nThe source does not mention any last date. There is no deadline you need to meet for this document.",
+    "summary": "The Employees' Provident Fund Organisation (EPFO) has issued a document called the Citizen's Charter. It is a public promise that tells you what service you can expect from the office. The source we received shows only the title, so the full details are not listed here.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2025/11/CitizenCharter.pdf"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is a committee listed on the DGFT website. The official source does not explain what it does in detail.",
+        "q": "What is the Policy Relaxation Committee?"
+      },
+      {
+        "a": "The DGFT works under the Ministry of Commerce & Industry, so the committee falls under that ministry.",
+        "q": "Which ministry runs it?"
+      },
+      {
+        "a": "Not specified in the official source. The page does not share an application process.",
+        "q": "Can I apply to this committee right now?"
+      }
+    ],
+    "slug": "dgft-policy-relaxation-committee",
+    "title": "DGFT's Policy Relaxation Committee: What the Official Source Tells You",
+    "status": "approved",
+    "content": "What Happened\n\nThe DGFT lists a Policy Relaxation Committee on its website. The DGFT comes under the Ministry of Commerce & Industry. That is the only detail shared in the official source.\n\nThe page does not explain how the committee is formed. It also does not list its members or past decisions. No meeting dates are given either.\n\nWhy It Matters\n\nRelaxation matters when a trade rule is too strict for your business. If a policy blocks your export or import, you may need a way to ask for relief. A committee like this usually handles such requests.\n\nBut you should not assume anything right now. Details about who can apply and what the committee can change are missing from the source. Treat this as a first step, not a full guide.\n\nKey Points\n\n- The Policy Relaxation Committee sits under the DGFT.\n- The DGFT is part of the Ministry of Commerce & Industry.\n- The official source does not give the committee's members.\n- No meeting schedule or deadline appears in the source.\n- No application method is shared in the source.\n\nWhat You Can Do Now\n\nKeep an eye on the DGFT website for updates. Build your trade plans on rules that are already published. If a rule is unclear, ask your local DGFT office or a trade expert.\n\nDo not pay anyone who claims to get you a relaxation. Confirm every step on the official DGFT page first.",
+    "summary": "The Directorate General of Foreign Trade (DGFT) has a Policy Relaxation Committee. It works under the Ministry of Commerce & Industry. The official source page only lists the committee, so full details are not available yet.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.dgft.gov.in/CP/?opt=policy-relaxation-committee"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Not specified in the official source. Check the Startup India page for the current rules.",
+        "q": "Who can get DPIIT recognition?"
+      }
+    ],
+    "slug": "dpiit-recognition-and-benefits",
+    "title": "DPIIT Recognition for Startups: What It Means for You",
+    "status": "approved",
+    "content": "<h2>What Happened</h2><p>Startup India has a dedicated page on DPIIT recognition and the benefits that come with it. DPIIT stands for the Department for Promotion of Industry and Internal Trade. This department sits under the Ministry of Commerce and Industry. The page is meant for founders who want to know what this recognition offers.</p><p>The source material shared here is short. It names the topic and the department behind it, but does not list the detailed rules. So this article sticks to what is officially stated and flags the rest clearly.</p><h2>Who Is Eligible</h2><p>Not specified in the official source. The shared text does not list who can apply for DPIIT recognition.</p><h2>Benefits</h2><p>Not specified in the official source. The shared text does not spell out the benefits in detail.</p><h2>How to Apply</h2><p>Not specified in the official source. The shared text does not describe the steps or the portal process.</p><p>If you run a startup and want to check your own case, go to the Startup India website. Read the DPIIT recognition page there and follow the steps listed on it.</p><h2>Important Dates</h2><p>Not specified in the official source. No start date, end date or deadline is given in the shared text.</p><h2>What You Should Do Next</h2><p>Keep your startup documents and registration details handy before you begin. Check the official Startup India page for the latest rules. Do not rely on second-hand information from social media or WhatsApp groups.</p>",
+    "summary": "Startup India has published information about DPIIT recognition and the benefits linked to it. DPIIT is the Department for Promotion of Industry and Internal Trade, which works under the Ministry of Commerce and Industry. The official page explains what this recognition means for recognised startups.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.startupindia.gov.in/content/sih/en/startup-scheme.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The official source names SCOMET but does not explain it. Check the latest DGFT notice or ask your customs broker for the items covered.",
+        "q": "What does SCOMET mean here?"
+      }
+    ],
+    "slug": "dgft-import-export-scomet-policy-guide",
+    "title": "DGFT Page on Import, Export and SCOMET Policy: A Simple Guide for Traders",
+    "status": "approved",
+    "content": "What Happened\n\nThe Directorate General of Foreign Trade (DGFT) has an official page called 'Import, Export and SCOMET Policy'. DGFT works under the Ministry of Commerce & Industry. This page is a reference point for anyone dealing with goods that cross India's borders. It does not list any new rule, fee or form on its own.\n\nWhat Changes\n\nThe page does not announce a change to any existing rule. It does not set a new deadline or a new charge. So your current paperwork does not change just because of this page. Think of it as a signpost, not a fresh order. If a rule change happens later, DGFT will publish it separately.\n\nWhat You Need to Do\n\nUse this page to find DGFT's own notices and tools on imports and exports. Pay extra attention if your product falls under SCOMET. The official source names SCOMET but does not explain it further. Always check the latest DGFT notice for your specific product before you ship. When in doubt, ask your customs broker or a trade consultant.\n\nDeadline\n\nNot specified in the official source.",
+    "summary": "The Directorate General of Foreign Trade (DGFT) hosts an official page on India's import, export and SCOMET policy. The page comes from the Ministry of Commerce & Industry. It works as a starting point for traders who want to know the rules for shipping goods in and out of India.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.dgft.gov.in/CP/?opt=itchs-import-export"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It names Rashesh Purohit, who is marked as a defaulter. His PAN is listed as ADQPP1270Q.",
+        "q": "Who does this SEBI release order name?"
+      }
+    ],
+    "slug": "sebi-release-order-rashesh-purohit-tv-vision-limited-2026",
+    "title": "SEBI Issues Release Order Against Rashesh Purohit in TV Vision Limited Case",
+    "status": "approved",
+    "content": "## What Happened\n\nSEBI has published a release order naming Rashesh Purohit as a defaulter. The order is linked to the case of TV Vision Limited. It falls under Certificate No. 7475 of 2023.\n\nThe order identifies him by his PAN, which is ADQPP1270Q. SEBI shared this notice on 24 September 2026. It sits under the recovery proceedings section of SEBI's website.\n\n## What Changes\n\nA recovery-related order like this usually means SEBI is acting to recover dues linked to the case. The notice names the person and the case it belongs to.\n\nThe source does not explain what specific action follows. It also does not state the amount involved. Treat the order as an official record in an ongoing recovery matter.\n\n## What You Need to Do\n\nIf you are not connected to this case, you do not need to do anything. This notice does not apply to the general public.\n\nIf you are named in the order or linked to TV Vision Limited, check the full document on SEBI's website. You may want to speak to a lawyer or a financial advisor before you act.\n\n## Deadline\n\nNot specified in the official source.",
+    "summary": "SEBI has issued a release order against Rashesh Purohit, marked as a defaulter, in the TV Vision Limited matter. The order comes under Certificate No. 7475 of 2023 and lists his PAN as ADQPP1270Q. The notice was published on 24 September 2026.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/recovery-proceedings/sep-2026/release-order-rashesh-purohit-defaulter-pan-adqpp1270q-in-the-matter-of-tv-vision-limited-under-certificate-no-7475-of-2023-_104723.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "The order relates to Certificate No. 7475 of 2023."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "24 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "pib-release-test-no-details-available",
+    "title": "PIB Release 'Test': No Details Available Yet",
+    "status": "approved",
+    "content": "Not specified in the official source.",
+    "summary": "Not specified in the official source.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/test"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "pib-press-release-details-not-available",
+    "title": "PIB Press Release: Full Details Not Available in This Update",
+    "status": "approved",
+    "content": "Not specified in the official source.",
+    "summary": "Not specified in the official source.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/test"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is about Rashesh Purohit, who is named as a defaulter. His PAN is ADQPP1270Q.",
+        "q": "Who is this SEBI release order about?"
+      }
+    ],
+    "slug": "sebi-release-order-rashesh-purohit-tv-vision-limited-certificate-7449-2023",
+    "title": "SEBI Issues Release Order Against Rashesh Purohit in TV Vision Limited Case",
+    "status": "approved",
+    "content": "## What Happened\nThe Securities and Exchange Board of India (SEBI) has shared a release order. The order names Rashesh Purohit as a defaulter. His PAN is ADQPP1270Q. This order belongs to the TV Vision Limited case. It sits under Certificate No. 7449 of 2023. SEBI made the order public on 24 September 2026.\n\n## What Changes\nThis order is part of SEBI's recovery proceedings. SEBI starts such proceedings to recover dues from people who do not pay. The order is tied to Rashesh Purohit and the TV Vision Limited matter. The public notice does not explain the full terms of the release.\n\n## What You Need to Do\nMost people do not need to do anything about this order. If the case has nothing to do with you, it will not affect you. If you have dealings linked to TV Vision Limited, read the full order on the SEBI website. You can also ask a legal or financial adviser for help. Always check the original order for exact details.\n\n## Deadline\nNot specified in the official source.",
+    "summary": "SEBI has issued a release order naming Rashesh Purohit as a defaulter in the TV Vision Limited matter. The order is linked to Certificate No. 7449 of 2023. SEBI published the order on 24 September 2026.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/recovery-proceedings/sep-2026/release-order-rashesh-purohit-defaulter-pan-adqpp1270q-in-the-matter-of-tv-vision-limited-under-certificate-no-7449-of-2023-_104721.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "SEBI published the release order on 24 September 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "24 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is a unique 15-digit number that identifies your mobile device on a telecom network.",
+        "q": "What is an IMEI number?"
+      },
+      {
+        "a": "Dial *#06# on your mobile device. The IMEI number will show on the screen.",
+        "q": "How do I find my phone's IMEI?"
+      },
+      {
+        "a": "Use the Sanchar Saathi portal or mobile app. You can also send KYM followed by your 15-digit IMEI number by SMS to 14422.",
+        "q": "How can I check if my IMEI is genuine?"
+      },
+      {
+        "a": "Yes. A dual-SIM phone usually has two IMEI numbers, one for each SIM slot.",
+        "q": "Does a dual-SIM phone have two IMEI numbers?"
+      },
+      {
+        "a": "You can face up to 3 years in jail, a fine of up to ₹50 lakh, or both. These offences are cognizable and non-bailable under Section 42(7). People who help or promote the crime face the same punishment.",
+        "q": "What is the punishment for IMEI tampering?"
+      },
+      {
+        "a": "File a report with your local police and keep a copy. Then get a duplicate SIM, wait 24 hours, and register a blocking request on the Sanchar Saathi (CEIR) portal with your police report and ID proof to get a Request ID.",
+        "q": "My phone was stolen. What should I do first?"
+      },
+      {
+        "a": "Under TRAI rules, SMS services are restricted for the first 24 hours after a re-issued SIM is activated. Sanchar Saathi needs a mobile OTP, so you can apply only after that.",
+        "q": "Why must I wait 24 hours after getting a duplicate SIM?"
+      },
+      {
+        "a": "Inform the local police first. Then use your Request ID on the Sanchar Saathi portal to unblock the handset.",
+        "q": "What if I get my lost phone back?"
+      }
+    ],
+    "slug": "imei-tampering-rules-india-telecom-device-security",
+    "title": "IMEI Tampering Can Land You in Jail: A Simple Guide to India's Telecom Device Rules",
+    "status": "approved",
+    "content": "What Happened\n\nIndia runs one of the world's largest mobile networks. In July 2026, the country had 1,204.01 million active wireless mobile subscribers. Crores of people use phones for payments, government services and daily work.\n\nBecause so much depends on these devices, the government wants every phone on the network to be genuine. The Department of Telecommunications (DoT) has now explained its rules on IMEI numbers — the unique identity of your phone.\n\nWhat Changes\n\nTampering with an IMEI is now unlawful under the Telecommunications Act, 2023. It is a crime if you intentionally remove, erase, change or alter a device's unique Mobile Device Equipment Identification number.\n\nIt is also a crime to make, use, sell, traffic in, control, keep or possess hardware or software that you know can change an IMEI.\n\nBreaking these rules can send you to jail for up to 3 years. You can also be fined up to ₹50 lakh, or face both. These offences are cognizable and non-bailable under Section 42(7).\n\nAnyone who helps or encourages such a crime faces the same punishment under Section 42(6). Section 42(3)(e) also bans getting SIM cards through fraud, cheating or impersonation.\n\nWhat You Need to Do\n\nKnow your IMEI. It is a unique 15-digit number that identifies your phone on a telecom network. Dial *#06# on your handset to see it.\n\nCheck the TAC. The first eight digits of an IMEI form the Type Allocation Code (TAC). It tells you the device model. The Global System for Mobile Communications Association (GSMA) gives out TACs to manufacturers.\n\nDual-SIM phones usually have two IMEI numbers, one for each SIM slot.\n\nVerify your device. Visit the Sanchar Saathi portal or mobile app. You can also send KYM <15-digit IMEI number> by SMS to 14422 to check your device details.\n\nIf you make devices, register first. Manufacturers must register IMEIs of telecom devices made in India with the government. Do this before the first sale, testing, research or other use. Registration happens on the Device Setu–Indian Counterfeited Device Restriction (ICDR) portal. Devices must carry valid, unique and untampered IMEIs.\n\nIf you import devices, register the IMEIs with the Central Government before the devices enter India. Use the Device Setu–ICDR portal. Imported devices must carry valid and authorised IMEIs.\n\nIf you sell devices, check every IMEI. Resellers and retailers must offer only devices with valid and untampered IMEIs. If you deal in used phones, check the IMEI against the government's central database of tampered and blacklisted devices before you close the deal. You pay a small fee for each IMEI check. Selling devices with tampered or configurable IMEIs can bring strict legal action.\n\nIf you own a brand, register it. Brand owners must register their brands on the Device Setu–ICDR portal and link them to the right GSMA Type Allocation Code. Devices sold under the brand must carry authentic and authorised IMEIs and follow cybersecurity rules.\n\nWhat Citizens Should Avoid\n\nDo not use, buy or put together devices like modems, modules or SIM boxes with tampered or configurable IMEIs.\n\nDo not get a SIM card using fake documents, fraud, cheating or impersonation.\n\nDo not transfer, sell or hand over a SIM card issued in your name to someone else. They may misuse it.\n\nDo not use apps, websites or any other method to change your Calling Line Identity (CLI) or other telecom identifiers.\n\nWhat Citizens Should Do\n\nBuy mobile devices only from authorised sellers. Always verify the IMEI details.\n\nProtect your phone with a strong password, PIN or biometric lock.\n\nGet your phone repaired only at authorised service centres. This lowers the risk of IMEI tampering.\n\nIf your phone is lost or stolen, act step by step. First, file a report with your local police and keep a copy of the complaint.\n\nNext, get a duplicate SIM card for the lost number from your telecom operator. Under TRAI rules, SMS services stay blocked for the first 24 hours after a re-issued SIM is activated. Sanchar Saathi needs a mobile OTP, so wait 24 hours before you apply.\n\nThen register the blocking request on the Sanchar Saathi (CEIR) portal or mobile app. Upload the police report and a valid ID proof. You will get a unique Request ID.\n\nIf you later get your device back, tell the local police first. After that, use your Request ID on the portal to unblock the handset safely.\n\nDeadline\n\nThe official source does not mention a deadline. These rules are already in force, so follow them right away.",
+    "summary": "India's telecom rules treat IMEI tampering as a serious crime. Under the Telecommunications Act, 2023, changing a phone's unique identity can mean up to 3 years in jail, a fine of up to ₹50 lakh, or both. The Department of Telecommunications also explains what manufacturers, sellers and ordinary phone users must do to keep devices genuine and safe.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313715"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Using or buying modems, modules or SIM boxes with tampered or configurable IMEIs.",
+      "Getting a SIM card with fake documents, fraud, cheating or impersonation.",
+      "Handing over a SIM card issued in your name to someone else who may misuse it.",
+      "Using apps or websites to change your Calling Line Identity (CLI) or other telecom identifiers.",
+      "Buying a phone without verifying the IMEI from an authorised seller.",
+      "Getting your phone repaired at an unauthorised shop, which raises the risk of IMEI tampering.",
+      "Dealing in used devices without checking the IMEI against the government's database of tampered and blacklisted devices."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is an official tag given to young companies by DPIIT, which is part of the Ministry of Commerce and Industry. The source does not explain the full process.",
+        "q": "What is DPIIT startup recognition?"
+      },
+      {
+        "a": "The document is on the Startup India website at startupindia.gov.in.",
+        "q": "Where can I read the revised guidelines?"
+      }
+    ],
+    "slug": "dpiit-startup-recognition-guidelines",
+    "title": "DPIIT Startup Recognition Guidelines: What Young Companies Should Know",
+    "status": "approved",
+    "content": "## What Happened\nThe Department for Promotion of Industry and Internal Trade (DPIIT) has released revised guidelines for startup recognition. DPIIT works under the Ministry of Commerce and Industry. These guidelines set out how a young company gets the official recognised startup tag. The full document is posted on the Startup India website.\n\n## What Changes\nRecognition is the label that tells the government a company counts as a startup. This tag helps a young business get support under government startup programmes. The document shared here does not list the exact changes in detail.\n\n## What You Need to Do\nIf you run a young company, go to the Startup India portal and read the revised guidelines first. Apply only after you understand the current rules. The source does not describe the steps, forms, or papers you must submit.\n\n## Deadline\nThe source does not mention any deadline.",
+    "summary": "DPIIT has issued revised guidelines for recognising startups in India. DPIIT is part of the Ministry of Commerce and Industry. These rules decide which young companies get the official 'recognised startup' tag.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.startupindia.gov.in/content/dam/invest-india/Templates/public/Revised%20Guidelines%20for%20recognition.pdf"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The page is from Startup India, DPIIT, under the Ministry of Commerce & Industry.",
+        "q": "Who publishes these income tax exemption notifications?"
+      },
+      {
+        "a": "You can read them on the Startup India website at the page linked in this article.",
+        "q": "Where can I read the notifications?"
+      },
+      {
+        "a": "Not specified in the official source.",
+        "q": "Does my startup automatically get a tax exemption?"
+      }
+    ],
+    "slug": "income-tax-exemption-notifications-startup-india",
+    "title": "Income Tax Exemption Notifications for Startups: A Simple Guide",
+    "status": "approved",
+    "content": "## What Happened\n\nStartup India has published a page for Income Tax Exemption Notifications. The page comes from the Department for Promotion of Industry and Internal Trade (DPIIT). DPIIT works under the Ministry of Commerce & Industry.\n\nThe page is meant to keep startup founders updated on tax exemption notices. These are official government orders, not news stories. If you run a startup, this is a page worth checking.\n\n## What Changes\n\nThis page acts as a single place for tax exemption notifications linked to startups. You do not have to search different government websites for each notice.\n\nThe exact rules, tax amounts and conditions are not given in the source text we received. So you should open the page directly to read the full notifications.\n\n## What You Need to Do\n\nRead the notifications on the Startup India page before you file your taxes. Check with a qualified tax professional if a notice applies to your startup. Tax rules can change, so always confirm the latest position.\n\nDo not assume an exemption applies to you without reading the actual notification. Keep proof of your startup registration ready in case you need it.\n\n## Deadline\n\nThe source does not mention any deadline. Please check the official page for the latest information.",
+    "summary": "Startup India has a dedicated page for income tax exemption notifications. It is run by DPIIT under the Ministry of Commerce & Industry. This page collects the official tax exemption notices that apply to startups.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.startupindia.gov.in/content/sih/en/startupgov/imb.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "epfo-update-details-not-available-official-source",
+    "title": "EPFO Update: Details Not Available in the Official Source",
+    "status": "approved",
+    "content": "## What Happened\n\nThe source document shared with us starts with the Government of India header. After that line, there is no further text. So there is no announcement, no scheme update, and no notification to report.\n\n## Why It Matters\n\nYou may have come here looking for news about your Provident Fund. Without real details in the source, we cannot tell you what changed or who it affects. Making up facts would be worse than saying nothing.\n\n## What You Can Do\n\nWait for the full press release or circular to be published. Then check the official EPFO portal or the India.gov.in website for the exact wording. Do not act on forwarded messages or social media posts that claim to know the details.\n\n## Key Points\n\n- The official source contains only the Government of India header line.\n- No announcement, date, or figure is mentioned in the source.\n- We have not added any facts that are not in the source.\n- Please check the official EPFO or India.gov.in website for updates.\n- Avoid acting on unverified messages about your PF account.",
+    "summary": "The official source for this page only shows the Government of India header. It does not include any announcement, scheme details, or rule change. Because of this, no specific information can be shared with you right now.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.india.gov.in/"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The official source does not say. It only shows the appeal number, the name of the person who filed it, and the date.",
+        "q": "What is this appeal about?"
+      }
+    ],
+    "slug": "sebi-appeal-no-7064-of-2026-amit-gangrade",
+    "title": "SEBI Appeal No. 7064 of 2026 Filed by Amit Gangrade",
+    "status": "approved",
+    "content": "## What Happened\n\nSEBI has published an appeal on its website. The appeal is numbered 7064 of 2026 and it was filed by a person named Amit Gangrade. The page appeared under SEBI's enforcement orders section on 22 September 2026. Beyond this, the official source shares no details about the case.\n\n## What Changes\n\nThe source does not mention any rule change, penalty or market direction. So there is nothing for you to act on right now. Treat this as a public record entry only. If you hold investments, your daily buying and selling is not affected by this listing.\n\n## What You Need to Do\n\nYou do not need to do anything based on this page alone. If the appeal relates to a company or broker you deal with, wait for the full order to be published. You can check the SEBI website for the complete document. Always read the full order before you draw any conclusion.\n\n## Deadline\n\nThe official source does not mention any deadline. Not specified in the official source.",
+    "summary": "SEBI has listed an appeal numbered 7064 of 2026, filed by Amit Gangrade. The appeal was published on the SEBI website on 22 September 2026. The official page does not give any other details about the case.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/orders/sep-2026/appeal-no-7064-of-2026-filed-by-amit-gangrade_104657.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "22 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is a direction to send money held for a defaulter to SEBI, so that dues can be recovered.",
+        "q": "What is a General Remittance Advice?"
+      }
+    ],
+    "slug": "sebi-remittance-advice-heena-khatoon-continental-seeds",
+    "title": "SEBI Issues Remittance Advice Against Heena Khatoon in Continental Seeds Case",
+    "status": "approved",
+    "content": "## What Happened\n\nSEBI issued a General Remittance Advice on 22 September 2026. It names Heena Khatoon, the proprietor of Heena Enterprises, as a defaulter. Her PAN is FGXPK5721G.\n\nThe advice relates to a recovery case. SEBI is recovering dues under Recovery Certificate No. 8876 of 2025. That recovery grows out of an investigation into how some entities traded in the scrip of Continental Seeds and Chemicals Limited.\n\nA General Remittance Advice tells banks and other parties to send money linked to the defaulter to the market regulator. This helps SEBI recover what is owed.\n\n## What Changes\n\nIf you hold or manage money for Heena Khatoon or Heena Enterprises, this advice applies to you. You must remit those funds to SEBI instead of releasing them to the defaulter.\n\nThe advice also puts banks and brokers on notice. Any account linked to the defaulter in this case may face a freeze or a recovery action.\n\nThis is a recovery step, not a new penalty. It follows an earlier order that already found dues payable in this matter.\n\n## What You Need to Do\n\nIf a bank, broker or intermediary holds funds for the named defaulter, act on the remittance advice. Send the money as directed by SEBI.\n\nThe PAN in the notice is the key identifier. Use it to check whether any account you handle matches this defaulter.\n\nKeep records of what you remit. Note the recovery certificate number, 8876 of 2025, in your papers.\n\nIf you are an ordinary investor with no link to this case, you do not need to do anything. Your own accounts and trades are not affected.\n\n## Deadline\n\nNo deadline is mentioned in the official source.",
+    "summary": "SEBI has issued a General Remittance Advice against Heena Khatoon, who runs Heena Enterprises. This is linked to an investigation into trading in the scrip of Continental Seeds and Chemicals Limited. The action comes under Recovery Certificate No. 8876 of 2025.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/recovery-proceedings/sep-2026/general-remittance-advice-against-heena-khatoon-proprietor-of-heena-enterprises-defaulter-pan-fgxpk5721g-in-the-matter-of-investigation-in-the-trading-activities-of-certain-entities-in-the-scrip-_104649.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "The remittance advice was published on 22 September 2026.",
+      "It relates to Recovery Certificate No. 8876 of 2025."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "22 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The appeal was filed by Saksham Puri, as stated in the official SEBI page.",
+        "q": "Who filed this appeal?"
+      }
+    ],
+    "slug": "sebi-appeal-no-7066-of-2026-saksham-puri",
+    "title": "SEBI Appeal No. 7066 of 2026 Filed by Saksham Puri: What the Notice Says",
+    "status": "approved",
+    "content": "## What Happened\nSEBI posted a new appeal on its official website. The appeal is numbered 7066 of 2026.\nIt was filed by a person named Saksham Puri. The page went live on 22 September 2026.\nThe notice itself is very short. It only shows the appeal number and the name of the person who filed it.\nIt does not describe the dispute, the parties involved, or any decision.\n\n## What Changes\nNot much changes for the general public right now. The source page is just a record of an appeal being filed with SEBI.\nIt does not spell out any rule change, penalty, or relief. So you cannot tell from this page what the outcome will be.\nThink of it like a case number board outside a court. It tells you a matter exists. It does not tell you the judgment.\n\n## What You Need to Do\nIf you are not linked to this case, you do not need to do anything. This notice is not aimed at the public at large.\nIf you are a party to the matter, wait for SEBI's official communication to you. Do not act on rumours or social media posts.\nYou can track updates on SEBI's website under its enforcement orders section.\nAlways check the original page before you rely on any claim about this appeal.\n\n## Deadline\nNot specified in the official source. The notice lists no date for a hearing, a reply, or a final order.\nKeep an eye on SEBI's website for any later update on this appeal.\n\n## A Simple Takeaway\nThis is a routine listing of an appeal on SEBI's site. The public page gives only the appeal number and the name Saksham Puri.\nFor the full facts, you must wait for the detailed order or a follow-up notice from SEBI.",
+    "summary": "SEBI has listed Appeal No. 7066 of 2026 on its website. The appeal was filed by Saksham Puri. It was published on 22 September 2026. The notice does not explain the case details or any outcome.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/orders/sep-2026/appeal-no-7066-of-2026-filed-by-saksham-puri_104655.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Do not assume the appeal is decided just because it is listed on the SEBI website."
+    ],
+    "important_dates": [
+      "The appeal was published on the SEBI website on 22 September 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "22 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is an appeal filed with SEBI by a person named Sanjay Shah. The official notice does not describe the subject of the appeal.",
+        "q": "What is Appeal No. 7063 of 2026?"
+      }
+    ],
+    "slug": "sebi-appeal-no-7063-of-2026-filed-by-sanjay-shah",
+    "title": "SEBI Appeal No. 7063 of 2026 Filed by Sanjay Shah: What the Notice Says",
+    "status": "approved",
+    "content": "## What Happened\nSEBI has shared a record of an appeal filed by a person named Sanjay Shah. The appeal is numbered 7063 of 2026. It appeared on SEBI's website on 22 September 2026. The short notice does not say what the appeal is about.\n\nAn appeal is a way for someone to ask a higher authority to review an earlier decision. It is a normal part of the legal process. This listing is just the record of that filing.\n\n## What Changes\nFor most people, nothing changes. This is not a new rule, a new tax, or a new scheme. It is a single case between a person and the market regulator.\n\nIf you do not have any connection to this case, this notice will not affect your money, your investments, or your daily life. SEBI regularly publishes such appeal records on its website so that the process stays open and traceable.\n\n## What You Need to Do\nYou do not need to take any action because of this notice. There is no form to fill, no fee to pay, and no deadline for the public.\n\nIf you are a party to this case, read the full order on SEBI's website. You may also want to speak to a lawyer who handles securities matters before your next step.\n\n## Deadline\nNot specified in the official source.",
+    "summary": "SEBI has published a notice about Appeal No. 7063 of 2026, filed by Sanjay Shah. It went up on SEBI's website on 22 September 2026. The official notice does not explain what the appeal is about or what decision is being challenged.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/orders/sep-2026/appeal-no-7063-of-2026-filed-by-sanjay-shah_104653.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "22 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "aicte-web-portal-login",
+    "title": "AICTE Web Portal Login Page: What the Official Source Actually Shows",
+    "status": "approved",
+    "content": "What Happened\n\nThe official source we received from AICTE is a web portal login page. It carries just two things: a login heading and a web address. There is no press note, no circular, and no announcement attached to it. So there is nothing here to explain as a scheme, a rule change, or an event.\n\nWhy It Matters\n\nAICTE runs a partner portal where institutes, faculty, and students usually sign in for approvals, applications, and records. A login page on its own tells you that the portal exists. It does not tell you what is new inside it.\n\nIf you were expecting details about a scheme, a deadline, or an order, this page does not have them. You would need the actual notice or circular to know what changed.\n\nKey Points\n\n- The source is only a login page for the AICTE partner portal.\n- No scheme, benefit, eligibility, or deadline is mentioned in it.\n- No announcement date is given in the source.\n- Any real update would sit behind the login, not on this page.\n- Please wait for an official AICTE notice before acting on anything.",
+    "summary": "The official AICTE link shared with us only opens a web portal login page. It shows no announcement, no scheme details, and no dates. Because of this, we cannot confirm any news, rule change, or benefit from this source.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Education",
+    "source_ids": [
+      "https://portal.aicte.gov.in/aicte/app/partnerportal/enu"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [],
+    "slug": "epfo-central-board-of-trustees-cbt",
+    "title": "Central Board of Trustees (CBT): What the EPFO Source Actually Says",
+    "status": "approved",
+    "content": "What Happened\n\nThe Employees' Provident Fund Organisation (EPFO) is the source for this page. The text shared with us names only one thing: the Central Board of Trustees (CBT).\n\nThere is no date on the page. There is no decision, order, or announcement written on it. So there is nothing here that changes your PF account today.\n\nWhy It Matters\n\nMany people search for CBT news and expect a rate change or a new rule. This page does not carry that information. The source does not explain what the CBT is or what it does.\n\nBecause the source is so short, treat this as a pointer only. If you want the full picture, open the EPFO link given below. Do not read this page as a deadline or an instruction to act.\n\nKey Points\n\n- The official source mentions only the Central Board of Trustees (CBT).\n- No meeting date is given in the source.\n- No decision, rate, or figure is given in the source.\n- No deadline is given in the source.\n- No action is asked of you in the source.\n- For full details, visit the EPFO CBT page linked below.",
+    "summary": "The official EPFO source for this page mentions only the Central Board of Trustees (CBT). It does not list any date, decision, or announcement. Read this as a short pointer page, not as a new rule.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.epfo.gov.in/cbt/"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The scheme has completed eight years since it was rolled out, according to the Prime Minister's message.",
+        "q": "How many years has Ayushman Bharat been running?"
+      },
+      {
+        "a": "More than 60 crore beneficiaries now have access to the scheme, the Prime Minister said.",
+        "q": "How many people are covered under Ayushman Bharat?"
+      },
+      {
+        "a": "Each beneficiary gets Rs 5 lakh of annual health cover.",
+        "q": "How much health cover does each beneficiary get?"
+      },
+      {
+        "a": "They are health centres that bring primary healthcare closer to people. They have already recorded over 500 crore visits.",
+        "q": "What are Ayushman Arogya Mandirs?"
+      }
+    ],
+    "slug": "ayushman-bharat-8-years-60-crore-beneficiaries",
+    "title": "Ayushman Bharat Completes 8 Years: 60 Crore People Now Get Rs 5 Lakh Health Cover",
+    "status": "approved",
+    "content": "## What Happened\n\nAyushman Bharat has now completed eight years. Prime Minister Shri Narendra Modi marked the occasion on September 23, 2026. He shared his thoughts in a post on X with the hashtag #8YearsOfAyushmanBharat.\n\nThe Prime Minister said the scheme started eight years ago with one clear idea. Every Indian should be able to get good quality healthcare at a price they can afford. He said that idea is now turning into reality for crores of families.\n\n## Why It Matters\n\nMore than 60 crore people can now use Rs 5 lakh of health cover every year. The Prime Minister said no other country runs a health scheme this large. This cover helps you pay for hospital treatment without emptying your savings.\n\nHe said the scheme has led to record savings on medical bills. This helps poor and middle class families the most. Instead of borrowing money or selling assets during an illness, families can use their Ayushman Bharat card.\n\nHealthcare is also reaching closer to your doorstep. Ayushman Arogya Mandirs have recorded more than 500 crore visits so far. These centres are improving primary healthcare in villages and small towns. The Prime Minister wished all beneficiaries well on this milestone.\n\n## Key Points\n\n- Ayushman Bharat has completed eight years since its rollout.\n- More than 60 crore beneficiaries now get Rs 5 lakh annual health cover.\n- The Prime Minister called it the largest healthcare scheme in the world.\n- The scheme has led to record savings on medical expenses for poor and middle class families.\n- Ayushman Arogya Mandirs have crossed 500 crore visits, strengthening primary healthcare at the grassroots.",
+    "summary": "Ayushman Bharat has completed eight years since it was launched. Prime Minister Narendra Modi said more than 60 crore people now get Rs 5 lakh health cover every year. He also said this makes it the largest healthcare scheme in the world.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313742"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Ayushman Bharat was rolled out eight years before September 23, 2026.",
+      "The Prime Minister shared the milestone message on September 23, 2026."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Prime Minister Narendra Modi paid tribute to him on his birth anniversary.",
+        "q": "Who paid tribute to Ramdhari Singh Dinkar?"
+      },
+      {
+        "a": "He said the poems are full of public awareness and national pride. They still fill people's hearts with courage, energy and self-respect.",
+        "q": "What did the Prime Minister say about Dinkar's poems?"
+      },
+      {
+        "a": "According to the Prime Minister, his works enrich literature and also inspire devotion towards the motherland. He said they will keep guiding Indians for ages to come.",
+        "q": "Why does Dinkar's writing still matter today?"
+      }
+    ],
+    "slug": "pm-modi-tribute-ramdhari-singh-dinkar-birth-anniversary",
+    "title": "PM Modi Pays Tribute to Rashtrakavi Ramdhari Singh Dinkar on His Birth Anniversary",
+    "status": "approved",
+    "content": "## What Happened\n\nPrime Minister Narendra Modi honoured Rashtrakavi Ramdhari Singh Dinkar on his birth anniversary. He shared his tribute in a post on X on September 23, 2026. In his message, the Prime Minister bowed to the poet and remembered his contribution to Indian literature.\n\n## Why It Matters\n\nMr Modi said Dinkar's poems carry feelings of public awareness and national pride. Even today, these verses bring courage, brightness and self-respect to the hearts of Indians, he said. His writings do more than enrich literature. They also inspire deep love and dedication towards the motherland.\n\nThe Prime Minister added that Dinkar's grand personality and timeless work will keep guiding Indians for generations to come. For readers, this is a reminder that good poetry can shape how a nation thinks and feels about itself.\n\n## Key Points\n\n- PM Modi paid tribute to Rashtrakavi Ramdhari Singh Dinkar on his birth anniversary.\n- He praised the poet's powerful verses for carrying feelings of public awareness and national pride.\n- He said the poems still fill people's hearts with courage, energy and self-respect.\n- He noted that Dinkar's writings both enrich literature and inspire love for the motherland.\n- He said the poet's personality and timeless creations will guide Indians for ages ahead.\n- The tribute was shared publicly through a post on X on September 23, 2026.",
+    "summary": "Prime Minister Narendra Modi paid tribute to Rashtrakavi Ramdhari Singh Dinkar on his birth anniversary. He said the poet's powerful verses still fill people's hearts with courage, energy and self-respect. The Prime Minister shared his message in a post on X.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313741"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "September 23, 2026 – Birth anniversary of Rashtrakavi Ramdhari Singh Dinkar. PM Modi paid tribute on this day."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "The official source does not explain this. Please check the Startup India portal for the full details.",
+        "q": "What is DPIIT recognition?"
+      },
+      {
+        "a": "The official source does not list the eligibility rules. Check the Startup India portal for the current criteria.",
+        "q": "Who can apply for DPIIT recognition?"
+      },
+      {
+        "a": "DPIIT handles it. DPIIT is the Department for Promotion of Industry and Internal Trade, under the Ministry of Commerce & Industry.",
+        "q": "Which department handles this recognition?"
+      }
+    ],
+    "slug": "apply-dpiit-recognition-startup-india-portal",
+    "title": "Apply for DPIIT Recognition on the Startup India Portal",
+    "status": "approved",
+    "content": "What Happened\nStartup India is where you apply for DPIIT recognition. DPIIT means the Department for Promotion of Industry and Internal Trade. This department sits under the Ministry of Commerce & Industry.\n\nThe official page is simply called Apply for DPIIT Recognition. It is the entry point for founders who want this recognition.\n\nWho Is Eligible\nThe official source does not list the eligibility rules. Please check the Startup India portal to see who can apply.\n\nBenefits\nThe official source does not explain the benefits of DPIIT recognition. Please check the portal for the full details.\n\nHow to Apply\nThe official source does not give the step-by-step process. To begin, open the Startup India recognition page and follow the instructions there.\n\nImportant Dates\nThe official source does not mention any dates, windows or deadlines.",
+    "summary": "Startup India has a page where you can apply for DPIIT recognition. DPIIT is the Department for Promotion of Industry and Internal Trade. It works under the Ministry of Commerce & Industry. The page is the starting point for your application.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://www.startupindia.gov.in/content/sih/en/startupgov/startup_recognition_page.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Mirabai Chanu won the Silver medal in the Women's 49 kg Weightlifting event.",
+        "q": "Who won the Silver medal?"
+      },
+      {
+        "a": "Prime Minister Narendra Modi congratulated her on the win.",
+        "q": "Who congratulated her?"
+      },
+      {
+        "a": "He said her determination and consistency continue to inspire the nation, and that India is proud of her.",
+        "q": "What did the Prime Minister say about her?"
+      },
+      {
+        "a": "Yes, he extended his best wishes for her future endeavours.",
+        "q": "Did the Prime Minister wish her for the future?"
+      }
+    ],
+    "slug": "pm-modi-congratulates-mirabai-chanu-silver-medal",
+    "title": "PM Modi Congratulates Mirabai Chanu on Her Silver Medal Win",
+    "status": "approved",
+    "content": "## What Happened\n\nWeightlifter Mirabai Chanu won a Silver medal in the Women's 49 kg Weightlifting event. Prime Minister Narendra Modi congratulated her on this achievement on 23 September 2026.\n\nThe Prime Minister said her determination and consistency continue to inspire the nation. He added that India is proud of her and wished her the very best for her future.\n\nThe Prime Minister's Office (PMO) posted the message on X, the social media platform. The post praised her silver medal win and called it special.\n\n## Why It Matters\n\nA medal at this level is not easy to win. It takes years of training, discipline and sacrifice. When an athlete from a small town makes it big, it gives hope to lakhs of young Indians who dream of sport as a career.\n\nMirabai Chanu has won medals before, and this win shows her consistency. For young weightlifters, especially girls, she is proof that strength training and hard work can take you to the world stage.\n\nRecognition from the Prime Minister also brings attention to the sport. More attention means better support, more coaching facilities and greater interest from sponsors in the coming years.\n\n## Key Points\n\n- Mirabai Chanu won Silver in the Women's 49 kg Weightlifting event.\n- PM Narendra Modi congratulated her and said India is proud of her.\n- The PMO shared the congratulatory message on X on 23 September 2026.\n- The Prime Minister praised her determination and consistency.\n- He also wished her success in her future competitions.",
+    "summary": "Prime Minister Narendra Modi congratulated weightlifter Mirabai Chanu on winning a Silver medal in the Women's 49 kg event. He said her hard work and steady performances keep inspiring the country. The Prime Minister's Office shared the message on social media on 23 September 2026.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Government",
+    "source_ids": [
+      "https://pib.gov.in/PressReleasePage.aspx?PRID=2313773"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "2026-09-23",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "Not specified in the official source. The published press release only carries the heading and does not describe the decisions.",
+        "q": "Which decisions did the SEBI board take?"
+      },
+      {
+        "a": "Check SEBI's official website for the detailed press release and any circulars that follow the meeting.",
+        "q": "Where can I find the actual decisions?"
+      }
+    ],
+    "slug": "sebi-board-meeting-24-september-2026-key-decisions",
+    "title": "SEBI Board Meeting on 24 September 2026: What the Press Release Says",
+    "status": "approved",
+    "content": "What Happened\nThe Securities and Exchange Board of India (SEBI) held a board meeting on 24 September 2026. SEBI put out a press release about the meeting on the same day. The release is titled \"Key decisions taken in the SEBI Board Meeting dated 24th September, 2026.\" The text published with this release only repeats that title. It does not spell out what the decisions are.\n\nWhy It Matters\nSEBI is the regulator of India's stock markets, mutual funds, and listed companies. Its board meetings often lead to rule changes. These changes can affect investors, brokers, fund houses, and company filings. So a board meeting date matters to anyone who saves or invests in the market.\n\nBut the details are missing here. You should not rely on social media posts or rumours about what was decided. Wait for SEBI's own circulars or the fuller release before you act. If you are an investor, keep an eye on SEBI's website for updates in the coming days.\n\nKey Points\n- SEBI's board met on 24 September 2026 for a scheduled board meeting.\n- A press release about the meeting was published the same day.\n- The release states that key decisions were taken at the meeting.\n- The list of decisions is not given in the published text.\n- Check SEBI's official website for circulars and detailed updates.",
+    "summary": "SEBI held a board meeting on 24 September 2026 and shared a press release the same day. The release only says that key decisions were taken at the meeting. The published text does not list those decisions, so full details are not available from this source.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/media-and-notifications/press-releases/sep-2026/key-decisions-taken-in-the-sebi-board-meeting-dated-24th-september-2026_104725.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "24 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is an official EPFO page that helps you locate an EPFO office.",
+        "q": "What is the 'Locate EPFO office' page?"
+      }
+    ],
+    "slug": "locate-epfo-office",
+    "title": "Locate an EPFO Office Near You",
+    "status": "approved",
+    "content": "## What This Is\n\nThe Employees' Provident Fund Organisation (EPFO) has a page on its website called 'Locate EPFO office'. This page helps you find an EPFO office. The official source shared here is only this locator page.\n\n## Why It Matters\n\nSometimes you may need to reach an EPFO office in person. To do that, you first need to know where the office is. This page is the official way to find that out.\n\n## What You Can Do\n\nOpen the official link given in the source section below. Use it to locate an EPFO office. Always check the EPFO website directly for the latest details.\n\n## Key Points\n\n- The page is named 'Locate EPFO office'.\n- It comes from the EPFO, a central government body.\n- It helps you find the location of an EPFO office.\n- The source does not give any other details, dates or rules.\n\n## A Simple Tip\n\nUse only the official EPFO website when you look for office details. Do not rely on forwarded messages or unofficial links.",
+    "summary": "EPFO provides an official page that helps you locate an EPFO office. The page is titled 'Locate EPFO office' on the EPFO website. It is a locator page, so it does not list rules, forms or deadlines.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.epfindia.gov.in/locate-epfo-office"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is about PAN validation services. The DGFT released it as Trade Notice 07.",
+        "q": "What is this trade notice about?"
+      },
+      {
+        "a": "The Directorate General of Foreign Trade, under the Ministry of Commerce & Industry, issued it.",
+        "q": "Who issued this notice?"
+      }
+    ],
+    "slug": "dgft-trade-notice-07-pan-validation-services",
+    "title": "DGFT Issues Trade Notice 07 on PAN Validation Services",
+    "status": "approved",
+    "content": "## What Happened\n\nThe Directorate General of Foreign Trade has put out a trade notice on PAN validation services. It is called Trade Notice 07. The DGFT works under the Ministry of Commerce & Industry.\n\nThe official update is shared as a PDF document. The short public note only points readers to that document.\n\n## What Changes\n\nThe notice deals with how PAN validation services work for trade-related processes. PAN validation means checking your Permanent Account Number against official records before it is accepted.\n\nThe exact rule changes are listed inside the trade notice PDF. This short summary does not cover them, so do not assume anything before you read the full notice.\n\n## What You Need to Do\n\nOpen the official trade notice PDF linked in this article. Read it fully if you file DGFT applications or handle import-export paperwork.\n\nIf your PAN details do not match your other documents, fix them early. Mismatched details can slow down or block your applications.\n\nShare the notice with your customs broker, chartered accountant, or compliance team. They handle these filings for you.\n\n## Deadline\n\nNot specified in the official source. Check the trade notice PDF for any effective date or last date.",
+    "summary": "The Directorate General of Foreign Trade (DGFT) has released a trade notice about PAN validation services. The notice is numbered 07 and comes from the Ministry of Commerce & Industry. The full details sit in the linked official PDF, so importers and exporters should read it directly.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Business",
+    "source_ids": [
+      "https://content.dgft.gov.in/Website/dgftprod/35cb697b-1e6f-4f20-a1dd-6dbe0b90758f/Trade%20Notice%2007%20PAN%20Validation%20Services.pdf"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "Not specified in the official source."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "content_type": "Press Release"
+  },
+  {
+    "faqs": [
+      {
+        "a": "It was issued to Rashesh Purohit, whose PAN is ADQPP1270Q. He was named as the defaulter.",
+        "q": "Who was the certificate issued to?"
+      }
+    ],
+    "slug": "sebi-cancels-recovery-certificate-rashesh-purohit-tv-vision-limited",
+    "title": "SEBI Cancels Recovery Certificate Issued to Rashesh Purohit in TV Vision Limited Case",
+    "status": "approved",
+    "content": "## What Happened\n\nSEBI has cancelled a recovery certificate linked to Rashesh Purohit. The certificate number is 7475 of 2023, and it was issued on December 14, 2023. It was issued in the matter of TV Vision Limited, and Purohit was named as the defaulter. His PAN is ADQPP1270Q. SEBI shared this news on September 24, 2026.\n\n## What Changes\n\nThe recovery certificate was a formal tool used to recover dues from a defaulter. Now that SEBI has cancelled it, this particular recovery process comes to an end. Anyone tracking this case should note that certificate number 7475 of 2023 is no longer in force. The cancellation applies only to this certificate and this person.\n\n## What You Need to Do\n\nIf you are Rashesh Purohit, you should keep a copy of this cancellation notice for your records. If you are an investor or a company dealing with TV Vision Limited, this order is for your information only. You do not need to file anything or pay anything because of this notice. For any doubt, check the official SEBI website or speak to a legal or financial advisor.\n\n## Deadline\n\nThere is no deadline mentioned in this order. It is a cancellation notice, not an application or compliance step. Not specified in the official source.",
+    "summary": "SEBI has cancelled Recovery Certificate No. 7475 of 2023, which was issued on December 14, 2023 to Rashesh Purohit in the TV Vision Limited matter. The certificate was issued against him as a defaulter, with PAN ADQPP1270Q. This means the recovery action tied to this specific certificate is no longer active.",
+    "benefits": [
+      "Not specified in the official source."
+    ],
+    "category": "Money",
+    "source_ids": [
+      "https://www.sebi.gov.in/enforcement/recovery-proceedings/sep-2026/cancellation-of-recovery-certificate-no-7475-of-2023-dated-december-14-2023-issued-to-rashesh-purohit-defaulter-pan-adqpp1270q-in-the-matter-of-tv-vision-limited-under-certificate-no-7475-of-20-_104719.html"
+    ],
+    "eligibility": [
+      "Not specified in the official source."
+    ],
+    "last_updated": "2026-09-25",
+    "common_mistakes": [
+      "Not specified in the official source."
+    ],
+    "important_dates": [
+      "December 14, 2023: The date the recovery certificate was issued.",
+      "September 24, 2026: The date SEBI published the cancellation notice."
+    ],
+    "required_documents": [
+      "Not specified in the official source."
+    ],
+    "application_process": [
+      "Not specified in the official source."
+    ],
+    "source_published_date": "24 Sep, 2026 +0530",
+    "content_type": "Press Release"
+  }
+]

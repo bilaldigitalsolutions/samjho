@@ -2,6 +2,10 @@
 /**
  * Ping IndexNow (Bing, Yandex, Naver) with every URL in dist/sitemap.xml.
  *
+ * The sitemap document itself (https://<domain>/sitemap.xml) is submitted first,
+ * as an explicit sitemap ping, so Bing re-reads the file and picks up every URL
+ * it lists in a single pass instead of crawling the sitemap opportunistically.
+ *
  * Run this from the build/ folder AFTER deploying dist/, so search engines can
  * crawl new or updated pages within minutes instead of waiting for a scheduled
  * crawl. IndexNow needs no account and no API-key registration — ownership is
@@ -9,7 +13,7 @@
  * (dist/<key>.txt -> https://<domain>/<key>.txt).
  *
  * Usage (from the build/ folder):
- *   node scripts/ping-indexnow.js            submit every sitemap URL
+ *   node scripts/ping-indexnow.js            submit sitemap.xml + every sitemap URL
  *   node scripts/ping-indexnow.js --dry-run  print the payload, send nothing
  *   node scripts/ping-indexnow.js --key=<32-char-hex>  override configured key
  *
@@ -81,6 +85,14 @@ function readSitemapUrls() {
   return urls;
 }
 
+// Absolute URL of the sitemap document itself. Submitted together with the page
+// URLs so search engines get an explicit sitemap ping — that is what makes them
+// re-read sitemap.xml and pick up every URL inside it in one pass, rather than
+// waiting to discover the file during a scheduled crawl.
+function sitemapDocUrl() {
+  return `${String(site.domain).replace(/\/+$/, "")}/sitemap.xml`;
+}
+
 function resolveKey(override) {
   const configured = site.indexNow && site.indexNow.key;
   const key = override || configured || "";
@@ -120,15 +132,19 @@ async function main() {
 
   const args = parseArgs(process.argv.slice(2));
   const urls = readSitemapUrls();
+  const sitemapUrl = sitemapDocUrl();
+  // Sitemap ping: submit sitemap.xml itself, then every URL it lists.
+  if (!urls.includes(sitemapUrl)) urls.unshift(sitemapUrl);
   const key = resolveKey(args.key);
   const host = new URL(site.domain).hostname;
   const keyLocation = `${site.domain}/${key}.txt`;
   const batches = chunk(urls, MAX_URLS_PER_REQUEST);
 
-  console.log(`IndexNow host:       ${host}`);
-  console.log(`IndexNow key file:   ${keyLocation}`);
-  console.log(`IndexNow sitemap:    ${SITEMAP}`);
-  console.log(`IndexNow URLs found: ${urls.length} (${batches.length} request(s))`);
+  console.log(`IndexNow host:         ${host}`);
+  console.log(`IndexNow key file:     ${keyLocation}`);
+  console.log(`IndexNow sitemap file: ${SITEMAP}`);
+  console.log(`IndexNow sitemap ping: ${sitemapUrl}`);
+  console.log(`IndexNow URLs found:   ${urls.length} (${batches.length} request(s))`);
 
   if (args.dryRun) {
     console.log(`\n[dry run] payload for ${ENDPOINT}:`);

@@ -222,6 +222,48 @@
       resultRow("Principal", fmtINR(principal));
   }
 
+  // ------------------------------------------------------------- Compound Interest
+  function calcCompoundInterest(form, out) {
+    var principal = readNumber(document.getElementById("ciPrincipal"), { min: 1 });
+    var rate = readNumber(document.getElementById("ciRate"), { min: 0, max: 100 });
+    var years = readNumber(document.getElementById("ciYears"), { min: 0.0834 });
+    if (principal === null || rate === null || years === null) return;
+    var freqEl = document.getElementById("ciFrequency");
+    var n = parseInt(freqEl.value, 10) || 1;
+    var freqLabel = freqEl.options[freqEl.selectedIndex].text;
+    var r = rate / 100;
+
+    var amount = principal * Math.pow(1 + r / n, n * years);
+    var interest = amount - principal;
+    var effective = (Math.pow(1 + r / n, n) - 1) * 100;
+
+    // Year-by-year growth breakdown (whole years, capped at 30 rows).
+    var tableHtml = "";
+    var wholeYears = Math.floor(years);
+    if (wholeYears >= 1) {
+      var maxRows = Math.min(wholeYears, 30);
+      tableHtml =
+        '<table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem">' +
+        '<thead><tr><th style="text-align:left;padding:6px 8px;border-bottom:2px solid rgba(255,255,255,.25)">Year</th>' +
+        '<th style="text-align:right;padding:6px 8px;border-bottom:2px solid rgba(255,255,255,.25)">Balance</th></tr></thead><tbody>';
+      for (var y = 1; y <= maxRows; y++) {
+        var bal = principal * Math.pow(1 + r / n, n * y);
+        tableHtml +=
+          "<tr><td style=\"padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.12)\">" + y + "</td>" +
+          "<td style=\"text-align:right;padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.12)\">" + fmtINR(bal) + "</td></tr>";
+      }
+      tableHtml += "</tbody></table>";
+    }
+
+    out.innerHTML =
+      resultRow("Maturity amount", fmtINR(amount), { hero: true }) +
+      resultRow("Total interest earned", fmtINR(interest)) +
+      resultRow("Principal", fmtINR(principal)) +
+      resultRow("Compounding", freqLabel) +
+      resultRow("Effective annual growth", fmtNum(effective, 2) + "%") +
+      tableHtml;
+  }
+
   // ------------------------------------------------------------- CGPA
   var CGPA_MAX_SEMESTERS = 8;
 
@@ -279,6 +321,7 @@
     age: calcAge,
     discount: calcDiscount,
     "simple-interest": calcSimpleInterest,
+    "compound-interest": calcCompoundInterest,
     cgpa: calcCGPA,
   };
 

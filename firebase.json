@@ -8,7 +8,16 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(js|css|png|jpg|jpeg|gif|ico|svg|webp|woff2|woff|ttf)",
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(png|jpg|jpeg|gif|ico|svg|webp|woff2|woff|ttf)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -24,6 +33,23 @@
             "value": "public, max-age=0, must-revalidate"
           }
         ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+          { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://pagead2.googlesyndication.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://*.clarity.ms https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://sodar.google.com; frame-src 'self' https://googleads.g.doubleclick.net https://*.googlesyndication.com;" }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/guides/sebi-release-order-rashesh-purohit-tv-vision-limited-certificate-7449-2023",
+        "destination": "/guides/sebi-release-order-rashesh-purohit-tv-vision-limited-2026/",
+        "type": 301
       }
     ],
     "rewrites": [
@@ -37,4 +63,3 @@
     "source": "functions"
   }
 }
-

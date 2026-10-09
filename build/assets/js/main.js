@@ -151,3 +151,95 @@
     });
   });
 })();
+
+// Article sidebar newsletter — no backend yet, so confirm inline instead of
+// reloading the page on submit.
+(function () {
+  var forms = document.querySelectorAll(".ag-newsletter-form");
+  if (!forms.length) return;
+  Array.prototype.forEach.call(forms, function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var input = form.querySelector("input[type='email']");
+      if (input && !input.value.trim()) {
+        input.focus();
+        return;
+      }
+      var note = form.parentNode.querySelector(".ag-widget__note");
+      if (note) note.textContent = "Thanks — you're on the list.";
+      form.reset();
+    });
+  });
+})();
+
+// ---------------------------------------------------------------------------
+// GA4 conversion events — fire only once GA4 is active (cookie consent
+// granted). The gtag() stub always exists (layout.js head), so calls made
+// before consent are simply gated off by __ga4Loaded.
+// ---------------------------------------------------------------------------
+(function () {
+  function gaEvent(name, params) {
+    if (!window.__ga4Loaded || typeof gtag !== "function") return;
+    gtag("event", name, params || {});
+  }
+
+  // subscribe_click — sidebar + footer newsletter forms
+  Array.prototype.forEach.call(
+    document.querySelectorAll(".ag-newsletter-form, .foot-newsletter-form"),
+    function (form) {
+      form.addEventListener("submit", function () {
+        gaEvent("subscribe_click", {
+          form_location: form.classList.contains("foot-newsletter-form") ? "footer" : "sidebar",
+        });
+      });
+    }
+  );
+
+  // share_click + whatsapp_click — delegated so every page is covered
+  document.addEventListener("click", function (e) {
+    var el = e.target && e.target.closest ? e.target : null;
+    if (!el) return;
+    var share = el.closest("a.ag-share__btn");
+    if (share) {
+      var platform = share.classList.contains("ag-share__btn--wa")
+        ? "whatsapp"
+        : share.classList.contains("ag-share__btn--x")
+          ? "twitter"
+          : "linkedin";
+      gaEvent("share_click", { platform: platform });
+      return;
+    }
+    var a = el.closest("a");
+    if (a && a.href && a.href.indexOf("wa.me") !== -1) {
+      gaEvent("whatsapp_click", { link: a.getAttribute("href") });
+    }
+  });
+
+  // calculator_use — first interaction on a calculator page (once per page)
+  if (/^\/calculators\/.+/.test(location.pathname)) {
+    var calcDone = false;
+    var fireCalc = function () {
+      if (calcDone) return;
+      calcDone = true;
+      gaEvent("calculator_use", { calculator: location.pathname });
+    };
+    document.addEventListener("click", function (e) {
+      if (e.target && e.target.closest && e.target.closest("button")) fireCalc();
+    });
+    document.addEventListener("input", fireCalc);
+  }
+
+  // scroll_75 — reader reached 75% of the page (once per page)
+  var scrolled = false;
+  function checkScroll() {
+    if (scrolled) return;
+    var doc = document.documentElement;
+    var total = Math.max(doc.scrollHeight, document.body.scrollHeight);
+    if (window.scrollY + window.innerHeight >= total * 0.75) {
+      scrolled = true;
+      window.removeEventListener("scroll", checkScroll);
+      gaEvent("scroll_75", { page_path: location.pathname });
+    }
+  }
+  window.addEventListener("scroll", checkScroll, { passive: true });
+})();
