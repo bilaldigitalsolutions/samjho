@@ -11,13 +11,15 @@ module.exports = {
     name: "Samjho Content Team",
     url: "https://samjhoindia.com/about/",
     description: "Finance and policy experts with 5+ years of experience helping Indians understand money, documents and government schemes.",
+    jobTitle: "Editorial team",
+    sameAs: ["https://www.youtube.com/@SamjhoIndia"],
   },
   publisher: {
     name: "Samjho India",
     logo: "/assets/logo/logo-icon.png",
   },
   defaultDescription:
-    "Samjho explains everyday Indian money, document and education questions in simple words, with calculators to help you decide.",
+    "Samjho explains everyday Indian money, documents and education questions in simple words — with free calculators, official sources and step-by-step guides.",
   nav: [
     { label: "Government", href: "/government/" },
     { label: "Documents", href: "/documents/" },
@@ -27,6 +29,7 @@ module.exports = {
   ],
   footerLinks: [
     { label: "About", href: "/about/" },
+    { label: "Editorial Policy", href: "/editorial-policy/" },
     { label: "Contact", href: "/contact/" },
     { label: "Privacy Policy", href: "/privacy/" },
     { label: "Terms", href: "/terms/" },
@@ -193,14 +196,18 @@ module.exports = {
       ],
     },
   ],
-  // AdSense placeholders — no real ad code is loaded until these are filled in.
+  // AdSense — publisher ID is verified (ads.txt + layout.js use
+  // ca-pub-6197766330959347). Slot IDs come from AdSense > Ads > By ad unit
+  // > "Create ad unit" (each gives a numeric data-ad-slot). Paste them here;
+  // until then the site renders Auto-ads-compatible responsive blocks
+  // (data-ad-format="auto") which start earning once Auto ads is ON.
   adsense: {
-    publisherId: "", // e.g. "ca-pub-0000000000000000"
+    publisherId: "ca-pub-6197766330959347",
     slots: {
-      headerBanner: "",
-      inContent: "",
-      sidebar: "",
-      footer: "",
+      headerBanner: "", // e.g. "1234567890" — Display / Horizontal
+      inContent: "", // e.g. "1234567890" — In-article
+      sidebar: "", // e.g. "1234567890" — Display / Vertical
+      footer: "", // e.g. "1234567890" — Display
     },
   },
   // Google Programmable Search Engine configuration.

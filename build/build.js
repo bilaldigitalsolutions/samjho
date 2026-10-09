@@ -6,13 +6,16 @@ const articles = require("./data/articles");
 const calculators = require("./data/calculators");
 const schemes = require("./data/schemes");
 const publishedStore = require("./data/published-store");
-const { renderPage, esc } = require("./templates/layout");
+const { renderPage, esc, formatTitleTag } = require("./templates/layout");
 const { renderMasterGuide } = require("./templates/master-guide");
 
 // Admin foundation copy (no public-site impact)
 const { copyAdmin, emitMasterGuideBrowser, emitQuestionsAdmin } = require("./admin");
 const { emitFunctions } = require("./emit-functions");
 const { emitSupabase } = require("./emit-supabase");
+// FIX 3 — article hero image compression (WebP < 100 KB) + minified asset copies.
+const { compressArticleImages } = require("./compress-images");
+const vm = require("vm");
 
 const OUT = path.join(__dirname, "..", "dist");
 
@@ -62,6 +65,19 @@ function mergeCounts(s, l) {
 
 var categoryCounts = {};
 
+// ------------------------------------------------- SITEMAP CLEANUP (junk/thin control)
+// Shared quality rules live in build/quality.js — the same rules are
+// enforced at publish time by build/data/published-store.js (thin or test
+// content can no longer be staged at all). The noindex + sitemap filters
+// remain as the safety net for anything already sitting in the store:
+//   - published (press-release style) guides: < 300 words OR < 3 FAQs
+//   - legacy hand-written articles (the real guides): < 300 words only
+const {
+  THIN_MIN_WORDS, THIN_MIN_FAQS, plainText, countWords,
+  guideWordCount, guideFaqCount, isThinGuide, isTestGuide,
+  articleWordCount, isThinArticle,
+} = require("./quality");
+
 // ------------------------------------------------------------------ utils
 function write(relPath, content) {
   const full = path.join(OUT, relPath);
@@ -97,6 +113,113 @@ function hubUrl(slug) {
   return `/${slug}/`;
 }
 
+// ---------------------------------------------------------------------------
+// FIX 2 helpers — full category listings for the top-level hub pages.
+// Every article that belongs to a category, from BOTH build sources:
+//   1. articles.js (legacy corpus: `category` + `lastUpdated`)
+//   2. published-guides.json (approved Supabase pipeline output:
+//      `category` + `last_updated`)
+// Deduped by slug, sorted newest first. Only slugs that actually get a
+// built /guides/<slug>/ page are listed, so the hubs never emit dead links.
+// ---------------------------------------------------------------------------
+const CATEGORY_HUB_SLUGS = ["government", "documents", "business", "money", "education"];
+const CATEGORY_PAGE_SIZE = 20;
+// FIX: /updates/ page — items per page for the category-grouped pagination.
+const UPDATES_PER_PAGE = 20;
+
+function categoryName(slug) {
+  var raw = String(slug || "").trim().toLowerCase();
+  if (CATEGORY_MAP[raw]) return CATEGORY_MAP[raw];
+  var c = site.categories.find(function (x) { return x.slug === raw; });
+  return c ? c.label : raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : "Guide";
+}
+
+// Category link target: the top-level hub (/government/) for the five hub
+// categories, the /guides/ index for anything else (no dead /jobs/ links).
+function categoryHubHref(slug) {
+  var raw = String(slug || "").trim().toLowerCase();
+  return CATEGORY_HUB_SLUGS.indexOf(raw) !== -1 ? "/" + raw + "/" : "/guides/";
+}
+
+function getCategoryArticles(catSlug) {
+  var target = String(catSlug || "").trim().toLowerCase();
+  var seen = {};
+  var items = [];
+  articles.forEach(function (a) {
+    if (!a || !a.slug || seen[a.slug]) return;
+    if (String(a.category || "").trim().toLowerCase() !== target) return;
+    seen[a.slug] = true;
+    items.push({
+      slug: a.slug,
+      title: a.title || a.slug,
+      desc: a.shortAnswer || "",
+      date: a.lastUpdated || "",
+      source: "Official Source · Hindi Guide",
+      href: guideUrl(a.slug),
+    });
+  });
+  publishedStore.loadPublishedGuides().forEach(function (g) {
+    if (!g || !g.slug || seen[g.slug]) return;
+    if (g.slug === "test-guide-micro7" || publishedStore.isSlugReserved(g.slug)) return;
+    var gCat = String(g.category || g.primary_category || "").trim().toLowerCase();
+    if (gCat !== target) return;
+    seen[g.slug] = true;
+    items.push({
+      slug: g.slug,
+      title: g.title || g.slug,
+      desc: typeof g.summary === "string" ? g.summary : "",
+      date: guideUpdateDate(g),
+      source: g.source_name ? "Official Source · " + g.source_name : "Official Source",
+      href: guideUrl(g.slug),
+    });
+  });
+  items.sort(function (x, y) { return String(y.date).localeCompare(String(x.date)); });
+  return items;
+}
+
+// One gov-card per article, reusing the canonical gov-* markup.
+function categoryArticleCard(item, hubLabel) {
+  var iconMap = { government: "🏛️", documents: "📄", business: "🏪", money: "💰", education: "🎓" };
+  var icon = iconMap[String(hubLabel).toLowerCase()] || "📘";
+  var updated = item.date ? formatUpdateDate(item.date) : "";
+  var dateTag = updated ? '<span class="gov-card__tag">Updated ' + esc(updated) + "</span>" : "";
+  var dateMeta = updated ? "<span>Updated " + esc(updated) + "</span>" : "";
+  return (
+    '<article class="gov-card">' +
+    '<div class="gov-card__top">' +
+    '<span class="gov-card__icon" style="background:#0d9488">' + icon + "</span>" +
+    '<span class="gov-card__badge" style="background:#0d9488">' + esc(String(hubLabel).toUpperCase()) + "</span>" +
+    "</div>" +
+    '<h3 class="gov-card__title">' + esc(item.title) + "</h3>" +
+    '<p class="gov-card__desc">' + esc(compactDescription(item.desc || "", 150)) + "</p>" +
+    '<div class="gov-card__tags">' + dateTag + '<span class="gov-card__tag">Hindi + English</span></div>' +
+    '<div class="gov-card__footer"><a href="' + item.href + '" class="gov-card__cta">Padhe → Read More</a></div>' +
+    '<div class="gov-card__meta"><span>✦ ' + esc(item.source) + "</span>" + dateMeta + "</div>" +
+    "</article>"
+  );
+}
+
+// Prev / page numbers / Next. Static pages: /<slug>/ is page 1,
+// /<slug>/page/N/ for N >= 2. Rendered only when there is more than one page.
+function categoryPaginationHtml(slug, page, totalPages) {
+  if (totalPages <= 1) return "";
+  function hrefFor(p) { return p === 1 ? "/" + slug + "/" : "/" + slug + "/page/" + p + "/"; }
+  var nav = '<nav class="gov-pagination" aria-label="Pagination">';
+  nav += page > 1
+    ? '<a class="gov-pagination__link" href="' + hrefFor(page - 1) + '" rel="prev">← Previous</a>'
+    : '<span class="gov-pagination__link gov-pagination__link--disabled">← Previous</span>';
+  for (var p = 1; p <= totalPages; p++) {
+    nav += p === page
+      ? '<span class="gov-pagination__link gov-pagination__link--active" aria-current="page">' + p + "</span>"
+      : '<a class="gov-pagination__link" href="' + hrefFor(p) + '">' + p + "</a>";
+  }
+  nav += page < totalPages
+    ? '<a class="gov-pagination__link" href="' + hrefFor(page + 1) + '" rel="next">Next →</a>'
+    : '<span class="gov-pagination__link gov-pagination__link--disabled">Next →</span>';
+  nav += "</nav>";
+  return nav;
+}
+
 function card({ href, eyebrow, title, desc }) {
   return `<a class="card" href="${href}">
     ${eyebrow ? `<span class="card-eyebrow">${esc(eyebrow)}</span>` : ""}
@@ -120,6 +243,65 @@ function breadcrumb(items) {
   return `<div class="breadcrumb">${parts}</div>`;
 }
 
+var MONTH_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatUpdateDate(dateStr) {
+  if (!dateStr || typeof dateStr !== "string") return "";
+  var m = String(dateStr).trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return String(dateStr).trim();
+  var day = parseInt(m[3], 10);
+  var mon = MONTH_SHORT[parseInt(m[2], 10) - 1] || "";
+  return day + " " + mon + " " + m[1];
+}
+
+function guideUpdateDate(g) {
+  return g.last_updated || g.lastUpdated || g.updated_at || g.dateModified || g.source_published_date || "";
+}
+
+function getLatestUpdates(limit) {
+  var items = publishedStore.loadPublishedGuides()
+    .filter(function (g) { return g && g.slug && g.slug !== "test-guide-micro7"; })
+    .map(function (g) {
+      var catSlug = String(g.category || g.primary_category || "government").toLowerCase();
+      var cat = categoryLabel(catSlug) || g.category || g.primary_category || "Government";
+      return {
+        slug: g.slug,
+        title: g.title || g.slug,
+        desc: g.summary || g.shortAnswer || "Read the simple guide.",
+        category: cat,
+        date: guideUpdateDate(g),
+        img: g.hero_image || "",
+        catSlug: catSlug,
+      };
+    });
+  items.sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+  return limit ? items.slice(0, limit) : items;
+}
+
+function updateCard(u) {
+  const cat = String(u.category || "Guide").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const media = u.img
+    ? `<span class="home-all-card__media"><img src="${esc(u.img)}" alt="${esc(u.title)}" loading="lazy" decoding="async" width="640" height="360" /></span>`
+    : `<span class="home-all-card__media home-all-card__media--fallback" aria-hidden="true"></span>`;
+  return `<a class="home-all-card home-all-card--${cat}" href="/guides/${u.slug}/">
+    ${media}
+    <span class="home-all-card__body">
+      <span class="home-all-card__eyebrow">${esc(u.category)}</span>
+      <h3 class="home-all-card__title">${esc(u.title)}</h3>
+      <p class="home-all-card__desc">${esc(u.desc)}</p>
+      <span class="home-all-card__footer">
+        <span class="home-all-card__date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          ${esc(formatUpdateDate(u.date))}
+        </span>
+        <span class="home-all-card__cta">Read guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </span>
+    </span>
+  </a>`;
+}
+
 function breadcrumbSchema(items) {
   return {
     "@context": "https://schema.org",
@@ -134,7 +316,21 @@ function breadcrumbSchema(items) {
 }
 
 function adSlot(kind, label) {
-  return `<div class="ad-slot ad-slot--${kind}" data-ad-slot="${kind}">Advertisement</div>`;
+  // Real AdSense block. publisherId comes from build/data/site.js.
+  // Slot IDs come from AdSense > Ads > By ad unit. Until a slot ID is
+  // pasted, we still emit a responsive Auto-ads-compatible <ins> block
+  // (data-ad-format="auto") — Google fills it once Auto ads is ON, and the
+  // review crawler sees a real ad unit instead of a fake placeholder.
+  var cfg = (site.adsense || {});
+  var client = cfg.publisherId || "";
+  var slots = cfg.slots || {};
+  var key = { header: "headerBanner", incontent: "inContent", sidebar: "sidebar", footer: "footer" }[kind] || kind;
+  var slot = slots[key] || slots[kind] || "";
+  if (!client) {
+    return `<div class="ad-slot ad-slot--${kind}" data-ad-slot="${kind}">${label || "Advertisement"}</div>`;
+  }
+  var slotAttr = slot ? ` data-ad-slot="${slot}"` : "";
+  return `<div class="ad-slot-wrap ad-slot-wrap--${kind}"><ins class="adsbygoogle ad-slot ad-slot--${kind}" style="display:block" data-ad-client="${client}"${slotAttr} data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>`;
 }
 
 function compactDescription(text, maxLength = 160) {
@@ -142,6 +338,42 @@ function compactDescription(text, maxLength = 160) {
   if (value.length <= maxLength) return value;
   const shortened = value.slice(0, maxLength - 1).replace(/\s+\S*$/, "").trim();
   return `${shortened}…`;
+}
+
+// ONE title rule for every article page (legacy + published):
+// base title + " — Samjho", capped at 60 chars so it is never truncated in SERPs.
+// The H1 on the page still uses the raw title — this only shapes the <title> tag.
+function articleTitleTag(raw) {
+  // Standard tag: [Article Title] | Samjho India — capped at 60 chars and
+  // stripped of legacy separators. See formatTitleTag() in templates/layout.js.
+  return formatTitleTag(raw);
+}
+
+// Meta description target: 150-160 chars. Prefer the hand-written
+// metaDescription, but fall back to the longer shortAnswer when the written one
+// is too short to hit the band. Uses only existing article text — nothing new.
+function articleDescription(a) {
+  const md = String(a.metaDescription || "").trim();
+  const sa = String(a.shortAnswer || "").trim();
+  if (md.length >= 150) return compactDescription(md);
+  if (sa.length > md.length) return compactDescription(sa);
+  return compactDescription(md || sa);
+}
+
+// Pick the existing title string whose <title> tag lands in the 50-60 char band.
+// Candidates are only re-ordered/selected — never rewritten.
+function articleTitleFor(a) {
+  const candidates = [];
+  [a.metaTitle, a.title].forEach((c) => {
+    const v = String(c || "").trim();
+    if (v && candidates.indexOf(v) === -1) candidates.push(v);
+  });
+  if (!candidates.length) return "";
+  const inBand = candidates.find((c) => {
+    const tagged = articleTitleTag(c);
+    return tagged.length >= 50 && tagged.length <= 60;
+  });
+  return inBand || candidates[0];
 }
 
 function howToSchema({ name, description, url, steps }) {
@@ -436,27 +668,12 @@ function buildHome() {
   ].filter((x) => x.article || x.href);
 
   const featuredIllustrations = {
-    government: '<picture><source srcset="assets/featured-kisan.webp" type="image/webp"><img src="assets/featured-kisan.png" alt="PM Kisan Yojana" loading="lazy" /></picture>',
-    documents: '<picture><source srcset="assets/featured-pan.webp" type="image/webp"><img src="assets/featured-pan.png" alt="PAN Card" loading="lazy" /></picture>',
-    business: '<picture><source srcset="assets/featured-udyam.webp" type="image/webp"><img src="assets/featured-udyam.png" alt="Udyam Registration" loading="lazy" /></picture>',
+    government: '<picture><source srcset="assets/featured-kisan.webp" type="image/webp"><img src="assets/featured-kisan.png" alt="PM Kisan Yojana" width="286" height="295" loading="lazy" /></picture>',
+    documents: '<picture><source srcset="assets/featured-pan.webp" type="image/webp"><img src="assets/featured-pan.png" alt="PAN Card" width="344" height="281" loading="lazy" /></picture>',
+    business: '<picture><source srcset="assets/featured-udyam.webp" type="image/webp"><img src="assets/featured-udyam.png" alt="Udyam Registration" width="500" height="500" loading="lazy" /></picture>',
   };
 
 
-  // --- All Articles by Category (homepage grid) ---
-  const allCategoryArticleCards = site.hubs
-    .flatMap((hub) => {
-      const catArticles = articles.filter((a) => a.category === hub.slug);
-      return catArticles.slice(0, 3).map((a) => ({ article: a, hub: hub }));
-    })
-    .map(
-      ({ article: a, hub }) => `<a class="home-all-card" href="${guideUrl(a.slug)}">
-        <span class="home-all-card__eyebrow">${esc(hub.label)}</span>
-        <h3 class="home-all-card__title">${esc(a.title)}</h3>
-        <p class="home-all-card__desc">${esc(compactDescription(a.shortAnswer, 100))}</p>
-        <span class="home-card-link">Read guide <span aria-hidden="true">→</span></span>
-      </a>`
-    )
-    .join("");
   const featuredCards = featuredArticles
     .map((x) => {
       const href = x.href || guideUrl(x.article.slug);
@@ -521,7 +738,7 @@ function buildHome() {
           <div class="home-hero__visual">
             <div class="home-hero__illustration-wrapper">
               <div class="home-hero__illustration">
-                <picture><source srcset="assets/hero-illustration-new.webp" type="image/webp"><img src="assets/hero-illustration-new.png" alt="India Gate, Parliament and India map illustration" class="hero-illustration-img" loading="eager" /></picture>
+                <picture><source srcset="assets/hero-illustration-new.webp" type="image/webp"><img src="assets/hero-illustration-new.png" alt="India Gate, Parliament and India map illustration" class="hero-illustration-img" width="1920" height="1080" loading="eager" /></picture>
               </div>
             </div>
           </div>
@@ -566,15 +783,16 @@ function buildHome() {
     <section class="home-section home-section--all-articles">
       <div class="container">
         <div class="home-section-heading home-section-heading--row">
-          <h2>Browse All Articles</h2>
-          <a href="/explore/" class="home-section-link">Explore Topics <span aria-hidden="true">→</span></a>
+          <h2>Latest Updates</h2>
+          <a href="/updates/" class="home-section-link">View All <span aria-hidden="true">→</span></a>
         </div>
-        <p class="home-section-subtitle">Find guides, calculators and information across every category.</p>
-        <div class="home-category-tabs">
-          ${site.hubs.map((h, i) => `<a href="${hubUrl(h.slug)}" class="home-cat-tab${i === 0 ? " home-cat-tab--active" : ""}">${esc(h.label)}</a>`).join("")}
-        </div>
-        <div class="home-all-articles-grid">${allCategoryArticleCards}</div>
+        <p class="home-section-subtitle">Fresh guides and government updates, newest first.</p>
+        <div class="home-all-articles-grid">${getLatestUpdates(3).map(updateCard).join("")}</div>
       </div>
+    </section>
+
+    <section class="home-section home-section--ad">
+      <div class="container">${adSlot("incontent", "Advertisement")}</div>
     </section>
 
     <section class="home-section home-section--why">
@@ -592,7 +810,7 @@ function buildHome() {
   write(
     "index.html",
     renderPage({
-      title: "Samjho India — Understand it. Calculate it. Decide better.",
+      title: "Your Questions, Clear Answers | Samjho India",
       description: site.defaultDescription,
       canonical,
       activeHref: "/",
@@ -671,6 +889,81 @@ function buildExplore() {
   );
 }
 
+// ------------------------------------------------------------------ UPDATES PAGE (/updates/)
+function buildUpdatesPage(page) {
+  page = page || 1;
+  const all = getLatestUpdates(0);
+
+  // Category grouping: items stay newest-first inside each group; group order
+  // follows first appearance (= the newest item in that category).
+  const groupOrder = [];
+  const groups = {};
+  const catCounts = {};
+  all.forEach(function (u) {
+    const key = u.catSlug || "general";
+    if (!groups[key]) { groups[key] = []; groupOrder.push(key); }
+    groups[key].push(u);
+    catCounts[key] = (catCounts[key] || 0) + 1;
+  });
+  const flat = [];
+  groupOrder.forEach(function (k) { groups[k].forEach(function (u) { flat.push(u); }); });
+
+  const totalPages = Math.max(1, Math.ceil(flat.length / UPDATES_PER_PAGE));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const start = (safePage - 1) * UPDATES_PER_PAGE;
+  const slice = flat.slice(start, start + UPDATES_PER_PAGE);
+
+  // Category heading + card grid per group. A heading re-appears when the
+  // category changes OR when a page boundary splits a group.
+  let cardsHtml = "";
+  let currentCat = null;
+  slice.forEach(function (u, idx) {
+    const key = u.catSlug || "general";
+    if (key !== currentCat) {
+      if (currentCat !== null) cardsHtml += "</div></section>";
+      const label = key.charAt(0).toUpperCase() + key.slice(1);
+      const hub = hubUrl(key);
+      cardsHtml += '<section class="updates-group"><div class="updates-group__head">' +
+        '<h2 class="updates-group__title"><a href="' + hub + '">' + esc(label) + "</a></h2>" +
+        '<span class="updates-group__count">' + catCounts[key] + " updates</span></div>" +
+        '<div class="home-all-articles-grid">';
+      currentCat = key;
+    }
+    cardsHtml += updateCard(u);
+  });
+  if (currentCat !== null) cardsHtml += "</div></section>";
+
+  const paginationHtml = categoryPaginationHtml("updates", safePage, totalPages);
+  const pageSuffix = safePage === 1 ? "" : " — Page " + safePage;
+  const canonical = site.domain + (safePage === 1 ? "/updates/" : "/updates/page/" + safePage + "/");
+
+  const body = `
+  <div class="page-head container">
+    ${breadcrumb([{ label: "Home", href: "/" }, { label: "All Updates", href: "/updates/" }].concat(safePage === 1 ? [] : [{ label: "Page " + safePage }]))}
+    <h1>All Updates${safePage === 1 ? "" : " — Page " + safePage}</h1>
+    <p>Latest guides, schemes, and government updates — newest first, grouped by category. ${all.length} updates${totalPages > 1 ? " · Page " + safePage + " of " + totalPages : ""}.</p>
+  </div>
+  <section class="section">
+    <div class="container">
+      ${cardsHtml}
+      ${paginationHtml}
+    </div>
+  </section>
+  `;
+
+  write(
+    safePage === 1 ? "updates/index.html" : "updates/page/" + safePage + "/index.html",
+    renderPage({
+      title: "All Updates: Latest Guides & News" + pageSuffix + " | Samjho India",
+      description: "Latest guides, schemes and government updates from Samjho India — newest first, grouped by category, with official sources and simple explanations.",
+      canonical,
+      activeHref: "/updates/",
+      bodyHtml: body,
+      structuredData: [breadcrumbSchema([{ name: "Home", url: site.domain + "/" }, { name: "All Updates", url: site.domain + "/updates/" }]), webPageSchema("All Updates" + pageSuffix, "Latest guides, schemes and government updates — newest first.")],
+    })
+  );
+}
+
 // ------------------------------------------------------------------ CATEGORY HUBS
 function buildCategoryHub(hub) {
   const hubHref = hubUrl(hub.slug);
@@ -732,6 +1025,7 @@ function buildCategoryHub(hub) {
       </div>
       <div class="card-grid card-grid--3">${contentCards}</div>
     </section>` : ""}
+    <div class="container">${adSlot("incontent", "Advertisement")}</div>
   </div>
   `;
 
@@ -791,115 +1085,19 @@ function buildGovernmentPage() {
   const description = HUB_SEO.government.description;
   const hubTitle = HUB_SEO.government.title;
 
-  const yojanaCards = [
-    {
-      icon: "🌾",
-      iconBg: "#16a34a",
-      badge: "POPULAR",
-      badgeColor: "#16a34a",
-      title: "PM Kisan Samman Nidhi",
-      hindi: "पीएम किसान सम्मान निधि",
-      desc: "Kisan parivar ko saal mein ₹6,000 milte hain — 3 kiston mein seedha bank account. Eligibility check karein aur e-KYC status dekhein.",
-      tags: ["11 Cr+ Farmers", "2 min read"],
-      href: "/guides/pm-kisan-yojana/",
-      source: "Official Source · Hindi Guide",
-      updated: "2h ago",
-    },
-    {
-      icon: "🪪",
-      iconBg: "#0d9488",
-      badge: "FAST TRACK",
-      badgeColor: "#0d9488",
-      title: "PAN Card Apply, Status, Correction",
-      hindi: "पैन कार्ड — नया, स्टेटस, सुधार",
-      desc: "PAN card ke liye apply karein, status track karein ya correction file karein. Instant e-PAN aur physical card dono ki poori jaankari.",
-      tags: ["8.5 Cr Applied", "3 min read"],
-      href: "/guides/what-is-pan-card/",
-      source: "Official Source · Hindi Guide",
-      updated: "5h ago",
-    },
-    {
-      icon: "🏪",
-      iconBg: "#f97316",
-      badge: "NEW UPDATE",
-      badgeColor: "#f97316",
-      title: "Shop Act License & Udyam Registration",
-      hindi: "शॉप एक्ट लाइसेंस और उद्यम रजिस्ट्रेशन",
-      desc: "Chhote business ke liye registration — Shop Act aur Udyam dono. Online apply karein, documents jaanein, aur MSME benefits paayein.",
-      tags: ["1.2 Cr Registered", "4 min read"],
-      href: "/guides/udyam-registration/",
-      source: "Official Source · Hindi Guide",
-      updated: "1d ago",
-    },
-    {
-      icon: "🆔",
-      iconBg: "#0d9488",
-      badge: "MOST SEARCHED",
-      badgeColor: "#0d9488",
-      title: "Aadhaar Update & Download",
-      hindi: "आधार — अपडेट और डाउनलोड",
-      desc: "Aadhaar card online update karein, download karein, aur status check karein. Mobile number link karne se lekar biometric update tak sab kuch.",
-      tags: ["13 Cr+ Searches", "2 min read"],
-      href: "/guides/what-is-aadhaar/",
-      source: "Official Source · Hindi Guide",
-      updated: "3h ago",
-    },
-    {
-      icon: "🍚",
-      iconBg: "#16a34a",
-      badge: "POPULAR",
-      badgeColor: "#16a34a",
-      title: "Ration Card — List & e-KYC",
-      hindi: "राशन कार्ड — सूची और ई-केवाईसी",
-      desc: "Ration card ke liye apply karein, apna naam list mein check karein, aur e-KYC complete karein. State-wise process aur documents.",
-      tags: ["80 Cr+ Cards", "3 min read"],
-      href: "/guides/ration-card/",
-      source: "Official Source · Hindi Guide",
-      updated: "6h ago",
-    },
-    {
-      icon: "👷",
-      iconBg: "#0d9488",
-      badge: "₹1000 AID",
-      badgeColor: "#0d9488",
-      title: "E-Shram Card & Benefits",
-      hindi: "ई-श्रम कार्ड और लाभ",
-      desc: "Unorganized sector workers ke liye ₹2 lakh accident insurance. E-Shram card banwaayein aur monthly benefits paayein.",
-      tags: ["30 Cr+ Workers", "2 min read"],
-      href: "/guides/e-shram-card/",
-      source: "Official Source · Hindi Guide",
-      updated: "8h ago",
-    },
-  ];
+    // FIX 2 - ALL Government articles: articles.js + approved published store
+  // (Supabase pipeline), sorted newest first. Paginated at 20 per page.
+  const allArticles = getCategoryArticles("government");
+  const totalCount = allArticles.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / CATEGORY_PAGE_SIZE));
 
-  const cardsHtml = yojanaCards
-    .map(
-      (c) => `<article class="gov-card">
-      <div class="gov-card__top">
-        <span class="gov-card__icon" style="background:${c.iconBg}">${c.icon}</span>
-        <span class="gov-card__badge" style="background:${c.badgeColor}">${c.badge}</span>
-      </div>
-      <h3 class="gov-card__title">${esc(c.title)}</h3>
-      <p class="gov-card__hindi">${esc(c.hindi)}</p>
-      <p class="gov-card__desc">${esc(c.desc)}</p>
-      <div class="gov-card__tags">${c.tags.map((t) => `<span class="gov-card__tag">${esc(t)}</span>`).join("")}</div>
-      <div class="gov-card__footer">
-        <a href="${c.href}" class="gov-card__cta">Padhe → Read More</a>
-        <button class="gov-card__heart" aria-label="Save for later">♡</button>
-      </div>
-      <div class="gov-card__meta">
-        <span>✦ ${esc(c.source)}</span>
-        <span>Updated ${c.updated}</span>
-      </div>
-    </article>`
-    )
-    .join("");
+
 
   const trendingItems = [
-    { title: "Ladli Behna Yojana 16th Kist Date", views: "2.1L views" },
-    { title: "PM Vishwakarma Yojana Tool Kit", views: "98K views" },
-    { title: "Ayushman Card Hospital List", views: "87K views" },
-    { title: "Mukhyamantri Seekho Kamao", views: "76K views" },
+    { title: "Ladli Behna Yojana 16th Kist Date" },
+    { title: "PM Vishwakarma Yojana Tool Kit" },
+    { title: "Ayushman Card Hospital List" },
+    { title: "Mukhyamantri Seekho Kamao" },
   ];
 
   const trendingHtml = trendingItems
@@ -908,7 +1106,7 @@ function buildGovernmentPage() {
         <span class="gov-trending__num">${i + 1}</span>
         <div class="gov-trending__text">
           <p>${esc(t.title)}</p>
-          <span>${t.views}</span>
+          
         </div>
       </div>`
     )
@@ -917,7 +1115,7 @@ function buildGovernmentPage() {
   const categoryTags = ["Kisan Yojana", "Mahila Yojana", "Student", "Rozgar", "Bima", "Card Seva"];
   const categoryTagsHtml = categoryTags.map((t) => `<span class="gov-cat-tag">${esc(t)}</span>`).join("");
 
-  const body = `
+  const renderBody = (cardsHtml, paginationHtml) => `
   <div class="gov-page">
     <section class="gov-hero">
       <div class="container gov-hero__grid">
@@ -971,7 +1169,7 @@ function buildGovernmentPage() {
           <span class="gov-chip">ID Cards</span>
           <span class="gov-chip">Udyam</span>
         </div>
-        <p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p>
+        <p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p>
       </div>
     </section>
 
@@ -979,12 +1177,13 @@ function buildGovernmentPage() {
       <div class="container gov-content__grid">
         <div class="gov-main">
           <div class="gov-main__header">
-            <h2>Popular Yojana · <span>${categoryCounts.government || 6} results</span></h2>
-            <span class="gov-main__sort">Sorted by helpful</span>
+            <h2>All Government Articles · <span>${totalCount} results</span></h2>
+            <span class="gov-main__sort">Sorted by date (newest first)</span>
           </div>
           <div class="gov-card-grid">
             ${cardsHtml}
           </div>
+          ${paginationHtml}
         </div>
         <aside class="gov-sidebar">
           <div class="gov-sidebar-widget gov-trending">
@@ -999,7 +1198,7 @@ function buildGovernmentPage() {
               <input type="email" placeholder="Your email" aria-label="Email for yojana updates" />
               <button type="submit">Join</button>
             </form>
-            <p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p>
+            <p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p>
           </div>
           <div class="gov-sidebar-widget gov-categories">
             <h3 class="gov-sidebar-widget__heading">CATEGORIES</h3>
@@ -1028,146 +1227,54 @@ function buildGovernmentPage() {
   </div>
   `;
 
-  const canonical = site.domain + "/government/";
-  const structuredData = [
-    breadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Government", href: "/government/" },
-    ]),
-    webPageSchema({
-      name: hubTitle,
-      description,
-      url: canonical,
-    }),
-  ];
-
-  write(
-    "government/index.html",
-    renderPage({
-      title: `${hubTitle} | Samjho India`,
-      description,
-      canonical,
-      activeHref: "/government/",
-      bodyHtml: body,
-      structuredData,
-    })
-  );
+    for (let page = 1; page <= totalPages; page++) {
+    const slice = allArticles.slice((page - 1) * CATEGORY_PAGE_SIZE, page * CATEGORY_PAGE_SIZE);
+    const cardsHtml = slice.map((it) => categoryArticleCard(it, "Government")).join("\n");
+    const paginationHtml = categoryPaginationHtml("government", page, totalPages);
+    const body = renderBody(cardsHtml, paginationHtml) + `<div class="container">${adSlot("incontent", "Advertisement")}</div>`;
+    const canonical = page === 1 ? site.domain + "/government/" : site.domain + "/government/page/" + page + "/";
+    const structuredData = [
+      breadcrumbSchema([
+        { label: "Home", href: "/" },
+        { label: "Government", href: "/government/" },
+      ]),
+      webPageSchema({
+        name: page === 1 ? hubTitle : hubTitle + " — Page " + page,
+        description,
+        url: canonical,
+      }),
+    ];
+    write(
+      page === 1 ? "government/index.html" : "government/page/" + page + "/index.html",
+      renderPage({
+        title: page === 1 ? "Government Yojana and Services" : "Government Yojana and Services — Page " + page,
+        description,
+        canonical,
+        activeHref: "/government/",
+        bodyHtml: body,
+        structuredData,
+      })
+    );
+  }
 }
-
 // -------------------------------------------------------- DOCUMENTS PAGE (DEDICATED)
 function buildDocumentsPage() {
   const description = HUB_SEO.documents.description;
   const hubTitle = HUB_SEO.documents.title;
 
-  const docCards = [
-    {
-      icon: "🪪",
-      iconBg: "#16a34a",
-      badge: "POPULAR",
-      badgeColor: "#16a34a",
-      title: "PAN Card Apply & Status",
-      hindi: "पैन कार्ड — अप्लाई और स्टेटस",
-      desc: "PAN card ke liye apply karein, status track karein ya correction file karein. Instant e-PAN aur physical card dono ki poori jaankari.",
-      tags: ["8.5 Cr Applied", "3 min read"],
-      href: "/guides/what-is-pan-card/",
-      source: "Official Source · Hindi Guide",
-      updated: "5h ago",
-    },
-    {
-      icon: "🆔",
-      iconBg: "#0d9488",
-      badge: "MOST SEARCHED",
-      badgeColor: "#0d9488",
-      title: "Aadhaar Update & Download",
-      hindi: "आधार — अपडेट और डाउनलोड",
-      desc: "Aadhaar card online update karein, download karein, aur status check karein. Mobile number link karne se lekar biometric update tak sab kuch.",
-      tags: ["13 Cr+ Searches", "2 min read"],
-      href: "/guides/what-is-aadhaar/",
-      source: "Official Source · Hindi Guide",
-      updated: "3h ago",
-    },
-    {
-      icon: "🗳️",
-      iconBg: "#0d9488",
-      badge: "FAST TRACK",
-      badgeColor: "#0d9488",
-      title: "Voter ID Card — Apply & Download",
-      hindi: "वोटर आईडी — अप्लाई और डाउनलोड",
-      desc: "Voter ID card ke liye online apply karein, e-EPIC download karein, ya correction karwayein. NVSP portal se sab kuch ghar baithe.",
-      tags: ["90 Cr+ Voters", "3 min read"],
-      href: "/guides/voter-id/",
-      source: "Official Source · Hindi Guide",
-      updated: "1d ago",
-    },
-    {
-      icon: "📘",
-      iconBg: "#16a34a",
-      badge: "POPULAR",
-      badgeColor: "#16a34a",
-      title: "Passport Apply Online",
-      hindi: "पासपोर्ट — ऑनलाइन अप्लाई",
-      desc: "Passport Seva portal se passport ke liye apply karein. Fees, documents, police verification — sab kuch step by step.",
-      tags: ["2 Cr+ Passports", "4 min read"],
-      href: "/guides/passport/",
-      source: "Official Source · Hindi Guide",
-      updated: "6h ago",
-    },
-    {
-      icon: "🚗",
-      iconBg: "#f97316",
-      badge: "NEW UPDATE",
-      badgeColor: "#f97316",
-      title: "Driving Licence — Apply & Renew",
-      hindi: "ड्राइविंग लाइसेंस — अप्लाई और रिन्यू",
-      desc: "Learner's Licence se permanent DL tak — Parivahan portal se online apply karein. RTO test, fees, renewal sab ki jaankari.",
-      tags: ["15 Cr+ DLs", "3 min read"],
-      href: "/guides/driving-licence/",
-      source: "Official Source · Hindi Guide",
-      updated: "2d ago",
-    },
-    {
-      icon: "💼",
-      iconBg: "#0d9488",
-      badge: "POPULAR",
-      badgeColor: "#0d9488",
-      title: "UAN / PF — Check & Download",
-      hindi: "यूएएन / पीएफ — चेक और डाउनलोड",
-      desc: "UAN number jaanein, PF balance check karein, aur passbook download karein. EPFO portal se online sab kuch karein.",
-      tags: ["6 Cr+ Members", "2 min read"],
-      href: "/guides/what-is-uan/",
-      source: "Official Source · Hindi Guide",
-      updated: "4h ago",
-    },
-  ];
+    // FIX 2 - ALL Documents articles: articles.js + approved published store
+  // (Supabase pipeline), sorted newest first. Paginated at 20 per page.
+  const allArticles = getCategoryArticles("documents");
+  const totalCount = allArticles.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / CATEGORY_PAGE_SIZE));
 
-  const cardsHtml = docCards
-    .map(
-      (c) => `<article class="gov-card">
-      <div class="gov-card__top">
-        <span class="gov-card__icon" style="background:${c.iconBg}">${c.icon}</span>
-        <span class="gov-card__badge" style="background:${c.badgeColor}">${c.badge}</span>
-      </div>
-      <h3 class="gov-card__title">${esc(c.title)}</h3>
-      <p class="gov-card__hindi">${esc(c.hindi)}</p>
-      <p class="gov-card__desc">${esc(c.desc)}</p>
-      <div class="gov-card__tags">${c.tags.map((t) => `<span class="gov-card__tag">${esc(t)}</span>`).join("")}</div>
-      <div class="gov-card__footer">
-        <a href="${c.href}" class="gov-card__cta">Padhe → Read More</a>
-        <button class="gov-card__heart" aria-label="Save for later">♡</button>
-      </div>
-      <div class="gov-card__meta">
-        <span>✦ ${esc(c.source)}</span>
-        <span>Updated ${c.updated}</span>
-      </div>
-    </article>`
-    )
-    .join("");
+
 
   const trendingItems = [
-    { title: "Aadhaar Address Change Online", views: "1.8L views" },
-    { title: "PAN Aadhaar Link Status", views: "1.2L views" },
-    { title: "Passport Appointment Slots", views: "98K views" },
-    { title: "DL Renewal Online", views: "76K views" },
+    { title: "Aadhaar Address Change Online" },
+    { title: "PAN Aadhaar Link Status" },
+    { title: "Passport Appointment Slots" },
+    { title: "DL Renewal Online" },
   ];
 
   const trendingHtml = trendingItems
@@ -1176,7 +1283,7 @@ function buildDocumentsPage() {
         <span class="gov-trending__num">${i + 1}</span>
         <div class="gov-trending__text">
           <p>${esc(t.title)}</p>
-          <span>${t.views}</span>
+          
         </div>
       </div>`
     )
@@ -1185,7 +1292,7 @@ function buildDocumentsPage() {
   const categoryTags = ["Identity", "Address", "Certificates", "Vehicle", "Tax", "Banking"];
   const categoryTagsHtml = categoryTags.map((t) => `<span class="gov-cat-tag">${esc(t)}</span>`).join("");
 
-  const body = `
+  const renderBody = (cardsHtml, paginationHtml) => `
   <div class="gov-page">
     <section class="gov-hero">
       <div class="container gov-hero__grid">
@@ -1240,7 +1347,7 @@ function buildDocumentsPage() {
           <span class="gov-chip">Vehicle</span>
           <span class="gov-chip">Tax</span>
         </div>
-        <p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p>
+        <p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p>
       </div>
     </section>
 
@@ -1248,12 +1355,13 @@ function buildDocumentsPage() {
       <div class="container gov-content__grid">
         <div class="gov-main">
           <div class="gov-main__header">
-            <h2>Popular Documents · <span>${categoryCounts.documents || 6} results</span></h2>
-            <span class="gov-main__sort">Sorted by helpful</span>
+            <h2>All Documents Articles · <span>${totalCount} results</span></h2>
+            <span class="gov-main__sort">Sorted by date (newest first)</span>
           </div>
           <div class="gov-card-grid">
             ${cardsHtml}
           </div>
+          ${paginationHtml}
         </div>
         <aside class="gov-sidebar">
           <div class="gov-sidebar-widget gov-trending">
@@ -1268,7 +1376,7 @@ function buildDocumentsPage() {
               <input type="email" placeholder="Your email" aria-label="Email for document updates" />
               <button type="submit">Join</button>
             </form>
-            <p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p>
+            <p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p>
           </div>
           <div class="gov-sidebar-widget gov-categories">
             <h3 class="gov-sidebar-widget__heading">CATEGORIES</h3>
@@ -1297,64 +1405,59 @@ function buildDocumentsPage() {
   </div>
   `;
 
-  const canonical = site.domain + "/documents/";
-  const structuredData = [
-    breadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Documents", href: "/documents/" },
-    ]),
-    webPageSchema({
-      name: hubTitle,
-      description,
-      url: canonical,
-    }),
-  ];
-
-  write(
-    "documents/index.html",
-    renderPage({
-      title: `${hubTitle} | Samjho India`,
-      description,
-      canonical,
-      activeHref: "/documents/",
-      bodyHtml: body,
-      structuredData,
-    })
-  );
+    for (let page = 1; page <= totalPages; page++) {
+    const slice = allArticles.slice((page - 1) * CATEGORY_PAGE_SIZE, page * CATEGORY_PAGE_SIZE);
+    const cardsHtml = slice.map((it) => categoryArticleCard(it, "Documents")).join("\n");
+    const paginationHtml = categoryPaginationHtml("documents", page, totalPages);
+    const body = renderBody(cardsHtml, paginationHtml) + `<div class="container">${adSlot("incontent", "Advertisement")}</div>`;
+    const canonical = page === 1 ? site.domain + "/documents/" : site.domain + "/documents/page/" + page + "/";
+    const structuredData = [
+      breadcrumbSchema([
+        { label: "Home", href: "/" },
+        { label: "Documents", href: "/documents/" },
+      ]),
+      webPageSchema({
+        name: page === 1 ? hubTitle : hubTitle + " — Page " + page,
+        description,
+        url: canonical,
+      }),
+    ];
+    write(
+      page === 1 ? "documents/index.html" : "documents/page/" + page + "/index.html",
+      renderPage({
+        title: page === 1 ? "Documents Apply, Update and Download" : "Documents Apply, Update and Download — Page " + page,
+        description,
+        canonical,
+        activeHref: "/documents/",
+        bodyHtml: body,
+        structuredData,
+      })
+    );
+  }
 }
-
 // ---------------------------------------------------------- BUSINESS PAGE (DEDICATED)
 function buildBusinessPage() {
   const businessHub = site.hubs.find((h) => h.slug === "business");
   const description = businessHub ? businessHub.description : "Business registrations, licences, tax and compliance explained in simple Hindi and English.";
 
-  const businessCards = [
-    { icon: "🏪", iconBg: "#16a34a", badge: "POPULAR", badgeColor: "#16a34a", title: "Shop Act License & Udyam Registration", hindi: "शॉप एक्ट लाइसेंस और उद्यम रजिस्ट्रेशन", desc: "Chhote business ke liye Shop Act aur Udyam registration ka step-by-step process, documents aur MSME benefits.", tags: ["7 Guides", "4 min read"], href: "/guides/what-is-udyam/", source: "Official Source · Hindi Guide", updated: "2h ago" },
-    { icon: "🧾", iconBg: "#2563eb", badge: "FAST TRACK", badgeColor: "#2563eb", title: "GST Registration & Filing", hindi: "जीएसटी रजिस्ट्रेशन और फाइलिंग", desc: "GST registration, returns aur filing ka process samjhein — small business ke liye simple Hindi me.", tags: ["7 Days", "4 min read"], href: "/guides/what-is-gst/", source: "Official Source · Hindi Guide", updated: "5h ago" },
-    { icon: "🍴", iconBg: "#f97316", badge: "MOST SEARCHED", badgeColor: "#f97316", title: "FSSAI Food License", hindi: "एफएसएसएआई फूड लाइसेंस", desc: "Food business ke liye FSSAI licence kaise lein, documents kya lagenge aur renewal ka process.", tags: ["Food Business", "3 min read"], href: "/guides/fssai-license/", source: "Official Source · Hindi Guide", updated: "1d ago" },
-    { icon: "📈", iconBg: "#0d9488", badge: "POPULAR", badgeColor: "#0d9488", title: "MSME Schemes & Subsidies", hindi: "एमएसएमई योजनाएं और सब्सिडी", desc: "MSME business ke liye schemes, subsidies aur government benefits ki useful jaankari.", tags: ["MSME Benefits", "5 min read"], href: "/guides/msme-schemes/", source: "Official Source · Hindi Guide", updated: "1d ago" },
-    { icon: "💼", iconBg: "#2563eb", badge: "FAST TRACK", badgeColor: "#2563eb", title: "Business Loan — Apply & Eligibility", hindi: "बिजनेस लोन — अप्लाई और पात्रता", desc: "Business loan ke liye eligibility, documents, interest aur apply karne ka process samjhein.", tags: ["Loan Guide", "5 min read"], href: "/guides/business-loan/", source: "Official Source · Hindi Guide", updated: "2d ago" },
-    { icon: "™️", iconBg: "#f97316", badge: "NEW UPDATE", badgeColor: "#f97316", title: "Trademark Registration", hindi: "ट्रेडमार्क रजिस्ट्रेशन", desc: "Brand name aur logo ko protect karne ke liye trademark registration ka simple step-by-step guide.", tags: ["Brand Protection", "4 min read"], href: "/guides/trademark/", source: "Official Source · Hindi Guide", updated: "3d ago" },
-  ];
+    // FIX 2 - ALL Business articles: articles.js + approved published store
+  // (Supabase pipeline), sorted newest first. Paginated at 20 per page.
+  const allArticles = getCategoryArticles("business");
+  const totalCount = allArticles.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / CATEGORY_PAGE_SIZE));
 
-  const cardsHtml = businessCards.map((c) => `<article class="gov-card">
-      <div class="gov-card__top"><span class="gov-card__icon" style="background:${c.iconBg}">${c.icon}</span><span class="gov-card__badge" style="background:${c.badgeColor}">${c.badge}</span></div>
-      <h3 class="gov-card__title">${esc(c.title)}</h3><p class="gov-card__hindi">${esc(c.hindi)}</p><p class="gov-card__desc">${esc(c.desc)}</p>
-      <div class="gov-card__tags">${c.tags.map((t) => `<span class="gov-card__tag">${esc(t)}</span>`).join("")}</div>
-      <div class="gov-card__footer"><a href="${c.href}" class="gov-card__cta">Padhe → Read More</a><button class="gov-card__heart" aria-label="Save for later">♡</button></div>
-      <div class="gov-card__meta"><span>✦ ${esc(c.source)}</span><span>Updated ${c.updated}</span></div>
-    </article>`).join("");
+
 
   const trendingItems = [
-    { title: "Udyam Registration Last Date", views: "1.5L views" },
-    { title: "GST Rate Change 2026", views: "89K views" },
-    { title: "FSSAI License Renewal", views: "76K views" },
-    { title: "MSME Loan Yojana", views: "65K views" },
+    { title: "Udyam Registration Last Date" },
+    { title: "GST Rate Change 2026" },
+    { title: "FSSAI License Renewal" },
+    { title: "MSME Loan Yojana" },
   ];
-  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p><span>${t.views}</span></div></div>`).join("");
+  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p></div></div>`).join("");
   const categoryTagsHtml = ["Registration", "Licence", "Tax", "Compliance", "MSME", "Loans"].map((t) => `<span class="gov-cat-tag">${esc(t)}</span>`).join("");
 
-  const body = `
+  const renderBody = (cardsHtml, paginationHtml) => `
   <div class="gov-page">
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.business || 7} BUSINESS GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
@@ -1366,69 +1469,64 @@ function buildBusinessPage() {
       <div class="gov-stat-card"><span class="gov-stat-card__label">GST REGISTRATION</span><span class="gov-stat-card__value">7 Days</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--teal" style="width:60%"></div></div></div>
       <div class="gov-stat-card"><span class="gov-stat-card__label">SHOP ACT</span><span class="gov-stat-card__value">State-wise</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--green" style="width:75%"></div></div></div>
     </div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>Udyam registration free hai. MSME benefits ke liye zaroor karein.</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
-    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Business ●</span><span class="gov-chip">Registration</span><span class="gov-chip">Licence</span><span class="gov-chip">Tax</span><span class="gov-chip">Compliance</span><span class="gov-chip">MSME</span></div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
-    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>Popular Business Guides · <span>${categoryCounts.business || 6} results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid">${cardsHtml}</div></div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Business updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new business guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for business updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
+    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Business ●</span><span class="gov-chip">Registration</span><span class="gov-chip">Licence</span><span class="gov-chip">Tax</span><span class="gov-chip">Compliance</span><span class="gov-chip">MSME</span></div><p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p></div></section>
+    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>All Business Articles · <span>${totalCount} results</span></h2><span class="gov-main__sort">Sorted by date (newest first)</span></div><div class="gov-card-grid">${cardsHtml}</div>${paginationHtml}</div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Business updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new business guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for business updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
     <section class="gov-banner-section"><div class="container"><div class="gov-banner"><div class="gov-banner__text"><span class="gov-banner__small">ABOUT SAMJHO INDIA</span><h2>Samjho India is an independent information platform. We explain government schemes and services in simple language — so every Indian can understand and act.</h2></div><a href="/about/" class="gov-banner__btn">Learn More →</a></div></div></section>
   </div>`;
 
-  const canonical = site.domain + "/business/";
-  const structuredData = [
-    breadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Business", href: "/business/" },
-    ]),
-    webPageSchema({
-      name: "Business — Samjho",
-      description,
-      url: canonical,
-    }),
-  ];
-
-  write(
-    "business/index.html",
-    renderPage({
-      title: "Business Registration 2026 — Udyam, GST, FSSAI Guide",
-      description,
-      canonical,
-      activeHref: "/business/",
-      bodyHtml: body,
-      structuredData,
-    })
-  );
+    for (let page = 1; page <= totalPages; page++) {
+    const slice = allArticles.slice((page - 1) * CATEGORY_PAGE_SIZE, page * CATEGORY_PAGE_SIZE);
+    const cardsHtml = slice.map((it) => categoryArticleCard(it, "Business")).join("\n");
+    const paginationHtml = categoryPaginationHtml("business", page, totalPages);
+    const body = renderBody(cardsHtml, paginationHtml) + `<div class="container">${adSlot("incontent", "Advertisement")}</div>`;
+    const canonical = page === 1 ? site.domain + "/business/" : site.domain + "/business/page/" + page + "/";
+    const structuredData = [
+      breadcrumbSchema([
+        { label: "Home", href: "/" },
+        { label: "Business", href: "/business/" },
+      ]),
+      webPageSchema({
+        name: page === 1 ? "Business — Samjho" : "Business — Samjho" + " — Page " + page,
+        description,
+        url: canonical,
+      }),
+    ];
+    write(
+      page === 1 ? "business/index.html" : "business/page/" + page + "/index.html",
+      renderPage({
+        title: page === 1 ? "Business Register, Comply, Grow" : "Business Register, Comply, Grow — Page " + page,
+        description,
+        canonical,
+        activeHref: "/business/",
+        bodyHtml: body,
+        structuredData,
+      })
+    );
+  }
 }
-
 // ---------------------------------------------------------- MONEY PAGE (DEDICATED)
 function buildMoneyPage() {
   const moneyHub = site.hubs.find((h) => h.slug === "money");
   const description = moneyHub ? moneyHub.description : "Loans, credit scores, savings, compounding and everyday banking explained in simple Hindi and English.";
 
-  const moneyCards = [
-    { icon: "📊", iconBg: "#2563eb", badge: "POPULAR", badgeColor: "#2563eb", title: "What is EMI?", hindi: "ईएमआई (EMI) क्या है और कैलकुलेशन कैसे होती है", desc: "EMI (Equated Monthly Instalment) is the scheduled amount you pay toward a loan each month, made up of principal and interest.", tags: ["Loan Guide", "3 min read"], href: "/guides/what-is-emi/", source: "Official Source · Hindi Guide", updated: "1h ago" },
-    { icon: "📈", iconBg: "#16a34a", badge: "POPULAR", badgeColor: "#16a34a", title: "What is a Credit Score?", hindi: "क्रेडिट स्कोर — CIBIL स्कोर की पूरी जानकारी", desc: "A credit score is a number calculated from your credit history, outstanding debt, and repayment behaviour.", tags: ["CIBIL Score", "4 min read"], href: "/guides/what-is-credit-score/", source: "Official Source · Hindi Guide", updated: "2h ago" },
-    { icon: "🏦", iconBg: "#0d9488", badge: "BASIC", badgeColor: "#0d9488", title: "What is a Savings Account?", hindi: "सेविंग्स अकाउंट (बचत खाता) के फायदे और नियम", desc: "A savings account is a basic bank account designed for individuals to safely deposit money and earn interest.", tags: ["Banking", "3 min read"], href: "/guides/what-is-savings-account/", source: "Official Source · Hindi Guide", updated: "4h ago" },
-    { icon: "💸", iconBg: "#f97316", badge: "FINANCIAL LIT", badgeColor: "#f97316", title: "What is Inflation?", hindi: "महंगाई (Inflation) क्या है और यह आपको कैसे प्रभावित करती है", desc: "Inflation is the general rise in prices of goods and services over time, which means each rupee buys a little less.", tags: ["Economics", "3 min read"], href: "/guides/what-is-inflation/", source: "Official Source · Hindi Guide", updated: "1d ago" },
-    { icon: "🔄", iconBg: "#7c3aed", badge: "GROWTH", badgeColor: "#7c3aed", title: "What is Compound Interest?", hindi: "कंपाउंड इंटरेस्ट (चक्रवृद्धि ब्याज) का जादू", desc: "Compound interest is interest calculated not just on your original amount, but also on the interest already added.", tags: ["Interest Guide", "4 min read"], href: "/guides/what-is-compound-interest/", source: "Official Source · Hindi Guide", updated: "1d ago" },
-    { icon: "💳", iconBg: "#e11d48", badge: "MOST SEARCHED", badgeColor: "#e11d48", title: "What is a Credit Card?", hindi: "क्रेडिट कार्ड — इस्तेमाल और चुकाने के नियम", desc: "A credit card lets you borrow money from a bank up to a set limit to make purchases now, which you then repay.", tags: ["Credit Card", "4 min read"], href: "/guides/what-is-credit-card/", source: "Official Source · Hindi Guide", updated: "2d ago" },
-  ];
+    // FIX 2 - ALL Money articles: articles.js + approved published store
+  // (Supabase pipeline), sorted newest first. Paginated at 20 per page.
+  const allArticles = getCategoryArticles("money");
+  const totalCount = allArticles.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / CATEGORY_PAGE_SIZE));
 
-  const cardsHtml = moneyCards.map((c) => `<article class="gov-card">
-      <div class="gov-card__top"><span class="gov-card__icon" style="background:${c.iconBg}">${c.icon}</span><span class="gov-card__badge" style="background:${c.badgeColor}">${c.badge}</span></div>
-      <h3 class="gov-card__title">${esc(c.title)}</h3><p class="gov-card__hindi">${esc(c.hindi)}</p><p class="gov-card__desc">${esc(c.desc)}</p>
-      <div class="gov-card__tags">${c.tags.map((t) => `<span class="gov-card__tag">${esc(t)}</span>`).join("")}</div>
-      <div class="gov-card__footer"><a href="${c.href}" class="gov-card__cta">Padhe → Read More</a><button class="gov-card__heart" aria-label="Save for later">♡</button></div>
-      <div class="gov-card__meta"><span>✦ ${esc(c.source)}</span><span>Updated ${c.updated}</span></div>
-    </article>`).join("");
+
 
   const trendingItems = [
-    { title: "CIBIL Score Improvement", views: "1.2L views" },
-    { title: "Home Loan EMI Calculator", views: "95K views" },
-    { title: "Mutual Fund Compounding", views: "80K views" },
-    { title: "Tax Saving Section 80C", views: "72K views" },
+    { title: "CIBIL Score Improvement" },
+    { title: "Home Loan EMI Calculator" },
+    { title: "Mutual Fund Compounding" },
+    { title: "Tax Saving Section 80C" },
   ];
-  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p><span>${t.views}</span></div></div>`).join("");
+  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p></div></div>`).join("");
   const categoryTagsHtml = ["Loans", "Savings", "Credit", "Tax", "Investment"].map((t) => `<span class="gov-cat-tag">${esc(t)}</span>`).join("");
 
-  const body = `
+  const renderBody = (cardsHtml, paginationHtml) => `
   <div class="gov-page">
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.money || 10} MONEY GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
@@ -1440,69 +1538,64 @@ function buildMoneyPage() {
       <div class="gov-stat-card"><span class="gov-stat-card__label">CREDIT SCORE</span><span class="gov-stat-card__value">750+ Goal</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--teal" style="width:90%"></div></div></div>
       <div class="gov-stat-card"><span class="gov-stat-card__label">GST CALCULATOR</span><span class="gov-stat-card__value">18% Standard</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--green" style="width:60%"></div></div></div>
     </div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>Credit score 750+ rakhein taaki loan interest rate sasta mile aur credit cards asani se approve ho sakein.</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
-    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Money ●</span><span class="gov-chip">Loans</span><span class="gov-chip">Savings</span><span class="gov-chip">Credit</span><span class="gov-chip">Tax</span><span class="gov-chip">Investment</span></div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
-    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>Popular Money Guides · <span>${categoryCounts.money || 6} results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid">${cardsHtml}</div></div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Money updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new money guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for money updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
+    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Money ●</span><span class="gov-chip">Loans</span><span class="gov-chip">Savings</span><span class="gov-chip">Credit</span><span class="gov-chip">Tax</span><span class="gov-chip">Investment</span></div><p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p></div></section>
+    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>All Money Articles · <span>${totalCount} results</span></h2><span class="gov-main__sort">Sorted by date (newest first)</span></div><div class="gov-card-grid">${cardsHtml}</div>${paginationHtml}</div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Money updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new money guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for money updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
     <section class="gov-banner-section"><div class="container"><div class="gov-banner"><div class="gov-banner__text"><span class="gov-banner__small">ABOUT SAMJHO INDIA</span><h2>Samjho India is an independent information platform. We explain government schemes and services in simple language — so every Indian can understand and act.</h2></div><a href="/about/" class="gov-banner__btn">Learn More →</a></div></div></section>
   </div>`;
 
-  const canonical = site.domain + "/money/";
-  const structuredData = [
-    breadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Money", href: "/money/" },
-    ]),
-    webPageSchema({
-      name: "Money — Samjho",
-      description,
-      url: canonical,
-    }),
-  ];
-
-  write(
-    "money/index.html",
-    renderPage({
-      title: "Money Guide 2026 — EMI, Credit Score, Savings, Loans",
-      description,
-      canonical,
-      activeHref: "/money/",
-      bodyHtml: body,
-      structuredData,
-    })
-  );
+    for (let page = 1; page <= totalPages; page++) {
+    const slice = allArticles.slice((page - 1) * CATEGORY_PAGE_SIZE, page * CATEGORY_PAGE_SIZE);
+    const cardsHtml = slice.map((it) => categoryArticleCard(it, "Money")).join("\n");
+    const paginationHtml = categoryPaginationHtml("money", page, totalPages);
+    const body = renderBody(cardsHtml, paginationHtml) + `<div class="container">${adSlot("incontent", "Advertisement")}</div>`;
+    const canonical = page === 1 ? site.domain + "/money/" : site.domain + "/money/page/" + page + "/";
+    const structuredData = [
+      breadcrumbSchema([
+        { label: "Home", href: "/" },
+        { label: "Money", href: "/money/" },
+      ]),
+      webPageSchema({
+        name: page === 1 ? "Money — Samjho" : "Money — Samjho" + " — Page " + page,
+        description,
+        url: canonical,
+      }),
+    ];
+    write(
+      page === 1 ? "money/index.html" : "money/page/" + page + "/index.html",
+      renderPage({
+        title: page === 1 ? "Money Understand, Calculate, Invest" : "Money Understand, Calculate, Invest — Page " + page,
+        description,
+        canonical,
+        activeHref: "/money/",
+        bodyHtml: body,
+        structuredData,
+      })
+    );
+  }
 }
-
 // ---------------------------------------------------------- EDUCATION PAGE (DEDICATED)
 function buildEducationPage() {
   const eduHub = site.hubs.find((h) => h.slug === "education");
   const description = eduHub ? eduHub.description : "Understand academic scoring, education pathways, entrance exams and funding — with tools to help you decide.";
 
-  const eduCards = [
-    { icon: "📚", iconBg: "#2563eb", badge: "MOST SEARCHED", badgeColor: "#2563eb", title: "What is CGPA?", hindi: "सीजीपीए (CGPA) क्या है और प्रतिशत में कैसे बदलें", desc: "CGPA (Cumulative Grade Point Average) summarises a student's overall academic performance as a single average grade point, instead of percentage marks.", tags: ["Grading Guide", "4 min read"], href: "/guides/what-is-cgpa/", source: "Official Source · Hindi Guide", updated: "1h ago" },
-    { icon: "🎓", iconBg: "#0d9488", badge: "POPULAR", badgeColor: "#0d9488", title: "CGPA Calculator", hindi: "सीजीपीए कैलकुलेटर — ग्रेड प्वाइंट से सीजीपीए", desc: "Convert your grades to CGPA or calculate CGPA from multiple semester grades — everything runs in your browser, private and free.", tags: ["Instant Result", "1 min read"], href: "/calculators/cgpa/", source: "Browser-Based Tool", updated: "3h ago" },
-    { icon: "⏳", iconBg: "#16a34a", badge: "POPULAR", badgeColor: "#16a34a", title: "Age Calculator", hindi: "आयु कैलकुलेटर — जन्म तिथि से सही उम्र", desc: "Enter a date of birth and get the exact age in years, months and days — useful for exam forms and eligibility checks.", tags: ["Instant Result", "2 min read"], href: "/calculators/age/", source: "Browser-Based Tool", updated: "2h ago" },
-    { icon: "🏆", iconBg: "#e11d48", badge: "NEW", badgeColor: "#e11d48", title: "Government Scholarships", hindi: "सरकारी स्कॉलरशिप — NSP पोर्टल से अप्लाई करें", desc: "Central and state scholarships, eligibility, how to apply on the National Scholarships Portal, documents and deadlines.", tags: ["Scholarships", "4 min read"], href: "/guides/scholarship-guide/", source: "Official Source · Hindi Guide", updated: "2h ago" },
-    { icon: "📝", iconBg: "#f97316", badge: "NEW", badgeColor: "#f97316", title: "Entrance Exams After 12th", hindi: "जेईई, नीट, क्यूएट और सीएलएटी — एंट्रेंस एग्जाम", desc: "Major exams after Class 12 — JEE, NEET, CUET, CLAT — eligibility, dates, preparation and the application process.", tags: ["JEE · NEET · CUET", "5 min read"], href: "/guides/entrance-exams/", source: "Official Source · Hindi Guide", updated: "3h ago" },
-    { icon: "🧭", iconBg: "#7c3aed", badge: "NEW", badgeColor: "#7c3aed", title: "Career Options After 12th", hindi: "12वीं के बाद करियर के विकल्प — हर स्ट्रीम", desc: "Science, commerce, arts, vocational and skill-based career paths after Class 12, with a simple way to compare options.", tags: ["Careers", "5 min read"], href: "/guides/career-options/", source: "Hindi Guide", updated: "4h ago" },
-  ];
+    // FIX 2 - ALL Education articles: articles.js + approved published store
+  // (Supabase pipeline), sorted newest first. Paginated at 20 per page.
+  const allArticles = getCategoryArticles("education");
+  const totalCount = allArticles.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / CATEGORY_PAGE_SIZE));
 
-  const cardsHtml = eduCards.map((c) => `<article class="gov-card">
-      <div class="gov-card__top"><span class="gov-card__icon" style="background:${c.iconBg}">${c.icon}</span><span class="gov-card__badge" style="background:${c.badgeColor}">${c.badge}</span></div>
-      <h3 class="gov-card__title">${esc(c.title)}</h3><p class="gov-card__hindi">${esc(c.hindi)}</p><p class="gov-card__desc">${esc(c.desc)}</p>
-      <div class="gov-card__tags">${c.tags.map((t) => `<span class="gov-card__tag">${esc(t)}</span>`).join("")}</div>
-      <div class="gov-card__footer"><a href="${c.href}" class="gov-card__cta">Padhe → Read More</a><button class="gov-card__heart" aria-label="Save for later">♡</button></div>
-      <div class="gov-card__meta"><span>✦ ${esc(c.source)}</span><span>Updated ${c.updated}</span></div>
-    </article>`).join("");
+
 
   const trendingItems = [
-    { title: "CGPA to Percentage", views: "1.2L views" },
-    { title: "Scholarship Deadlines", views: "95K views" },
-    { title: "Entrance Exam Dates", views: "80K views" },
-    { title: "Career Options", views: "72K views" },
+    { title: "CGPA to Percentage" },
+    { title: "Scholarship Deadlines" },
+    { title: "Entrance Exam Dates" },
+    { title: "Career Options" },
   ];
-  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p><span>${t.views}</span></div></div>`).join("");
+  const trendingHtml = trendingItems.map((t, i) => `<div class="gov-trending__item"><span class="gov-trending__num">${i + 1}</span><div class="gov-trending__text"><p>${esc(t.title)}</p></div></div>`).join("");
   const categoryTagsHtml = ["Scores", "Exams", "Scholarships", "Career", "Courses"].map((t) => `<span class="gov-cat-tag">${esc(t)}</span>`).join("");
 
-  const body = `
+  const renderBody = (cardsHtml, paginationHtml) => `
   <div class="gov-page">
     <section class="gov-hero"><div class="container gov-hero__grid"><div class="gov-hero__left">
       <div class="gov-hero__pills"><span class="gov-pill gov-pill--teal">● LIVE · ${categoryCounts.education || 6} EDUCATION GUIDES</span><span class="gov-pill gov-pill--orange">HINDI + ENGLISH</span></div>
@@ -1514,37 +1607,41 @@ function buildEducationPage() {
       <div class="gov-stat-card"><span class="gov-stat-card__label">AGE CALCULATOR</span><span class="gov-stat-card__value">Instant</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--teal" style="width:85%"></div></div></div>
       <div class="gov-stat-card"><span class="gov-stat-card__label">PERCENTAGE</span><span class="gov-stat-card__value">Instant</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--green" style="width:70%"></div></div></div>
     </div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>CGPA ko percentage me convert karne ke liye (CGPA - 0.75) × 10 formula use karein.</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
-    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Education ●</span><span class="gov-chip">Exams</span><span class="gov-chip">Scholarships</span><span class="gov-chip">Career</span><span class="gov-chip">Scores</span><span class="gov-chip">Courses</span></div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
-    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>Popular Education Guides · <span>${categoryCounts.education || 6} results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid">${cardsHtml}</div></div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Education updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new education guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for education updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
+    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Education ●</span><span class="gov-chip">Exams</span><span class="gov-chip">Scholarships</span><span class="gov-chip">Career</span><span class="gov-chip">Scores</span><span class="gov-chip">Courses</span></div><p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p></div></section>
+    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>All Education Articles · <span>${totalCount} results</span></h2><span class="gov-main__sort">Sorted by date (newest first)</span></div><div class="gov-card-grid">${cardsHtml}</div>${paginationHtml}</div><aside class="gov-sidebar"><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Trending This Week <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="#" class="gov-trending__more">View All Trending →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">Education updates seedha apne inbox mein.</h3><p class="gov-newsletter__desc">Har Monday, new education guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for education updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${categoryTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
     <section class="gov-banner-section"><div class="container"><div class="gov-banner"><div class="gov-banner__text"><span class="gov-banner__small">ABOUT SAMJHO INDIA</span><h2>Samjho India is an independent information platform. We explain government schemes and services in simple language — so every Indian can understand and act.</h2></div><a href="/about/" class="gov-banner__btn">Learn More →</a></div></div></section>
   </div>`;
 
-  const canonical = site.domain + "/education/";
-  const structuredData = [
-    breadcrumbSchema([
-      { label: "Home", href: "/" },
-      { label: "Education", href: "/education/" },
-    ]),
-    webPageSchema({
-      name: "Education — Samjho",
-      description,
-      url: canonical,
-    }),
-  ];
-
-  write(
-    "education/index.html",
-    renderPage({
-      title: "Education Guide 2026 — CGPA, Scholarships, Exams",
-      description,
-      canonical,
-      activeHref: "/education/",
-      bodyHtml: body,
-      structuredData,
-    })
-  );
+    for (let page = 1; page <= totalPages; page++) {
+    const slice = allArticles.slice((page - 1) * CATEGORY_PAGE_SIZE, page * CATEGORY_PAGE_SIZE);
+    const cardsHtml = slice.map((it) => categoryArticleCard(it, "Education")).join("\n");
+    const paginationHtml = categoryPaginationHtml("education", page, totalPages);
+    const body = renderBody(cardsHtml, paginationHtml) + `<div class="container">${adSlot("incontent", "Advertisement")}</div>`;
+    const canonical = page === 1 ? site.domain + "/education/" : site.domain + "/education/page/" + page + "/";
+    const structuredData = [
+      breadcrumbSchema([
+        { label: "Home", href: "/" },
+        { label: "Education", href: "/education/" },
+      ]),
+      webPageSchema({
+        name: page === 1 ? "Education — Samjho" : "Education — Samjho" + " — Page " + page,
+        description,
+        url: canonical,
+      }),
+    ];
+    write(
+      page === 1 ? "education/index.html" : "education/page/" + page + "/index.html",
+      renderPage({
+        title: page === 1 ? "Education Learn, Score, Succeed" : "Education Learn, Score, Succeed — Page " + page,
+        description,
+        canonical,
+        activeHref: "/education/",
+        bodyHtml: body,
+        structuredData,
+      })
+    );
+  }
 }
-
 // -------------------------------------------------- GUIDES SUB-CATEGORY PAGES
 // /guides/<category>/ pages using the canonical gov-* layout, matching the
 // top-level category pages. Config-driven so all five pages share one template.
@@ -1606,7 +1703,7 @@ const GUIDE_SUBPAGES = [
     label: "Government",
     h1: "Government Guides — Schemes & Benefits",
     hindi: "सरकारी योजना को आसान भाषा में",
-    description: "Plain-English guides for government schemes and services — PM Kisan, Aadhaar, ration card and e-Shram, with official sources.",
+    description: "Plain-English guides for government schemes and services — PM Kisan, Aadhaar, ration card and e-Shram, with official sources and step-by-step Hindi guides.",
     filters: ["All Government", "Schemes", "Services", "Benefits"],
     statCards: [
       { label: "PM KISAN", value: "₹6,000 / year", fill: 60, fillClass: "" },
@@ -1614,7 +1711,7 @@ const GUIDE_SUBPAGES = [
     ],
     tip: "Kisi bhi sarkari yojana ke liye sirf official .gov.in / .nic.in portal par apply karein — agent ko paisa dene ki zaroorat nahi.",
     newsletterHeading: "Scheme updates seedha apne inbox mein.",
-    slugs: ["pm-kisan-yojana", "what-is-aadhaar", "ration-card", "e-shram-card"],
+    slugs: ["pm-kisan-yojana"],
   },
   {
     slug: "business",
@@ -1716,8 +1813,8 @@ function buildGuidesSubPage(cfg) {
       <p class="gov-hero__hindi">${esc(cfg.hindi)}</p>
       <p class="gov-hero__desc">${esc(cfg.description)}</p>
     </div><div class="gov-hero__right"><div class="gov-quick-check"><h2 class="gov-quick-check__heading">Quick Check</h2><div class="gov-quick-check__stats">${statCardsHtml}</div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>${esc(cfg.tip)}</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
-    <section class="gov-filters"><div class="container"><div class="gov-filters__row">${filterChipsHtml}</div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
-    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>All ${esc(cfg.label)} Guides · <span>${count} results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid">${cardsHtml}</div></div><aside class="gov-sidebar"><div class="gov-sidebar-widget"><h3 class="gov-sidebar-widget__heading">QUICK LINKS</h3><ul class="static-toc">${quickLinksHtml}</ul></div><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Popular In This Category <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="/guides/" class="gov-trending__more">View All Guides →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">${esc(cfg.newsletterHeading)}</h3><p class="gov-newsletter__desc">Har Monday, new guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">12,400+ log jud chuke hain · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${filterTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
+    <section class="gov-filters"><div class="container"><div class="gov-filters__row">${filterChipsHtml}</div><p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p></div></section>
+    <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main"><div class="gov-main__header"><h2>All ${esc(cfg.label)} Guides · <span>${count} results</span></h2><span class="gov-main__sort">Sorted by helpful</span></div><div class="gov-card-grid">${cardsHtml}</div></div><aside class="gov-sidebar"><div class="gov-sidebar-widget"><h3 class="gov-sidebar-widget__heading">BROWSE GUIDES</h3><ul class="static-toc">${quickLinksHtml}</ul></div><div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">🔥 Popular In This Category <span class="gov-live-badge">Live</span></h3>${trendingHtml}<a href="/guides/" class="gov-trending__more">View All Guides →</a></div><div class="gov-sidebar-widget gov-newsletter"><h3 class="gov-newsletter__heading">${esc(cfg.newsletterHeading)}</h3><p class="gov-newsletter__desc">Har Monday, new guides + useful links. No spam, sirf kaam ki baat.</p><form class="gov-newsletter__form"><input type="email" placeholder="Your email" aria-label="Email for updates" /><button type="submit">Join</button></form><p class="gov-newsletter__note">Newsletter join karein · Unsubscribe anytime</p></div><div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3><div class="gov-categories__tags">${filterTagsHtml}</div></div><div class="gov-sidebar-widget gov-help"><p>Need help? WhatsApp par 'Hi' bhejo, hum form bharna me help denge.</p><a href="#" class="gov-help__link">Chat now →</a></div></aside></div></section>
     <section class="gov-banner-section"><div class="container"><div class="gov-banner"><div class="gov-banner__text"><span class="gov-banner__small">ABOUT SAMJHO INDIA</span><h2>Samjho India is an independent information platform. We explain government schemes and services in simple language — so every Indian can understand and act.</h2></div><a href="/about/" class="gov-banner__btn">Learn More →</a></div></div></section>
   </div>`;
 
@@ -1759,7 +1856,8 @@ function buildGuidesSubPage(cfg) {
 
 // ------------------------------------------------------------------ GUIDES INDEX
 function buildGuidesIndex() {
-  const totalGuides = articles.length;
+  const allGuideSlugs = new Set(GUIDE_SUBPAGES.flatMap((c) => c.slugs));
+  const totalGuides = allGuideSlugs.size;
   const chips = GUIDE_SUBPAGES.map(
     (s) => `<a class="gov-chip" href="/guides/${s.slug}/">${esc(s.label)}</a>`
   ).join("");
@@ -1782,17 +1880,17 @@ function buildGuidesIndex() {
   }).join("");
 
   const popularItems = [
-    { slug: "pm-kisan-yojana", views: "1.2L views", live: true },
-    { slug: "what-is-aadhaar", views: "88k views", live: true },
-    { slug: "what-is-credit-score", views: "7.6k views", live: false },
-    { slug: "what-is-credit-score", views: "5.4k views", live: true },
-    { slug: "what-is-gst", views: "3.2k views", live: false },
+    { slug: "pm-kisan-yojana", live: true },
+    { slug: "what-is-aadhaar", live: true },
+    { slug: "what-is-credit-score", live: false },
+    { slug: "what-is-credit-score", live: true },
+    { slug: "what-is-gst", live: false },
   ].map((item) => {
     const a = articles.find((x) => x.slug === item.slug);
     return a ? { ...item, title: a.title, slug: a.slug } : null;
   }).filter(Boolean);
   const popularHtml = `<ol class="popular-guides-sidebar">${popularItems
-    .map((item) => `<li><div><a href="${guideUrl(item.slug)}">${esc(item.title)}</a><div class="popular-guides-sidebar__meta"><span>${esc(item.views)}</span>${item.live ? '<span class="popular-guides-sidebar__live">LIVE</span>' : ''}</div></div></li>`)
+    .map((item) => `<li><div><a href="${guideUrl(item.slug)}">${esc(item.title)}</a><div class="popular-guides-sidebar__meta">${item.live ? '<span class="popular-guides-sidebar__live">LIVE</span>' : ''}</div></div></li>`)
     .join("")}</ol>`;
   
   const categoryTagsHtml = GUIDE_SUBPAGES.map(
@@ -1815,12 +1913,12 @@ function buildGuidesIndex() {
       <div class="gov-stat-card"><span class="gov-stat-card__label">5 CATEGORIES</span><span class="gov-stat-card__value">Gov · Docs · Business · Money · Edu</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--teal" style="width:90%"></div></div></div>
       <div class="gov-stat-card"><span class="gov-stat-card__label">OFFICIAL SOURCES</span><span class="gov-stat-card__value">Every guide cited</span><div class="gov-stat-card__bar"><div class="gov-stat-card__fill gov-stat-card__fill--green" style="width:80%"></div></div></div>
     </div><div class="gov-tip"><div class="gov-tip__content"><span class="gov-tip__label">Aaj ka Tip</span><p>Har guide mein step-by-step process, required documents, fees, FAQ aur official portal links hain.</p></div><button class="gov-tip__btn" aria-label="Check now">↻</button></div></div></div></div></section>
-    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Guides ●</span>${chips}</div><p class="gov-filters__trust">Trusted by 4.21L+ Indians this month · No ads, no clutter</p></div></section>
+    <section class="gov-filters"><div class="container"><div class="gov-filters__row"><span class="gov-chip gov-chip--active">All Guides ●</span>${chips}</div><p class="gov-filters__trust">Trusted by readers across India · No ads, no clutter</p></div></section>
     <section class="gov-content"><div class="container gov-content__grid"><div class="gov-main">${sections}</div><aside class="gov-sidebar">
       <div class="sidebar-quick-check"><div class="sidebar-quick-check__title"><span>Quick Check</span><span class="sidebar-quick-check__badge">LIVE DATA</span></div><div class="sidebar-quick-check__grid"><div class="sidebar-stat"><span class="sidebar-stat__icon">&#x1F310;</span><span class="sidebar-stat__label">Hindi + English</span><span class="sidebar-stat__value">100%</span><div class="sidebar-stat__bar"><div class="sidebar-stat__fill" style="width:100%"></div></div></div><div class="sidebar-stat"><span class="sidebar-stat__icon">&#x1F4CB;</span><span class="sidebar-stat__label">Gov Docs</span><span class="sidebar-stat__value">6 Cats</span><div class="sidebar-stat__bar"><div class="sidebar-stat__fill sidebar-stat__fill--orange" style="width:60%"></div></div></div><div class="sidebar-stat"><span class="sidebar-stat__icon">&#x2705;</span><span class="sidebar-stat__label">Cited Sources</span><span class="sidebar-stat__value">100%</span><div class="sidebar-stat__bar"><div class="sidebar-stat__fill sidebar-stat__fill--green" style="width:100%"></div></div></div></div></div>
       <div class="sidebar-pro-tip"><div class="sidebar-pro-tip__label">Pro tip for today</div><p class="sidebar-pro-tip__text">Most guides take &lt; 4 min to read. Start with Popular Guides on the right &mdash; they are updated every morning at 6 AM IST.</p></div>
       <div class="gov-sidebar-widget gov-trending"><h3 class="gov-sidebar-widget__heading">Popular Guides <span class="gov-live-badge">Live</span></h3>${popularHtml}</div>
-      <div class="sidebar-join"><h3 class="sidebar-join__title">JOIN 42K+ READERS</h3><p class="sidebar-join__desc">Get one yojana update every morning at 6 AM. No spam, unsubscribe anytime.</p><form class="sidebar-join__form"><input type="email" class="sidebar-join__input" placeholder="you@email.com" aria-label="Email for updates" /><button type="submit" class="sidebar-join__btn">Join</button></form><p class="sidebar-join__note">Trusted by UPSC aspirants &amp; small business owners</p></div>
+      <div class="sidebar-join"><h3 class="sidebar-join__title">JOIN OUR NEWSLETTER</h3><p class="sidebar-join__desc">Get one yojana update every morning at 6 AM. No spam, unsubscribe anytime.</p><form class="sidebar-join__form"><input type="email" class="sidebar-join__input" placeholder="you@email.com" aria-label="Email for updates" /><button type="submit" class="sidebar-join__btn">Join</button></form><p class="sidebar-join__note">Trusted by UPSC aspirants &amp; small business owners</p></div>
       <div class="gov-sidebar-widget gov-categories"><h3 class="gov-sidebar-widget__heading">CATEGORIES</h3>${sidebarCatsHtml}</div>
       <div class="sidebar-help"><div class="sidebar-help__icon">&#x1F4AC;</div><h3 class="sidebar-help__title">NEED HELP?</h3><p class="sidebar-help__desc">Confused about any yojana or document? Message us on WhatsApp &mdash; reply in 2 hours.</p><a href="https://wa.me/919999999999?text=Hi%20Samjho%20India" class="sidebar-help__btn" target="_blank" rel="noopener">&#x1F4AC; Chat on WhatsApp</a><p class="sidebar-help__note">No bots &middot; Real humans &middot; Hindi + English</p></div>
     </aside></div></section>
@@ -1847,6 +1945,10 @@ function buildGuidesIndex() {
 }
 
 // ------------------------------------------------------------------ GUIDE ARTICLE
+// DEPRECATED — superseded by buildLegacyGuide()/renderMasterGuide().
+// Kept only for reference; NOT called anywhere since every article page now
+// renders through the single master template. Safe to delete once the unified
+// structure has been signed off.
 function buildGuideArticle(a) {
   const faqHtml = a.faq
     .map(
@@ -1918,7 +2020,7 @@ function buildGuideArticle(a) {
   <div class="article-head container">
     ${breadcrumb([
       { label: "Home", href: "/" },
-      { label: "Guides", href: "/guides/" },
+      { label: categoryName(a.category), href: categoryHubHref(a.category) },
       { label: a.title, href: guideUrl(a.slug) },
     ])}
     <span class="article-category-badge">
@@ -2058,7 +2160,7 @@ function buildGuideArticle(a) {
         .join("")}</div></nav>`
     : "";
   const sideToolsHtml = a.relatedTools.length
-    ? `<div class="guide-sidebar__widget"><h3>Related Tools</h3><ul class="guide-sidebar__links">${a.relatedTools
+    ? `<div class="guide-sidebar__widget"><h3>Tools</h3><ul class="guide-sidebar__links">${a.relatedTools
         .map((t) => `<li><a href="${t.href}">${esc(t.title)}</a></li>`)
         .join("")}</ul></div>`
     : "";
@@ -2092,7 +2194,7 @@ function buildGuideArticle(a) {
   const structuredData = [
     breadcrumbSchema([
       { label: "Home", href: "/" },
-      { label: "Guides", href: "/guides/" },
+      { label: categoryName(a.category), href: categoryHubHref(a.category) },
       { label: a.title, href: guideUrl(a.slug) },
     ]),
     {
@@ -2429,6 +2531,21 @@ const CALC_FORMS = {
       ])}
     </div>
   `,
+  "compound-interest": () => `
+    ${field({ id: "ciPrincipal", label: "Principal amount (₹)", type: "number", placeholder: "e.g. 100000" })}
+    ${field({ id: "ciRate", label: "Annual interest rate (%)", type: "number", placeholder: "e.g. 8", extraAttrs: "step=\"0.01\"" })}
+    ${field({ id: "ciYears", label: "Time period (years)", type: "number", placeholder: "e.g. 5", extraAttrs: "step=\"0.01\"" })}
+    <div class="field">
+      <label for="ciFrequency">Compounding frequency</label>
+      <select id="ciFrequency">
+        <option value="1">Yearly</option>
+        <option value="2">Half-yearly</option>
+        <option value="4" selected>Quarterly</option>
+        <option value="12">Monthly</option>
+      </select>
+      <span class="hint">Most Indian bank fixed deposits compound quarterly.</span>
+    </div>
+  `,
   cgpa: () => `
     <div class="field">
       <label>Number of semesters</label>
@@ -2461,6 +2578,8 @@ const CALC_EXPLAINERS = {
     "A discount calculator finds how much you save and what you finally pay when a percentage is knocked off an original price.",
   "simple-interest":
     "Simple interest is calculated only on the original principal for the entire time period, using Interest = (Principal × Rate × Time) ÷ 100.",
+  "compound-interest":
+    "Compound interest is calculated on the principal plus the interest already added, using A = P × (1 + r/n)^(n × t). More frequent compounding (monthly vs yearly) grows the amount faster at the same annual rate.",
   cgpa:
     "CGPA (Cumulative Grade Point Average) is calculated by averaging the grade points earned across all semesters, weighted by the credits for each semester. It's commonly used in universities to track overall academic performance.",
 };
@@ -2473,6 +2592,7 @@ const CALC_BADGES = {
   age: "EVERYDAY TOOL",
   discount: "SHOPPING TOOL",
   "simple-interest": "FINTECH TOOL",
+  "compound-interest": "FINTECH TOOL",
   cgpa: "EDUCATION TOOL",
 };
 
@@ -2489,6 +2609,8 @@ const CALC_LEDES = {
     'See exactly <span class="calc-lede__highlight">how much you save and what you finally pay</span> when a percentage discount is applied.',
   "simple-interest":
     'Work out <span class="calc-lede__highlight">interest and total amount payable</span> for a given principal, rate and time period.',
+  "compound-interest":
+    'See how your money grows with <span class="calc-lede__highlight">compounding — maturity amount, total interest</span> and a year-by-year breakdown.',
   cgpa:
     'Average your semester grade points to get your <span class="calc-lede__highlight">Cumulative Grade Point Average</span> instantly.',
 };
@@ -2519,6 +2641,12 @@ const CALC_FAQS = {
     { q: "How is simple interest different from compound interest?", a: "Simple interest is calculated on the original principal only. Compound interest is calculated on the principal plus accumulated interest, so it grows faster." },
     { q: "When is simple interest used?", a: "Simple interest is typically used for short-term loans, fixed deposits, and certain government schemes. Most bank loans use compound interest." },
   ],
+  "compound-interest": [
+    { q: "What is the compound interest formula?", a: "A = P × (1 + r/n)^(n × t), where P is the principal, r is the annual rate (as a decimal), n is the number of compounding periods per year, and t is time in years. Total interest = A − P." },
+    { q: "How is compound interest different from simple interest?", a: "Simple interest earns only on the original principal. Compound interest earns on the principal plus the interest already added, so the amount grows faster over time — especially with longer periods and more frequent compounding." },
+    { q: "How often do banks compound fixed deposit interest in India?", a: "Most Indian banks compound FD interest quarterly. So the effective annual yield is slightly higher than the quoted annual rate — always check the compounding frequency when comparing FD rates." },
+    { q: "Do credit card balances also compound?", a: "Yes. Unpaid credit card balances typically attract interest calculated on the outstanding amount, which can compound quickly. Paying the full statement dues each month is the cheapest way to avoid it." },
+  ],
   cgpa: [
     { q: "What is CGPA?", a: "CGPA (Cumulative Grade Point Average) is the average of grade points earned across all semesters, weighted by credits. It is commonly used in Indian universities." },
     { q: "How do I convert CGPA to percentage?", a: "Multiply your CGPA by the conversion factor specified by your university. Common factors: 9.5 (CBSE), 10 (some universities), or check your university's official conversion formula." },
@@ -2538,6 +2666,7 @@ const CALC_FORMULAS = {
   age: "Age = exact difference between DOB and as-of date\n(complete years, months and days)",
   discount: "Savings = Price × Discount% ÷ 100\nFinal price = Price − Savings",
   "simple-interest": "Interest = (P × R × T) ÷ 100\nTotal = P + Interest",
+  "compound-interest": "A = P × (1 + r/n)^(n × t)\nr = annual rate ÷ 100, n = compounds per year, t = time in years",
   cgpa: "CGPA = Σ (Semester GP × Credits) ÷ Σ (Credits)",
 };
 
@@ -2665,12 +2794,14 @@ function buildCalculatorPage(c) {
         },
       ],
     },
+    // FAQPage schema — mirrors the visible FAQs below (AEO).
+    ...(CALC_FAQS[c.slug] && CALC_FAQS[c.slug].length ? [faqSchema(CALC_FAQS[c.slug])] : []),
   ];
 
   write(
     `calculators/${c.slug}/index.html`,
     renderPage({
-      title: `${c.metaTitle || c.title} — Samjho India`,
+      title: c.title,
       description: c.description,
       canonical,
       activeHref: "/calculators/",
@@ -2742,7 +2873,7 @@ function buildStaticPage({ slug, title, description, heading, sectionsHtml }) {
   write(
     `${slug}/index.html`,
     renderPage({
-      title: heading.includes("Samjho") ? heading : heading + " — Samjho India",
+      title,
       description,
       canonical: `${site.domain}/${slug}/`,
       activeHref: slug === "about" ? "/about/" : "",
@@ -2790,6 +2921,47 @@ function buildAbout() {
         </ul>
         <p>For anything that affects your money or legal standing, always confirm details with the relevant official source — your bank, employer, or the appropriate government department — before deciding.</p>
       </section>
+      <section>
+        <h2>Editorial standards</h2>
+        <p>Every Samjho guide starts from an official source — a government release (PIB, ministry websites), a regulator (RBI, SEBI, EPFO, GST Council) or an official portal — and lists those sources on the page. We do not publish unverifiable claims: no subscriber counts, no fake view numbers, no "trusted by X people" statistics.</p>
+        <p>Our full <a href="/editorial-policy/">editorial policy</a> covers sourcing, the quality bar every guide must meet before it publishes, how corrections are handled, and how our publishing pipeline is gated.</p>
+      </section>
+    `,
+  });
+}
+
+function buildEditorialPolicy() {
+  buildStaticPage({
+    slug: "editorial-policy",
+    title: "Editorial Policy — Samjho India",
+    heading: "Editorial Policy — How Samjho Content Is Made",
+    description: "Samjho India editorial policy: official sourcing, a published quality bar (300+ words, 3+ FAQs), corrections process, and how our automated pipeline is gated before anything goes live.",
+    sectionsHtml: `
+      <section>
+        <h2>Where our content comes from</h2>
+        <p>Every Samjho guide starts from an official source: government releases (Press Information Bureau and ministry websites), regulator publications (RBI, SEBI, GST Council, EPFO, UIDAI) or official service portals. Guide pages list their official sources so anything we explain can be verified against the primary document.</p>
+      </section>
+      <section>
+        <h2>Our quality bar</h2>
+        <ul>
+          <li>Every published guide must carry at least 300 words of substantive explanation and 3 FAQs.</li>
+          <li>Test entries, placeholder releases and stub pages are never published — an automated quality gate rejects them at publish time.</li>
+          <li>We do not publish unverifiable claims: no subscriber counts, no view-count numbers, no "trusted by X people" statistics.</li>
+        </ul>
+        <p>Content that does not meet the bar is expanded before publishing — not published and hidden.</p>
+      </section>
+      <section>
+        <h2>How content is produced</h2>
+        <p>Official releases are collected through an internal pipeline that drafts first versions from the source documents. Nothing goes live automatically: each draft must pass schema validation, the quality gate described above, and an explicit approval step before it can be published. The "Last updated" date shown on every guide reflects the last review.</p>
+      </section>
+      <section>
+        <h2>Corrections</h2>
+        <p>If something on Samjho is wrong or out of date, tell us through the <a href="/contact/">contact page</a> — mention the exact page and what needs fixing. Urgent corrections (wrong calculator numbers, outdated scheme rules) are prioritised, and every fix is reflected in the guide's last-updated date.</p>
+      </section>
+      <section>
+        <h2>Independence</h2>
+        <p>Samjho is an independent information platform — not a government website, a bank or a financial institution — and it does not sell products or personalised advice. Calculators run entirely in your browser. See the <a href="/about/">about page</a> and <a href="/disclaimer/">disclaimer</a> for the full picture.</p>
+      </section>
     `,
   });
 }
@@ -2797,7 +2969,7 @@ function buildAbout() {
 function buildContact() {
   buildStaticPage({
     slug: "contact",
-    title: "Contact Samjho India — Get in Touch",
+    title: "Contact Samjho India",
     heading: "Contact Samjho India — Get in Touch",
     description: "Get in touch with Samjho India for corrections, topic requests, or feedback. We respond to every query about our guides and calculators.",
     sectionsHtml: `
@@ -2869,7 +3041,7 @@ function buildPrivacy() {
 function buildTerms() {
   buildStaticPage({
     slug: "terms",
-    title: "Terms & Conditions — Samjho India",
+    title: "Terms and Conditions",
     heading: "Terms & Conditions",
     description: "Terms and conditions for using Samjho India. Read about content usage, accuracy, liability limits, and your responsibilities as a user.",
     sectionsHtml: `
@@ -2994,6 +3166,259 @@ function buildSearchIndex() {
 // Approved guides staged in data/published-guides.json are rendered through
 // the EXISTING Master Guide Template and the EXISTING renderPage(). Existing
 // article pages are never replaced — reserved slugs are skipped.
+// ------------------------------------------------------------------ FAQ SCHEMA
+// Shared by the published-guide and legacy-article paths so every article page
+// ships FAQPage markup (it previously existed only on the legacy pages).
+function faqSchema(faqs) {
+  const list = (Array.isArray(faqs) ? faqs : [])
+    .filter((f) => f && (f.q || f.question) && (f.a || f.answer));
+  if (!list.length) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: list.map((f) => ({
+      "@type": "Question",
+      name: f.q || f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.a || f.answer },
+    })),
+  };
+}
+
+// ------------------------------------------------------- LEGACY ARTICLE MIGRATION
+// data/articles.js uses a flat, rich schema (tables, ordered step lists, tool
+// cards) that the guide markdown renderer cannot express. Instead of flattening
+// it — which would lose those structures — the body is pre-rendered to HTML and
+// handed to the SAME master template through `content_html`. Every article,
+// legacy or press release, therefore gets one identical page structure.
+//
+// Fields intentionally NOT placed in the body, because the master template
+// renders them as their own sections further down the page:
+//   faq                -> faqs             -> "FAQs" H2
+//   officialReferences -> officialReferences -> "Official Sources" H2
+//   commonMistakes     -> common_mistakes   -> "Common Mistakes" H2
+//   relatedGuides      -> relatedGuides     -> "Related Guides" H2
+function legacyBodyHtml(a) {
+  const out = [];
+
+  // "In simple words" opener — kept as content, reuses its existing styling.
+  if (a.shortAnswer) {
+    out.push(
+      `<div class="simple-words-box"><span class="simple-words-box__label">In simple words:</span>` +
+      `<p class="simple-words-box__text">${esc(a.shortAnswer)}</p></div>`
+    );
+  }
+
+  if (Array.isArray(a.simpleExplanation) && a.simpleExplanation.length) {
+    out.push(
+      `<h2>Simple explanation</h2>` +
+      a.simpleExplanation.map((p) => `<p>${inlineLinked(p, a.slug)}</p>`).join("")
+    );
+  }
+
+  if (a.whyMatters) {
+    out.push(`<h2>Why does it matter?</h2><p>${inlineLinked(a.whyMatters, a.slug)}</p>`);
+  }
+
+  if (a.example) {
+    out.push(
+      `<h2>Example</h2>` +
+      `<div class="example-box"><span class="card-eyebrow">In numbers</span>` +
+      `<p>${inlineLinked(a.example, a.slug)}</p></div>` +
+      (a.rateNotice
+        ? `<p class="article-notice" role="note"><strong>Rules and rates can change:</strong> ${esc(a.rateNotice)}</p>`
+        : "")
+    );
+  }
+
+  if (Array.isArray(a.scoreBands) && a.scoreBands.length) {
+    out.push(
+      `<h2>What do credit score ranges mean?</h2>` +
+      `<p>These bands are a simple guide, not universal approval rules. Lender cut-offs and scoring models can differ, and some CICs may display a different range or result.</p>` +
+      `<div class="table-wrap"><table class="score-table"><thead><tr>` +
+      `<th scope="col">Score or result</th><th scope="col">Plain-English meaning</th>` +
+      `</tr></thead><tbody>` +
+      a.scoreBands.map((row) => `<tr><th scope="row">${esc(row.band)}</th><td>${esc(row.meaning)}</td></tr>`).join("") +
+      `</tbody></table></div>`
+    );
+  }
+
+  const renderStructuredSection = (section) =>
+    `<h2>${esc(section.heading)}</h2>` +
+    (section.table
+      ? `<div class="table-wrap"><table class="score-table"><thead><tr>` +
+        section.table.head.map((h) => `<th scope="col">${esc(h)}</th>`).join("") +
+        `</tr></thead><tbody>` +
+        section.table.rows
+          .map((row) => `<tr>${row.map((cell, ci) => (ci === 0 ? `<th scope="row">${esc(cell)}</th>` : `<td>${esc(cell)}</td>`)).join("")}</tr>`)
+          .join("") +
+        `</tbody></table></div>`
+      : "") +
+    (section.paragraphs || []).map((p) => `<p>${inlineLinked(p, a.slug)}</p>`).join("");
+
+  (a.directSections || []).forEach((s) => out.push(renderStructuredSection(s)));
+  (a.extraSections || []).forEach((s) => out.push(renderStructuredSection(s)));
+
+  if (a.howTo) {
+    out.push(
+      `<h2>${esc(a.howTo.name)}</h2><p>${esc(a.howTo.description)}</p>` +
+      `<ol class="steps">${a.howTo.steps.map((p) => `<li><div><p>${esc(p)}</p></div></li>`).join("")}</ol>`
+    );
+  }
+
+  out.push(
+    `<h2>Important things to know</h2>` +
+    `<ul class="point-list point-list--check">${(a.importantPoints || []).map((p) => `<li>${esc(p)}</li>`).join("")}</ul>`
+  );
+
+  if (Array.isArray(a.correctionSteps) && a.correctionSteps.length) {
+    // Structural label, not authored copy — the source template hardcoded the
+    // literal FAQ question here, which collided with that FAQ once every FAQ
+    // became an <h3>. The steps themselves are unchanged.
+    out.push(
+      `<h2>Steps to correct your credit report</h2>` +
+      `<ol class="steps">${a.correctionSteps.map((p) => `<li><div><p>${esc(p)}</p></div></li>`).join("")}</ol>`
+    );
+  }
+
+  // Related tools stay in the body: the master template has no tools section and
+  // these are real internal calculator links that must not disappear.
+  if (Array.isArray(a.relatedTools) && a.relatedTools.length) {
+    out.push(
+      `<h2>Related tools</h2>` +
+      a.relatedTools
+        .map(
+          (t) =>
+            `<div class="related-tools-box"><div class="related-tools-box__icon">&#x1F4CA;</div><div>` +
+            `<p class="related-tools-box__label">RELATED TOOLS</p>` +
+            `<p class="related-tools-box__title"><a href="${t.href}">${esc(t.title)}</a></p>` +
+            `<p class="related-tools-box__desc">${esc(t.desc || "Check if you qualify with our calculator.")}</p>` +
+            `</div></div>`
+        )
+        .join("")
+    );
+  }
+
+  return out.join("\n");
+}
+
+// Hero images for legacy articles: three topics have a purpose-made graphic,
+// everything else falls back to the site hero illustration. (data/articles.js
+// has no image field of its own.) FIX 3: point at the WebP variants —
+// identical visuals, 4-10x smaller per article page transfer.
+const LEGACY_HERO = {
+  "pm-kisan-yojana": "/assets/featured-kisan.webp",
+  "what-is-pan-card": "/assets/featured-pan.webp",
+  "what-is-udyam": "/assets/featured-udyam.webp",
+};
+
+// Map the legacy article schema onto the Guide schema the master template reads.
+function normalizeLegacyArticle(a) {
+  return {
+    title: a.title,
+    metaTitle: a.metaTitle || a.title,
+    metaDescription: a.metaDescription || a.shortAnswer || "",
+    slug: a.slug,
+    category: a.category || "",
+    status: "approved",
+    // Not a press release -> the optional sections stay available (only
+    // Common Mistakes carries data on legacy articles).
+    content_type: "",
+    summary: Array.isArray(a.quickSummary) && a.quickSummary.length ? a.quickSummary.slice() : a.shortAnswer || "",
+    // Body is pre-rendered; `content` stays empty so nothing is converted twice.
+    content: "",
+    content_html: legacyBodyHtml(a),
+    last_updated: a.lastUpdated || "",
+    hero_image: LEGACY_HERO[a.slug] || "/assets/hero-illustration-new.webp",
+    faqs: Array.isArray(a.faq) ? a.faq : [],
+    officialReferences: Array.isArray(a.officialReferences) ? a.officialReferences : [],
+    common_mistakes: Array.isArray(a.commonMistakes) ? a.commonMistakes : [],
+    relatedGuides: Array.isArray(a.relatedGuides) ? a.relatedGuides : [],
+  };
+}
+
+// One shared related-content pool: published guides + legacy articles.
+function allGuidesPool() {
+  return [
+    ...publishedStore
+      .loadPublishedGuides()
+      .filter((pg) => pg.slug && pg.slug !== "test-guide-micro7")
+      .map((pg) => ({
+        slug: pg.slug,
+        title: pg.title,
+        category: pg.category || pg.primary_category || "",
+        summary: typeof pg.summary === "string" ? pg.summary : "",
+      })),
+    ...articles.map((x) => ({
+      slug: x.slug,
+      title: x.title,
+      category: x.category || "",
+      summary: x.shortAnswer || "",
+    })),
+  ];
+}
+
+// Render a legacy article through the SAME master template as published guides.
+function buildLegacyGuide(a) {
+  const g = normalizeLegacyArticle(a);
+  const rendered = renderMasterGuide(g, { allGuides: allGuidesPool(), siteDomain: site.domain });
+  const isoDate = a.lastUpdated ? new Date(a.lastUpdated).toISOString() : undefined;
+  const canonical = site.domain + guideUrl(a.slug);
+  // Thin-page control: legacy guides below 300 words are noindexed (none in
+  // practice — the real guides are all far above the bar).
+  const legacyWords = articleWordCount(a);
+  const robots = isThinArticle(a) ? "noindex, follow" : "index, follow";
+  if (robots !== "index, follow") console.log(`  noindexed thin legacy guide -> /guides/${a.slug}/ (${legacyWords} words)`);
+
+  const structuredData = [
+    breadcrumbSchema([
+      { label: "Home", href: "/" },
+      { label: categoryName(a.category), href: categoryHubHref(a.category) },
+      { label: a.title, href: guideUrl(a.slug) },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: a.title,
+      description: compactDescription(a.metaDescription || a.shortAnswer),
+      url: canonical,
+      image: g.hero_image || site.socialImage || undefined,
+      articleSection: categoryLabel(a.category),
+      author: { "@type": "Person", name: site.author.name, url: site.author.url, description: site.author.description, jobTitle: site.author.jobTitle, sameAs: site.author.sameAs || [] },
+      publisher: {
+        "@type": "Organization",
+        name: site.publisher.name,
+        url: site.domain,
+        logo: { "@type": "ImageObject", url: site.domain + site.publisher.logo },
+      },
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+      dateModified: isoDate,
+      datePublished: isoDate,
+    },
+    ...(faqSchema(g.faqs) ? [faqSchema(g.faqs)] : []),
+    ...(a.howTo
+      ? [howToSchema({ name: a.howTo.name, description: a.howTo.description, url: canonical, steps: a.howTo.steps })]
+      : []),
+  ];
+
+  write(
+    `guides/${a.slug}/index.html`,
+    renderPage({
+      title: articleTitleTag(articleTitleFor(a)),
+      description: articleDescription(a),
+      canonical,
+      robots,
+      ogType: "article",
+      activeHref: "/guides/",
+      bodyHtml: rendered.html,
+      topBar: rendered.topBar,
+      extraScripts: `<script src="/assets/js/toc.js" defer></script>`,
+      structuredData,
+      articleMeta: { author: site.author.name, datePublished: isoDate, dateModified: isoDate },
+    })
+  );
+  console.log(`Legacy article (master template) -> /guides/${a.slug}/`);
+}
+
 function buildPublishedGuides() {
   // Read from published-guides.json (existing pipeline)
   const published = publishedStore.loadPublishedGuides();
@@ -3017,21 +3442,31 @@ function buildPublishedGuides() {
   if (allPublished.length === 0) return;
 
   allPublished.forEach((g) => {
-    if (!g.slug || publishedStore.isSlugReserved(g.slug)) {
-      console.log(`Published guide skipped (missing or reserved slug): ${g.slug || "(none)"}`);
+    // Test/mock junk never renders — primary removal is from
+    // published-guides.json; this guard catches anything re-added later.
+    if (!g.slug || publishedStore.isSlugReserved(g.slug) || isTestGuide(g)) {
+      console.log(`Published guide skipped (missing, reserved, or test/mock slug): ${g.slug || "(none)"}`);
       return;
     }
     // Build allGuides list for related section: published + articles
     const allGuides = [
-      ...publishedStore.loadPublishedGuides().filter((pg) => pg.slug && pg.slug !== 'test-guide-micro7').map((pg) => ({ slug: pg.slug, title: pg.title, category: pg.category || pg.primary_category || '', summary: pg.summary || '' })),
+      ...publishedStore.loadPublishedGuides().filter((pg) => pg.slug && !isTestGuide(pg)).map((pg) => ({ slug: pg.slug, title: pg.title, category: pg.category || pg.primary_category || '', summary: pg.summary || '' })),
       ...articles.map((a) => ({ slug: a.slug, title: a.title, category: a.category || '', summary: a.shortAnswer || '' })),
     ];
-    const rendered = renderMasterGuide(g, { allGuides });
+    const rendered = renderMasterGuide(g, { allGuides, siteDomain: site.domain });
     const pubDate = g.last_updated || g.refined_at || g.updated_at || null;
+    // Thin-page control: < 300 words OR < 3 FAQs -> noindex, follow (page
+    // still serves humans/referrals but leaves the index + sitemap).
+    const wCount = guideWordCount(g);
+    const fCount = guideFaqCount(g);
+    const robots = isThinGuide(g) ? "noindex, follow" : "index, follow";
+    if (robots !== "index, follow") {
+      console.log(`  noindexed thin guide -> /guides/${g.slug}/ (${wCount} words, ${fCount} FAQs)`);
+    }
     const structuredData = [
       breadcrumbSchema([
         { label: "Home", href: "/" },
-        { label: "Guides", href: "/guides/" },
+        { label: categoryName(g.category || g.primary_category), href: categoryHubHref(g.category || g.primary_category) },
         { label: rendered.title, href: guideUrl(g.slug) },
       ]),
       {
@@ -3046,6 +3481,9 @@ function buildPublishedGuides() {
           "@type": "Person",
           name: site.author.name,
           url: site.author.url,
+          description: site.author.description,
+          jobTitle: site.author.jobTitle,
+          sameAs: site.author.sameAs || [],
         },
         publisher: {
           "@type": "Organization",
@@ -3063,16 +3501,21 @@ function buildPublishedGuides() {
         dateModified: pubDate ? new Date(pubDate).toISOString() : undefined,
         datePublished: pubDate ? new Date(pubDate).toISOString() : undefined,
       },
+      // FAQPage schema — was previously missing on every published guide.
+      ...(faqSchema(g.faqs || g.faq) ? [faqSchema(g.faqs || g.faq)] : []),
     ];
     write(
       "guides/" + g.slug + "/index.html",
       renderPage({
-        title: rendered.title.length > 60 ? rendered.title.substring(0, 57) + "..." : rendered.title,
-        description: rendered.description,
+        robots,
+        title: articleTitleTag(rendered.title),
+        description: compactDescription(rendered.description),
         canonical: site.domain + guideUrl(g.slug),
         ogType: "article",
         activeHref: "",
         bodyHtml: rendered.html,
+        topBar: rendered.topBar,
+        extraScripts: `<script src="/assets/js/toc.js" defer></script>`,
         structuredData,
         articleMeta: {
           author: site.author.name,
@@ -3094,8 +3537,8 @@ function buildSitemap() {
       : `  <url><loc>${site.domain}${loc}</loc></url>`;
   }
   const staticPages = [
-    "/", "/explore/", "/guides/", "/calculators/",
-    "/about/", "/contact/", "/privacy/", "/terms/", "/disclaimer/",
+    "/", "/explore/", "/updates/", "/guides/", "/calculators/",
+    "/about/", "/editorial-policy/", "/contact/", "/privacy/", "/terms/", "/disclaimer/",
   ];
   const guideSubPages = [
     "/guides/business/", "/guides/documents/", "/guides/education/",
@@ -3106,17 +3549,35 @@ function buildSitemap() {
     "/schemes/pm-kisan-yojana/", "/schemes/soil-health-card/",
   ];
   const hubPages = site.hubs.map((h) => hubUrl(h.slug));
-  const articlePages = articles.map((a) => ({ loc: guideUrl(a.slug), lastmod: a.lastUpdated || null }));
+  // FIX 2 - category pagination pages (only for hubs with more than one page).
+  const categoryPaginationUrls = [];
+  CATEGORY_HUB_SLUGS.forEach((slug) => {
+    const pages = Math.ceil(getCategoryArticles(slug).length / CATEGORY_PAGE_SIZE);
+    for (let p = 2; p <= pages; p++) categoryPaginationUrls.push('/' + slug + '/page/' + p + '/');
+  });
+  // FIX: /updates/ pagination pages (/updates/page/N/) — same pattern as hubs.
+  const updatesPaginationUrls = [];
+  const updatesPageCount = Math.max(1, Math.ceil(getLatestUpdates(0).length / UPDATES_PER_PAGE));
+  for (let p = 2; p <= updatesPageCount; p++) updatesPaginationUrls.push('/updates/page/' + p + '/');
+  // Sitemap cleanup: only quality pages. Thin pages (published guides below
+  // 300 words or with < 3 FAQs; legacy articles below 300 words) render
+  // noindex and are excluded here; test/mock entries are deleted from
+  // published-guides.json entirely.
+  const articlePages = articles
+    .filter((a) => !isThinArticle(a))
+    .map((a) => ({ loc: guideUrl(a.slug), lastmod: a.lastUpdated || null }));
   const calcPages = calculators.map((c) => ({ loc: calcUrl(c.slug), lastmod: null }));
   const pubGuides = publishedStore
     .loadPublishedGuides()
-    .filter((g) => g.slug && g.slug !== 'test-guide-micro7' && !publishedStore.isSlugReserved(g.slug))
+    .filter((g) => g.slug && !isTestGuide(g) && !isThinGuide(g) && !publishedStore.isSlugReserved(g.slug))
     .map((g) => ({ loc: guideUrl(g.slug), lastmod: g.last_updated || g.refined_at || g.updated_at || null }));
   const allUrls = [
     ...staticPages.map((u) => urlEntry(u, today)),
     ...guideSubPages.map((u) => urlEntry(u, today)),
     ...schemePages.map((u) => urlEntry(u, today)),
     ...hubPages.map((u) => urlEntry(u, today)),
+    ...categoryPaginationUrls.map((u) => urlEntry(u, today)),
+    ...updatesPaginationUrls.map((u) => urlEntry(u, today)),
     ...articlePages.map((u) => urlEntry(u.loc, u.lastmod)),
     ...calcPages.map((u) => urlEntry(u.loc, u.lastmod)),
     ...pubGuides.map((u) => urlEntry(u.loc, u.lastmod)),
@@ -3131,8 +3592,12 @@ ${allUrls.join("\n")}
 }
 
 function buildRobots() {
+  // FIX (GSC crawl budget): /admin/ ships 42 foundation files that are not
+  // linked from any public page — block them from crawling so Google spends
+  // its limited crawl budget on public content instead.
   const body = `User-agent: *
 Allow: /
+Disallow: /admin/
 
 User-agent: GPTBot
 Allow: /
@@ -3181,12 +3646,16 @@ ${popularGuides.map((g) => `- [${g.title}](${g.href}): ${g.desc}`).join("\n")}
 ## Calculators
 - [EMI Calculator](https://samjhoindia.com/calculators/emi/): Loan EMI calculate
 - [GST Calculator](https://samjhoindia.com/calculators/gst/): GST add/remove
+- [Compound Interest Calculator](https://samjhoindia.com/calculators/compound-interest/): FD & savings maturity amount
 - [Age Calculator](https://samjhoindia.com/calculators/age/): Exact age
 
 ## How This Site Works
 - Every calculator runs in your browser — nothing is sent to a server.
 - Guides explain what something is, why it matters, and how it works, in simple Hindi-English mix.
 - Samjho is an independent information platform, not a government website.
+
+## Editorial Policy
+- [Editorial Policy](https://samjhoindia.com/editorial-policy/): official sourcing, the quality bar every guide meets, and how corrections are handled.
 `;
   write("llms.txt", body);
 }
@@ -3241,7 +3710,7 @@ function buildIndexNow() {
 // Search-engine ownership files (e.g. BingSiteAuth.xml) must be reachable from
 // the site root, so they are published from build/assets/ to dist/ unchanged:
 // build/assets/BingSiteAuth.xml -> https://<domain>/BingSiteAuth.xml
-const VERIFICATION_FILES = ["BingSiteAuth.xml"];
+const VERIFICATION_FILES = ["BingSiteAuth.xml", "ads.txt"];
 
 function buildVerificationFiles() {
   for (const name of VERIFICATION_FILES) {
@@ -3255,6 +3724,164 @@ function buildVerificationFiles() {
   }
 }
 
+// ------------------------------------------------------------------ MINIFICATION (FIX 3)
+// Dependency-free CSS/JS minifiers applied when assets are copied into dist.
+// Both are character scanners (strings, template literals and comments are
+// respected). Minified JS is compile-checked with vm.Script — on any doubt the
+// original file ships unchanged, so the build can never emit broken assets.
+function minifyCss(code) {
+  var out = "";
+  var i = 0;
+  var n = code.length;
+  var quote = null;
+  var pendingSpace = false;
+  function flush(nextCh) {
+    if (!pendingSpace) return;
+    pendingSpace = false;
+    var prev = out.length ? out[out.length - 1] : "";
+    if (!prev) return;
+    if ("{};:,".indexOf(prev) !== -1) return; // no space after these
+    if ("};,".indexOf(nextCh) !== -1) return;  // no space before these
+    out += " ";
+  }
+  while (i < n) {
+    var ch = code[i];
+    if (quote) {
+      out += ch;
+      if (ch === "\\" && i + 1 < n) { out += code[i + 1]; i += 2; continue; }
+      if (ch === quote) quote = null;
+      i++; continue;
+    }
+    if (ch === '"' || ch === "'") { flush(ch); quote = ch; out += ch; i++; continue; }
+    if (ch === "/" && code[i + 1] === "*") {
+      var end = code.indexOf("*/", i + 2);
+      i = end === -1 ? n : end + 2;
+      pendingSpace = true;
+      continue;
+    }
+    if (ch === " " || ch === "\t" || ch === "\n" || ch === "\r") { pendingSpace = true; i++; continue; }
+    flush(ch);
+    out += ch;
+    i++;
+  }
+  return out.trim();
+}
+
+function minifyJs(code) {
+  var out = "";
+  var i = 0;
+  var n = code.length;
+  var state = "code"; // code | squote | dquote | template
+  var stack = [];     // "tmpl" (inside a template literal) | "expr" (inside ${...})
+  var lastSig = "";
+  var pendingWs = false;
+  var ident = /[A-Za-z0-9_$]/;
+  var ops = "+-*/%<>=!&|^~?:.";
+  var regexKeywords = ["return", "typeof", "case", "in", "of", "new", "delete", "void", "do", "else", "yield", "await", "instanceof"];
+  function lastWord() {
+    var w = "";
+    for (var k = out.length - 1; k >= 0 && ident.test(out[k]); k--) w = out[k] + w;
+    return w;
+  }
+  function flush(nextCh) {
+    if (!pendingWs) return;
+    pendingWs = false;
+    var prev = out.length ? out[out.length - 1] : "";
+    if (!prev) return;
+    if (ident.test(prev) && ident.test(nextCh)) { out += " "; return; } // never join tokens
+    if (ops.indexOf(prev) !== -1 && ops.indexOf(nextCh) !== -1) { out += " "; return; } // a + +b
+  }
+  while (i < n) {
+    var ch = code[i];
+    var next = i + 1 < n ? code[i + 1] : "";
+    if (state === "squote" || state === "dquote") {
+      out += ch;
+      if (ch === "\\") { if (next) out += next; i += 2; continue; }
+      if ((state === "squote" && ch === "'") || (state === "dquote" && ch === '"')) state = "code";
+      i++; continue;
+    }
+    if (state === "template") {
+      out += ch;
+      if (ch === "\\") { if (next) out += next; i += 2; continue; }
+      if (ch === "`") { stack.pop(); state = "code"; }
+      else if (ch === "$" && next === "{") { out += "{"; stack.push("expr"); state = "code"; lastSig = "}"; i += 2; continue; }
+      i++; continue;
+    }
+    // state === "code"
+    if (ch === " " || ch === "\t" || ch === "\n" || ch === "\r") { pendingWs = true; i++; continue; }
+    if (ch === "/" && next === "/") { var nl = code.indexOf("\n", i); i = nl === -1 ? n : nl; pendingWs = true; continue; }
+    if (ch === "/" && next === "*") { var e2 = code.indexOf("*/", i + 2); i = e2 === -1 ? n : e2 + 2; pendingWs = true; continue; }
+    if (ch === "'") { flush(ch); state = "squote"; out += ch; lastSig = ch; i++; continue; }
+    if (ch === '"') { flush(ch); state = "dquote"; out += ch; lastSig = ch; i++; continue; }
+    if (ch === "`") { flush(ch); stack.push("tmpl"); state = "template"; out += ch; lastSig = ch; i++; continue; }
+    if (ch === "}") {
+      if (stack.length && stack[stack.length - 1] === "expr") { stack.pop(); state = "template"; out += "}"; lastSig = "}"; i++; continue; }
+      flush(ch); out += ch; lastSig = ch; i++; continue;
+    }
+    if (ch === "/") {
+      var prevSig = lastSig;
+      var lw = lastWord();
+      var regexAllowed = prevSig === "" || "+-*/%<>=!&|^~?:;,([{".indexOf(prevSig) !== -1 || regexKeywords.indexOf(lw) !== -1;
+      if (regexAllowed) {
+        out += "/";
+        var j = i + 1, inClass = false, closed = false;
+        while (j < n) {
+          var c2 = code[j];
+          if (c2 === "\\") { out += c2; if (j + 1 < n) out += code[j + 1]; j += 2; continue; }
+          out += c2;
+          if (c2 === "[") inClass = true;
+          else if (c2 === "]") inClass = false;
+          else if (c2 === "/" && !inClass) { j++; closed = true; break; }
+          else if (c2 === "\n") break;
+          j++;
+        }
+        if (closed) { while (j < n && /[a-z]/i.test(code[j])) { out += code[j]; j++; } }
+        lastSig = "/";
+        i = j;
+        continue;
+      }
+    }
+    flush(ch);
+    out += ch;
+    lastSig = ch;
+    i++;
+  }
+  return out;
+}
+
+function copyDirMinified(src, dest) {
+  fs.mkdirSync(dest, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const s = path.join(src, entry.name);
+    const d = path.join(dest, entry.name);
+    if (entry.isDirectory()) copyDirMinified(s, d);
+    else if (/\.css$/i.test(entry.name)) {
+      const raw = fs.readFileSync(s, "utf8");
+      let out = raw;
+      try { out = minifyCss(raw); } catch (e) { out = raw; }
+      fs.writeFileSync(d, out, "utf8");
+      console.log("  minify CSS " + entry.name + ": " + raw.length + " -> " + out.length + " bytes");
+    } else fs.copyFileSync(s, d);
+  }
+}
+
+function copyJsMinified(relFromAssets) {
+  const src = path.join(__dirname, "assets", relFromAssets);
+  const dest = path.join(OUT, "assets", relFromAssets);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  const raw = fs.readFileSync(src, "utf8");
+  let out = raw;
+  try { out = minifyJs(raw); } catch (e) { out = raw; }
+  try {
+    new vm.Script(out, { filename: relFromAssets });
+  } catch (e) {
+    console.log("  minify JS " + relFromAssets + ": syntax check failed (" + e.message + ") — shipping original");
+    out = raw;
+  }
+  fs.writeFileSync(dest, out, "utf8");
+  console.log("  minify JS " + relFromAssets + ": " + raw.length + " -> " + out.length + " bytes");
+}
+
 // ------------------------------------------------------------------ RUN
 async function run() {
   if (fs.existsSync(OUT)) fs.rmSync(OUT, { recursive: true, force: true });
@@ -3266,9 +3893,16 @@ async function run() {
   console.log('[counts] Final:', categoryCounts);
   fs.mkdirSync(OUT, { recursive: true });
 
+  // FIX 3 — convert article hero images to WebP (< 100 KB) and rewrite
+  // published-guides.json references BEFORE any page is rendered, so hero
+  // <img>, og:image tags and image-dims.js all see the .webp files.
+  try { await compressArticleImages(); } catch (e) { console.log("Article image compression skipped:", e.message); }
+
   buildSearchIndex();
   buildHome();
   buildExplore();
+  const updatesPageCount = Math.max(1, Math.ceil(getLatestUpdates(0).length / UPDATES_PER_PAGE));
+  for (let up = 1; up <= updatesPageCount; up++) buildUpdatesPage(up);
   site.hubs.filter((h) => h.slug !== "government" && h.slug !== "documents" && h.slug !== "business" && h.slug !== "money" && h.slug !== "education").forEach(buildCategoryHub);
   buildGovernmentPage();
   buildDocumentsPage();
@@ -3277,12 +3911,15 @@ async function run() {
   buildEducationPage();
   buildGuidesIndex();
   GUIDE_SUBPAGES.forEach(buildGuidesSubPage);
-  articles.forEach(buildGuideArticle);
+  // Every article page — legacy and published alike — goes through the ONE
+  // master template (buildLegacyGuide -> renderMasterGuide).
+  articles.forEach(buildLegacyGuide);
   schemes.forEach(buildSchemeArticle);
   buildPublishedGuides();
   buildCalculatorsIndex();
   calculators.forEach(buildCalculatorPage);
   buildAbout();
+  buildEditorialPolicy();
   buildContact();
   buildPrivacy();
   buildTerms();
@@ -3294,19 +3931,10 @@ async function run() {
   buildIndexNow();
   buildVerificationFiles();
 
-    copyDir(path.join(__dirname, "assets", "css"), path.join(OUT, "assets", "css"));
-  fs.copyFileSync(
-    path.join(__dirname, "assets", "js", "main.js"),
-    path.join(OUT, "assets", "js", "main.js")
-  );
-  fs.copyFileSync(
-    path.join(__dirname, "assets", "js", "calculators.js"),
-    path.join(OUT, "assets", "js", "calculators.js")
-  );
-  fs.copyFileSync(
-    path.join(__dirname, "assets", "js", "toc.js"),
-    path.join(OUT, "assets", "js", "toc.js")
-  );
+  // FIX 3 — ship minified CSS/JS (compile-checked; falls back to the original
+  // file if the minified output does not parse).
+  copyDirMinified(path.join(__dirname, "assets", "css"), path.join(OUT, "assets", "css"));
+  ["js/main.js", "js/calculators.js", "js/toc.js"].forEach(copyJsMinified);
   // Optional assets — copy only if the source file exists.
   ["hero-illustration-new.png", "featured-kisan.png", "featured-pan.png", "featured-udyam.png"].forEach((name) => {
     const src = path.join(__dirname, "assets", name);
@@ -3319,6 +3947,17 @@ async function run() {
   // Logo + favicon assets
   copyDir(path.join(__dirname, "assets", "logo"), path.join(OUT, "assets", "logo"));
   copyDir(path.join(__dirname, "assets", "favicon"), path.join(OUT, "assets", "favicon"));
+
+  // Article hero images (Pexels). Source lives in build/assets/images because
+  // run() wipes dist/ at the top of every build — anything downloaded straight
+  // into dist/images would be deleted before deploy.
+  var heroImagesSrc = path.join(__dirname, "assets", "images");
+  if (fs.existsSync(heroImagesSrc)) {
+    copyDir(heroImagesSrc, path.join(OUT, "images"));
+    var n = 0;
+    try { n = fs.readdirSync(path.join(heroImagesSrc, "articles")).filter(function (f) { return /\.(jpe?g|png|webp|avif)$/i.test(f); }).length; } catch (e) {}
+    console.log("Article hero images -> /images/articles (" + n + " file(s))");
+  }
 
   // Image optimization: convert to WebP for performance
   const { execSync } = require("child_process");

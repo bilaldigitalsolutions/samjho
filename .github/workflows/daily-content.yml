@@ -41,5 +41,25 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: node build/scripts/run-pipeline.js
       
+      - name: Stage + build + deploy pending guides
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          node build/scripts/deploy-published.js --build || node build/build.js
+          git config user.name "samjho-bot"
+          git config user.email "bot@samjhoindia.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Auto-update articles $(date -u +%F)"
+          git push origin HEAD:main || echo "push skipped"
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAMJHO_96E3A }}
+          channelId: live
+          projectId: samjho-96e3a
+
       - name: Log completion
         run: echo "Daily pipeline completed at $(date -u)"
